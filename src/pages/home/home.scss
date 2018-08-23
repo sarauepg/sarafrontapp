@@ -1,3 +1,34 @@
 page-home {
 
+    .loginimg {
+
+        background-image: url('../assets/imgs/imglogin.jpeg');
+        // background: url('../../img/getstart.png');
+        background-repeat: no-repeat;
+        background-size:cover;
+    }
+
+    
+
+    .login-form {
+        background-color: rgb(255, 255, 255);
+        position: absolute; 
+        left: 37%; 
+        top: 25%;
+        width: 25vw;
+        height: 25vw;
+        border-radius: 50%;
+        display: flex; 
+        align-items: center; 
+        justify-content: center;
+    }
+
+    .logo-sara{
+        width: 55%;
+        height: 20%;
+        position: absolute;
+        top: 10%;
+        left: 23%;
+
+    }
 }

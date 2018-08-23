@@ -8,10 +8,22 @@ import { ListPage } from '../pages/list/list';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { AgendamentoPage } from '../pages/agendamento/agendamento';
+import { AtendimentoPage } from '../pages/atendimento/atendimento';
+import { PacientePage } from '../pages/paciente/paciente';
+import { TipoAtendimentoPage } from '../pages/tipo-atendimento/tipo-atendimento';
+import { UsuarioPage } from '../pages/usuario/usuario';
+import { VisaoGeralPage } from '../pages/visao-geral/visao-geral';
 
 @NgModule({
   declarations: [
     MyApp,
+    AgendamentoPage,
+    AtendimentoPage,
+    PacientePage,
+    TipoAtendimentoPage,
+    UsuarioPage,
+    VisaoGeralPage,
     HomePage,
     ListPage
   ],
@@ -22,6 +34,12 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    AgendamentoPage,
+    AtendimentoPage,
+    PacientePage,
+    TipoAtendimentoPage,
+    UsuarioPage,
+    VisaoGeralPage,
     HomePage,
     ListPage
   ],
