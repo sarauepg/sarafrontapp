@@ -1,17 +1,27 @@
-<ion-content   padding class="loginimg">
+<ion-content padding class="loginimg">
   <!-- <ion-grid>
     <ion-row>
       <ion-col col-lg-4> -->
-        <ion-card class="login-form" col-lg-3>
-            <ion-card-header >
-                <img class="logo-sara" src="../assets/imgs/logo-fundo-transparente.png"/>
-            </ion-card-header>
-          
-            <ion-card-content>
-              <!-- Add card content here! -->
-          </ion-card-content>
-        </ion-card>
-     <!-- </ion-col>
+  <ion-card class="login-form" col-lg-3>
+    <ion-card-header>
+      <img class="logo-sara" src="../assets/imgs/logo-fundo-transparente.png" />
+    </ion-card-header>
+
+    <ion-card-content style="margin-top: 25px">
+        <ion-list>
+            <ion-item class="login-input">
+                <ion-icon item-left name="md-person"></ion-icon>
+                <ion-input type="email"  placeholder="Nome de usuário" cmaxlength="60"></ion-input>
+            </ion-item>
+            <ion-item class="login-input" style="margin-top: 5px">
+                <ion-icon item-left name="md-lock"></ion-icon>
+                <ion-input type="password" placeholder="Senha" cmaxlength="20"></ion-input>
+            </ion-item>
+        </ion-list>
+        <button ion-button block class="login-btn" style="margin-top: 25px; background-color: teal" (click) = "goToAgenda()">entrar</button>
+    </ion-card-content>
+  </ion-card>
+  <!-- </ion-col>
     </ion-row>
   </ion-grid> -->
 
