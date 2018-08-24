@@ -4,7 +4,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
 import { AtendimentoPage } from '../pages/atendimento/atendimento';
 import { AgendamentoPage } from '../pages/agendamento/agendamento';
 import { TipoAtendimentoPage } from '../pages/tipo-atendimento/tipo-atendimento';
@@ -20,19 +19,19 @@ export class MyApp {
 
   rootPage: any = HomePage;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{title: string, component: any, icon: string}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Agenda', component: AgendamentoPage },
-      { title: 'Atendimentos', component: AtendimentoPage },
-      { title: 'Tipos de atendimento', component: TipoAtendimentoPage },
-      { title: 'Pacientes', component: PacientePage },
-      { title: 'Usuários', component: UsuarioPage },
-      { title: 'Visão geral ', component: VisaoGeralPage }
+      { title: 'Agenda', component: AgendamentoPage, icon: 'md-calendar'},
+      { title: 'Atendimentos', component: AtendimentoPage, icon: 'md-checkbox-outline' },
+      { title: 'Tipos de atendimento', component: TipoAtendimentoPage, icon: 'ios-list-box-outline' },
+      { title: 'Pacientes', component: PacientePage, icon: 'md-people' },
+      { title: 'Usuários', component: UsuarioPage, icon: 'md-people' },
+      { title: 'Visão geral ', component: VisaoGeralPage, icon: 'md-pie' }
     ];
 
   }

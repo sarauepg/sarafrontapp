@@ -17,7 +17,7 @@
         display: flex; 
         align-items: center; 
         justify-content: center;
-        border: 3px solid teal !important;
+        border: 3px solid rgb(89, 194, 200) !important;
     }
 
     .logo-sara{
@@ -38,7 +38,19 @@
 			margin-left: 10px !important;
 		}
     }
+
+    .botao-enviar{
+        margin-top: 25px; 
+        background-color: rgb(89, 194, 200);
+    }
+
+    .icones-login{
+        color: rgb(89, 194, 200);
+    }
     
-    ion-icon{
-        color: teal;
+    ion-footer p{
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 1.2em;
+        color: #fff;
+        text-align: center;
     }
