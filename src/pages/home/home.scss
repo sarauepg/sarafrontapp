@@ -1,43 +1,56 @@
 
     .loginimg {
-        background-color: rgba($color: #474747, $alpha: 1.0);
         background-image: url('../assets/imgs/imglogin.jpeg');
         background-repeat: no-repeat;
-        background-size:cover;
+        background-size: cover;
     }
 
     .login-form {
         background-color: rgb(255, 255, 255);
-        position: absolute; 
-        left: 37%; 
-        top: 25%;
-        width: 25vw;
-        height: 25vw;
+        position: relative; 
+        left: 50%; 
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 460px;
+        height: 460px;
         border-radius: 50%;
         display: flex; 
         align-items: center; 
         justify-content: center;
-        border: 3px solid teal !important;
+        border: 3px solid rgb(89, 194, 200) !important;
     }
 
     .logo-sara{
         width: 45%;
         height: 18%;
         position: absolute;
+        flex: 1 0 auto;
         top: 8%;
         left: 28%;
+        margin-bottom: 25px;
 
     }
 
     .login-input {
-		//background-color: #f1f1f1 !important;
 		border-radius: 5px;
 		border: 1px solid #ccc !important;
 		.item-inner {
 			margin-left: 10px !important;
 		}
     }
+
+    .botao-enviar{
+        margin-top: 25px; 
+        background-color: rgb(89, 194, 200);
+    }
+
+    .icones-login{
+        color: rgb(89, 194, 200);
+    }
     
-    ion-icon{
-        color: teal;
+    ion-footer p{
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 1.2em;
+        color: #fff;
+        text-align: center;
     }

@@ -1,28 +1,24 @@
 <ion-content padding class="loginimg">
-  <!-- <ion-grid>
-    <ion-row>
-      <ion-col col-lg-4> -->
-  <ion-card class="login-form" col-lg-3>
-    <ion-card-header>
-      <img class="logo-sara" src="../assets/imgs/logo-fundo-transparente.png" />
-    </ion-card-header>
-
-    <ion-card-content style="margin-top: 25px">
-        <ion-list>
-            <ion-item class="login-input">
-                <ion-icon item-left name="md-person"></ion-icon>
-                <ion-input type="email"  placeholder="Nome de usuário" cmaxlength="60"></ion-input>
-            </ion-item>
-            <ion-item class="login-input" style="margin-top: 5px">
-                <ion-icon item-left name="md-lock"></ion-icon>
-                <ion-input type="password" placeholder="Senha" cmaxlength="20"></ion-input>
-            </ion-item>
-        </ion-list>
-        <button ion-button block class="login-btn" style="margin-top: 25px; background-color: teal" (click) = "goToAgenda()">entrar</button>
-    </ion-card-content>
-  </ion-card>
-  <!-- </ion-col>
-    </ion-row>
-  </ion-grid> -->
-
+  <div class="login-form">
+    <div>
+      <div>
+        <img class="logo-sara" src="../assets/imgs/logo-fundo-transparente.png" />
+      </div>
+      <div style="margin-top: 40px">
+      <ion-item class="login-input">
+        <ion-icon item-left name="md-person" class="icones-login"></ion-icon>
+        <ion-input type="email" placeholder="Nome de usuário" cmaxlength="60"></ion-input>
+      </ion-item>
+      <ion-item class="login-input" style="margin-top: 5px">
+        <ion-icon item-left name="md-lock" class="icones-login"></ion-icon>
+        <ion-input type="password" placeholder="Senha" cmaxlength="20"></ion-input>
+      </ion-item>
+      <button ion-button block class="login-btn botao-enviar" (click)="goToAgenda()">entrar</button>
+      <p style="text-align: center; color: rgb(89, 194, 200);">____________________________________________</p>
+    </div>
+    </div>
+  </div>
+  <ion-footer>
+    <p>Sistema de Agendamento e Registro para Ambulatório</p>
+  </ion-footer>
 </ion-content>
