@@ -15,8 +15,31 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
+
 .menu-icon {
     line-height: 1 !important;
     margin-right: 14px;
 	vertical-align: middle;
 }
+
+.menu-bg{
+    background-color:rgb(89, 194, 200) !important;
+}
+
+.menu-logo{
+    width: 135px;
+    height: 45px;
+}
+
+.menu-content-font{
+    font-size: 1.5em;
+}
+
+.menu-font{
+    font-size: 2.5em !important;
+}
+
+.scroll-content {
+    overflow-y: auto !important;
+    color: white !important;
+ }

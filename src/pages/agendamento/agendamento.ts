@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, Events } from 'ionic-angular';
 
 /**
  * Generated class for the AgendamentoPage page.
@@ -18,11 +18,25 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class AgendamentoPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  menuAberto = true;
+
+  constructor(public events: Events, public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams) {
+    
+    events.subscribe('menu:opened', () => {
+      this.menuAberto = true;
+    });
+
+    events.subscribe('menu:closed', () => {
+      this.menuAberto = false;
+    });
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AgendamentoPage');
+  }
+
+  ionViewWillEnter() {
+    this.menuCtrl.open();
   }
 
 }

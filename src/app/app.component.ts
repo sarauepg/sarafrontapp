@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, Events} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -19,16 +19,15 @@ export class MyApp {
 
   rootPage: any = HomePage;
 
-  pages: Array<{title: string, component: any, icon: string}>;
+  pages: Array<{ title: string, component: any, icon: string }>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public events: Events, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
 
-    // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Agenda', component: AgendamentoPage, icon: 'md-calendar'},
-      { title: 'Atendimentos', component: AtendimentoPage, icon: 'md-checkbox-outline' },
-      { title: 'Tipos de atendimento', component: TipoAtendimentoPage, icon: 'ios-list-box-outline' },
+      { title: 'Agenda', component: AgendamentoPage, icon: 'md-calendar' },
+      { title: 'Atendimentos', component: AtendimentoPage, icon: 'md-medkit' },
+      { title: 'Tipos de atendimento', component: TipoAtendimentoPage, icon: 'md-list' },
       { title: 'Pacientes', component: PacientePage, icon: 'md-people' },
       { title: 'Usuários', component: UsuarioPage, icon: 'md-people' },
       { title: 'Visão geral ', component: VisaoGeralPage, icon: 'md-pie' }
@@ -50,4 +49,13 @@ export class MyApp {
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
   }
+
+  menuClosed() {
+    this.events.publish('menu:closed', '');
+  }
+
+  menuOpened() {
+    this.events.publish('menu:opened', '');
+  }
+
 }

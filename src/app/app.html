@@ -1,15 +1,18 @@
- <ion-menu class="appmenu" [content]="content" >
+ <ion-menu type="push" [content]="content" (ionOpen)="menuOpened()" (ionClose)="menuClosed()">
   <ion-header>
-    <ion-toolbar>
-      <ion-title>Menu</ion-title>
+    <ion-toolbar color = "dark">
+    <button  ion-button menuToggle>
+        <ion-icon class="menu-font" name="menu"></ion-icon>
+      </button>
+      <img class="menu-logo" src="../assets/imgs/branco-transparente.png" />
     </ion-toolbar>
   </ion-header>
 
-  <ion-content class="menu-bg">
-    <ion-list>
-      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-          <ion-icon name="{{p.icon}}" ios="{{p.iconiOS}}" color="white" class="menu-icon"></ion-icon>
-          <span class="white font-normal" >{{p.title}}</span>
+  <ion-content class="menu-bg" margin-top>
+    <ion-list no-lines>
+      <button class="menu-content-font" ion-item *ngFor="let p of pages" (click)="openPage(p)" color = "light">
+          <ion-icon name="{{p.icon}}"  class="menu-icon"></ion-icon>
+          <span>{{p.title}}</span>
       </button>
     </ion-list>
   </ion-content>
