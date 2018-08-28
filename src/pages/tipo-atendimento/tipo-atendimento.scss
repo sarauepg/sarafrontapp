@@ -8,6 +8,12 @@ page-tipo-atendimento {
         min-height: 100%;
     }
 
+    .card-header{
+        text-align: center !important;
+        font-size: 1.5em !important;
+        color: #6b6b6b !important;
+    }
+
     @media only screen and (min-width: 768px) {
         .content-padding-side {
             padding-left: 0px;
