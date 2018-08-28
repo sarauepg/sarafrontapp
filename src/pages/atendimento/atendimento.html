@@ -29,11 +29,31 @@
           <ion-card-content>
             <ion-list>
               <ion-row>
-                <ion-col col-12 col-md>
+                <ion-col col-12 col-lg-4>
                   <ion-item>
                     <ion-label floating>Nome</ion-label>
                     <ion-input type="text"></ion-input>
+                  </ion-item>                                
+                </ion-col>
+
+                <ion-col col-12 col-lg-4>
+                  <ion-item>
+                    <ion-label floating>CPF</ion-label>
+                    <ion-input type="text"></ion-input>
                   </ion-item>
+                  
+                </ion-col>
+                <ion-col col-12 col-lg-4>
+                  <ion-item>
+                    <ion-label floating>Data</ion-label>
+                    <ion-input type="text"></ion-input>
+                  </ion-item>
+                </ion-col>  
+                
+                            
+              </ion-row>
+              <ion-row>
+                <ion-col col-12 col-lg-4>
                   <ion-item>
                     <ion-label floating>Atendido por</ion-label>
                     <ion-select interface="popover">
@@ -42,37 +62,26 @@
                       <ion-option value="n64">Médico(a)</ion-option>
                       <ion-option value="ps">Todos(as)</ion-option> -->
                     </ion-select>
-                  </ion-item>               
-                </ion-col>
-                <ion-col col-12 col-md>
-                  <ion-item>
-                    <ion-label floating>CPF</ion-label>
-                    <ion-input type="text"></ion-input>
                   </ion-item>
-                  <ion-item>
-                      <ion-label floating>Tipo de atendimento</ion-label>
-                      <ion-select interface="popover">
-                        <ion-option value="nes">Nome do tipo de atendimento</ion-option>
-                        <!-- <ion-option value="nes">Enfermeiro(a)</ion-option>
-                        <ion-option value="n64">Médico(a)</ion-option>
-                        <ion-option value="ps">Todos(as)</ion-option> -->
-                      </ion-select>
-                    </ion-item>
                 </ion-col>
-                <ion-col col-12 col-md>
+                <ion-col col-12 col-lg-4>
                   <ion-item>
-                    <ion-label floating>Data</ion-label>
-                    <ion-input type="text"></ion-input>
+                    <ion-label floating>Tipo de atendimento</ion-label>
+                    <ion-select interface="popover">
+                      <ion-option value="nes">Nome do tipo de atendimento</ion-option>
+                      <!-- <ion-option value="nes">Enfermeiro(a)</ion-option>
+                      <ion-option value="n64">Médico(a)</ion-option>
+                      <ion-option value="ps">Todos(as)</ion-option> -->
+                    </ion-select>
                   </ion-item>
-                </ion-col>  
-                <ion-col col-12 col-md>
-                    <ion-item>
-                        <button ion-button class="search-btn" >
-                            <ion-icon name="search"></ion-icon>Pesquisar
-                        </button> 
-                    </ion-item>
-                  </ion-col>  
-                            
+                </ion-col>
+                <ion-col col-12 col-lg-4>
+                  <ion-item>
+                      <button ion-button class="search-btn" color= "dark">
+                          <ion-icon name="search"></ion-icon>Pesquisar
+                      </button> 
+                  </ion-item>
+                </ion-col>           
               </ion-row>
               
               

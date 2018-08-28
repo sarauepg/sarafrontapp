@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 
 @IonicPage({
   name: 'Atendimento',
@@ -11,7 +11,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class AtendimentoPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public events: Events, public navCtrl: NavController, public navParams: NavParams) {
+    events.subscribe('menu:opened', () => {
+      let elm = <HTMLElement>document.querySelector(".content-padding-side");
+      elm.style.paddingRight = '23%';
+    });
+
+    events.subscribe('menu:closed', () => {
+      let elm = <HTMLElement>document.querySelector(".content-padding-side");
+      elm.style.paddingRight = '5%';
+    });
   }
 
   ionViewDidLoad() {
