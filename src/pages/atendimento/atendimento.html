@@ -24,9 +24,15 @@
         <ion-card>
           <ion-card-header style="text-align:left">
             Atendimentos
+            <ion-item>
+              <button icon-start ion-button class="new-btn" float-right>
+                  <ion-icon name="add"></ion-icon>Novo atendimento
+              </button> 
+          </ion-item>
           </ion-card-header>
           <div class="divider2"></div>
-          <ion-card-content>
+          <ion-card-content style="padding: 0px 16px !important;">
+            
             <ion-list>
               <ion-row>
                 <ion-col col-12 col-lg-4>
@@ -77,20 +83,16 @@
                 </ion-col>
                 <ion-col col-12 col-lg-4>
                   <ion-item>
-                      <button ion-button class="search-btn" color= "dark">
+                      <button icon-start ion-button class="search-btn" color= "dark" float-end>
                           <ion-icon name="search"></ion-icon>Pesquisar
                       </button> 
                   </ion-item>
                 </ion-col>           
               </ion-row>
-              
-              
             </ion-list>
-            
           </ion-card-content>
         </ion-card>
       </ion-col>
-
     </ion-row>
   </div>
 </ion-content>
