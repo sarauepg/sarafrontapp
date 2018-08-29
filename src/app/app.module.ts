@@ -14,6 +14,9 @@ import { PacientePage } from '../pages/paciente/paciente';
 import { TipoAtendimentoPage } from '../pages/tipo-atendimento/tipo-atendimento';
 import { UsuarioPage } from '../pages/usuario/usuario';
 import { VisaoGeralPage } from '../pages/visao-geral/visao-geral';
+import { HttpModule } from '@angular/http';
+import { RequestService } from '../service/request.service';
+import { Network } from '@ionic-native/network';
 
 @NgModule({
   declarations: [
@@ -30,6 +33,7 @@ import { VisaoGeralPage } from '../pages/visao-geral/visao-geral';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -46,6 +50,8 @@ import { VisaoGeralPage } from '../pages/visao-geral/visao-geral';
   providers: [
     StatusBar,
     SplashScreen,
+    Network,
+    RequestService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

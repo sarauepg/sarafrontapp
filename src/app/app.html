@@ -12,7 +12,7 @@
     <ion-list no-lines>
       <button class="menu-content-font" ion-item *ngFor="let p of pages" (click)="openPage(p)" color = "light">
           <ion-icon name="{{p.icon}}"  class="menu-icon"></ion-icon>
-          <span style="font-weight:bold">{{p.title}}</span>
+          <span>{{p.title}}</span>
       </button>
     </ion-list>
   </ion-content>
