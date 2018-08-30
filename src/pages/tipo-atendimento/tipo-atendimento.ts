@@ -10,15 +10,9 @@ import { APP_CONFIG } from '../../app/app.config';
  * Ionic pages and navigation.
  */
 
-@IonicPage({
-  name: 'TipoAtendimento',
-  segment: 'tipo-atendimento'
-})
-@Component({
-  selector: 'page-tipo-atendimento',
-  templateUrl: 'tipo-atendimento.html',
-})
-@Injectable()
+@IonicPage({ name: 'TipoAtendimento', segment: 'tipo-atendimento'})
+@Component({ selector: 'page-tipo-atendimento', templateUrl: 'tipo-atendimento.html'})
+
 export class TipoAtendimentoPage {
 
   tiposAtendimento: any;
@@ -46,7 +40,7 @@ export class TipoAtendimentoPage {
 		loading.present();
 		this.requestService.getData(APP_CONFIG.WEBSERVICE.LISTAR_TIPO_ATENDIMENTO).then((tiposAtendimento: any) => {
       this.tiposAtendimento = tiposAtendimento;
-      console.error(this.tiposAtendimento);
+      console.log(this.tiposAtendimento);
 			loading.dismiss();
 		}, error => {
 			console.error(error);
