@@ -22,55 +22,59 @@
     <ion-row>
       <ion-col col-12 col-md no-padding>
         <ion-card>
-          <ion-card-header style="text-align:left">
-            Pacientes
-            <ion-item>
-              <button icon-start ion-button class="new-btn" float-right>
+          <ion-card-header>
+            <ion-row align-items-center>
+              <ion-col>
+                <p class="card-title">Atendimentos</p>
+              </ion-col>
+              <ion-col>
+                <button icon-start ion-button class="add-btn" float-right>
                   <ion-icon name="add"></ion-icon>Novo atendimento
-              </button> 
-          </ion-item>
+                </button>
+              </ion-col>
+            </ion-row>
           </ion-card-header>
           <div class="divider2"></div>
-          <ion-card-content style="padding: 0px 16px !important;">
-            
+          <ion-card-content>
+
             <ion-list>
+              <ion-row>
+                
+
+                
+                <ion-col col-12 col-lg-4>
+                  <ion-item>
+                    <ion-label floating>Data</ion-label>
+                    <ion-input type="tel"></ion-input>
+                  </ion-item>
+                </ion-col>
+
+
+              </ion-row>
+
               <ion-row>
                 <ion-col col-12 col-lg-4>
                   <ion-item>
                     <ion-label floating>Nome</ion-label>
                     <ion-input type="text"></ion-input>
-                  </ion-item>                                
-                </ion-col>
-
-                <ion-col col-12 col-lg-4>
-                  <ion-item>
-                    <ion-label floating>CPF</ion-label>
-                    <ion-input type="text"></ion-input>
                   </ion-item>
-                  
                 </ion-col>
+                
                 <ion-col col-12 col-lg-4>
                   <ion-item>
                     <ion-label floating>Lotação</ion-label>
                     <ion-select interface="popover">
-                      <ion-option value="nes">lotassoes do bancu</ion-option>
-                      <!-- <ion-option value="nes">Enfermeiro(a)</ion-option>
-                      <ion-option value="n64">Médico(a)</ion-option>
-                      <ion-option value="ps">Todos(as)</ion-option> -->
+                      <ion-option value="nes">DEINFO</ion-option>
                     </ion-select>
                   </ion-item>
                 </ion-col>
+
                 <ion-col col-12 col-lg-4>
-                  <ion-item>
-                      <button icon-start ion-button class="search-btn" color= "dark" float-end>
-                          <ion-icon name="search"></ion-icon>Pesquisar
-                      </button> 
-                  </ion-item>
+                  <button icon-start ion-button class="search-btn" color="dark" float-end>
+                    <ion-icon name="search"></ion-icon>Pesquisar
+                  </button>
                 </ion-col>
-                
-                            
               </ion-row>
-              
             </ion-list>
           </ion-card-content>
         </ion-card>
