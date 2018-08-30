@@ -6,10 +6,15 @@ let SERVER_SELECTED =LOCALHOST_SERVER_ADDRESS;
 
 let API_ADDRESS 	   = SERVER_SELECTED + ":8080/sara/";
 
+let PROXY = "/proxy/sara/";
+
+let END_POINT = PROXY;
+
+
 export const APP_CONFIG = {
 	SERVER_SELECTED: SERVER_SELECTED,
 	WEBSERVICE: {
 		// TIPO DE ATENDIMENTO
-		LISTAR_TIPO_ATENDIMENTO: API_ADDRESS + "tipoatendimento/listar",
+		LISTAR_TIPO_ATENDIMENTO: END_POINT + "tipoatendimento/listar",
 	}
 };

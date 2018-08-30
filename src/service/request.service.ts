@@ -9,7 +9,6 @@ import 'rxjs/add/operator/timeout';
 @Injectable()
 export class RequestService {
 
-    private header: Headers;
     private TIMEOUT = 30000;
 
     constructor(private http: Http,
@@ -18,38 +17,20 @@ export class RequestService {
 
     getData(url) {
         return new Promise((resolve, reject) => {
-            this.checkConnection().then(() => {
-                let getRequest = () => {
-                    this.http.get(url, this.getRequestOptions(url))
+                //let getRequest = () => {
+                    this.http.get(url)
                         .timeout(this.TIMEOUT)
                         .toPromise()
                         .then((resp: any) => {
-                            this.header = null;
                             resolve(this.getJsonData(resp));
                         })
                         .catch((error) => {
-                            this.header = null;
-                            reject(error);
+                            reject(this.getJsonData(error));
                         });
-                }
-                getRequest();
-            }, erro => {
-                reject(erro);
-            });
+                //}
+               // getRequest();
         });
 
-    }
-
-
-    private checkConnection() {
-        console.log("Status rede: " + this.network.type);
-        if (this.network.type === 'none') {
-            return Promise.reject({
-                status: 12,
-                message: "Você está offline."
-            });
-        }
-        return Promise.resolve();
     }
 
     private getJsonData(res: Response): any {
@@ -60,14 +41,6 @@ export class RequestService {
             //sem content no response
         }
         return body;
-    }
-
-    private getRequestOptions(urlRequest: string) {
-        var options = null;
-        if(this.header) {
-            options = new RequestOptions({headers: this.header});
-        }
-        return options;
     }
 
 

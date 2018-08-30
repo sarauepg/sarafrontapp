@@ -2,5 +2,12 @@
   "name": "sarafrontapp",
   "integrations": {},
   "type": "ionic-angular",
+  "proxies": [
+    {
+      "path": "/proxy/sara/",
+      "proxyUrl": "http://localhost:8080/sara/",
+      "rejectUnauthorized": false
+    }
+  ],
   "app_id": ""
 }
