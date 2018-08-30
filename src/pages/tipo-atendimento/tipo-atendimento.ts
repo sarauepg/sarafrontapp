@@ -18,16 +18,6 @@ export class TipoAtendimentoPage {
   tiposAtendimento: any;
 
   constructor(public loadingCtrl: LoadingController, public events: Events, public navCtrl: NavController, public navParams: NavParams, private requestService: RequestService) {
-
-    events.subscribe('menu:opened', () => {
-      let elm = <HTMLElement>document.querySelector(".content-padding-side");
-      elm.style.paddingRight = '23%';
-    });
-
-    events.subscribe('menu:closed', () => {
-      let elm = <HTMLElement>document.querySelector(".content-padding-side");
-      elm.style.paddingRight = '5%';
-    });
   }
 
   ionViewDidLoad() {

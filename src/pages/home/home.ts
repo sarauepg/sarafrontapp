@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, MenuController } from 'ionic-angular';
 import { AgendamentoPage } from '../agendamento/agendamento';
 
 @Component({
@@ -8,8 +8,12 @@ import { AgendamentoPage } from '../agendamento/agendamento';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
+  constructor(public menuCtrl: MenuController, public navCtrl: NavController) {
 
+  }
+
+  ionViewWillEnter(){
+    this.menuCtrl.enable(false);
   }
 
   goToAgenda(){

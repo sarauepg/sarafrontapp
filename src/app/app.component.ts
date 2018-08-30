@@ -50,12 +50,4 @@ export class MyApp {
     this.nav.setRoot(page.component);
   }
 
-  menuClosed() {
-    this.events.publish('menu:closed', '');
-  }
-
-  menuOpened() {
-    this.events.publish('menu:opened', '');
-  }
-
 }
