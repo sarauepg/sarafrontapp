@@ -116,8 +116,8 @@
                       <ion-col class="max-w-135">Visualizar/Editar</ion-col>
                       <ion-col class="max-w-65">Excluir</ion-col>
                     </ion-row>
-                    <ion-row align-items-center class="table-content">
-                      <ion-col class="max-w-100">Data</ion-col>
+                    <ion-row *ngFor="let i of items" align-items-center class="table-content">
+                      <ion-col class="max-w-100">{{i}}</ion-col>
                       <ion-col class="max-w-60">Hora</ion-col>
                       <ion-col>Paciente</ion-col>
                       <ion-col class="max-w-130">CPF</ion-col>
