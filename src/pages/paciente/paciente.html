@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar color = "dark">
-    <ion-title>Pacientes</ion-title>
+    <ion-title icon-start><ion-icon name="people"></ion-icon></ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -22,11 +22,11 @@
           <ion-card-header>
             <ion-row align-items-center>
               <ion-col>
-                <p class="card-title">Atendimentos</p>
+                <p class="card-title">Pacientes</p>
               </ion-col>
               <ion-col>
                 <button icon-start ion-button class="add-btn" float-right>
-                  <ion-icon name="add"></ion-icon>Novo atendimento
+                  <ion-icon name="add"></ion-icon>Cadastrar Paciente
                 </button>
               </ion-col>
             </ion-row>
@@ -37,14 +37,14 @@
             <ion-list>
              
               <ion-row>
-                <ion-col col-12 col-lg-4>
+                <ion-col col-12 col-lg-3>
                   <ion-item>
                     <ion-label floating>Nome</ion-label>
                     <ion-input type="text"></ion-input>
                   </ion-item>
                 </ion-col>
                 
-                <ion-col col-12 col-lg-4>
+                <ion-col col-12 col-lg-3>
                     <ion-item>
                       <ion-label floating>CPF</ion-label>
                       <ion-input type="text"></ion-input>
@@ -52,7 +52,7 @@
   
                   </ion-col>
 
-                <ion-col col-12 col-lg-4>
+                <ion-col col-12 col-lg-3>
                   <ion-item>
                     <ion-label floating>Lotação</ion-label>
                     <ion-select interface="popover">
@@ -61,16 +61,58 @@
                   </ion-item>
                 </ion-col>
 
-                <ion-col col-12 col-lg-4>
+                <ion-col col-12 col-lg-3>
                   <button icon-start ion-button class="search-btn" color="dark" float-end>
                     <ion-icon name="search"></ion-icon>Pesquisar
                   </button>
                 </ion-col>
-                
+
               </ion-row>
             </ion-list>
           </ion-card-content>
         </ion-card>
+
+        <ion-card>
+            <ion-card-content>
+              <ion-list>
+                <ion-row>
+                  <ion-col col-auto>
+                    <ion-item>Nome</ion-item>
+                  </ion-col>
+  
+                  <ion-col col-auto>
+                    <ion-item>CPF</ion-item>
+                  </ion-col>
+  
+                  <ion-col col-auto>
+                    <ion-item>Nascimento</ion-item>
+                  </ion-col>
+                  
+                  <ion-col col-auto>
+                    <ion-item>E-mail</ion-item>
+                  </ion-col>
+                  
+                  <ion-col col-auto>
+                    <ion-item>Telefone</ion-item>
+                  </ion-col>
+                  
+                  <ion-col col-auto>
+                    <ion-item>Lotação</ion-item>
+                  </ion-col>
+                  
+                  <ion-col col-auto>
+                    <ion-item>Observação médica</ion-item>
+                  </ion-col>
+                                  
+                  <ion-col col-auto>
+                    <ion-item>Editar</ion-item>  
+                  </ion-col>
+                                                           
+                </ion-row>
+              </ion-list>
+            </ion-card-content>
+          </ion-card>
+
       </ion-col>
     </ion-row>
   </div>

@@ -5,7 +5,7 @@ page-atendimento {
     }
     
     ion-card{
-        min-height: 100%;
+        min-height: 0%;
     }
 
     ion-card-header{
@@ -28,8 +28,8 @@ page-atendimento {
 
     @media only screen and (min-width: 1200px) {
         .content-padding-side {
-            padding-left: 5%;
-            padding-right: 5%;
+            padding-left: 0%;
+            padding-right: 0%;
         }
     }
 
