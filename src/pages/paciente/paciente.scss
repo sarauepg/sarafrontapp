@@ -1,3 +1,26 @@
 page-paciente {
+    ion-label{
+        color: gray;
+    }
+    
+    ion-card{
+        min-height: 100%;
+    }
 
+    @media only screen and (min-width: 768px) {
+        .content-padding-side {
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+        .second-card-col {
+            margin-top: 16px !important;
+        }
+    }
+
+    @media only screen and (min-width: 1200px) {
+        .content-padding-side {
+            padding-left: 5%;
+            padding-right: 23%;
+        }
+    }
 }
