@@ -17,6 +17,7 @@ import { VisaoGeralPage } from '../pages/visao-geral/visao-geral';
 import { HttpModule } from '@angular/http';
 import { RequestService } from '../service/request.service';
 import { Network } from '@ionic-native/network';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { Network } from '@ionic-native/network';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    HttpModule
+    HttpModule,
+    NgxDatatableModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
