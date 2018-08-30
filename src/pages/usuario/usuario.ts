@@ -1,12 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the UsuarioPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 
 @IonicPage({
   name: 'Usuario',
@@ -18,11 +11,29 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class UsuarioPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  items = [];
+
+  constructor(public events: Events, public navCtrl: NavController, public navParams: NavParams) {
+    
+    for (let i = 0; i < 15; i++) {
+      this.items.push( this.items.length );
+    }
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad UsuarioPage');
   }
+ 
+  doInfinite(infiniteScroll) {
+    console.log('Begin async operation');
 
+    setTimeout(() => {
+      for (let i = 0; i < 15; i++) {
+        this.items.push( this.items.length );
+      }
+
+      console.log('Async operation has ended');
+      infiniteScroll.complete();
+    }, 500);
+  }
 }

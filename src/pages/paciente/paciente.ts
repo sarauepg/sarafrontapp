@@ -1,13 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 
-/**
- * Generated class for the PacientePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage({
   name: 'Paciente',
   segment: 'paciente'
@@ -17,13 +10,30 @@ import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
   templateUrl: 'paciente.html',
 })
 export class PacientePage {
+  
+  items = [];
 
   constructor(public events: Events, public navCtrl: NavController, public navParams: NavParams) {
-    
+   
+    for (let i = 0; i < 15; i++) {
+      this.items.push( this.items.length );
   }
+}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PacientePage');
   }
 
+  doInfinite(infiniteScroll) {
+    console.log('Begin async operation');
+
+    setTimeout(() => {
+      for (let i = 0; i < 15; i++) {
+        this.items.push( this.items.length );
+      }
+
+      console.log('Async operation has ended');
+      infiniteScroll.complete();
+    }, 500);
+  }
 }
