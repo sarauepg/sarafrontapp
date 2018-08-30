@@ -21,14 +21,6 @@ export class AgendamentoPage {
   menuAberto = true;
 
   constructor(public events: Events, public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams) {
-    
-    events.subscribe('menu:opened', () => {
-      this.menuAberto = true;
-    });
-
-    events.subscribe('menu:closed', () => {
-      this.menuAberto = false;
-    });
   }
 
   ionViewDidLoad() {
@@ -36,7 +28,7 @@ export class AgendamentoPage {
   }
 
   ionViewWillEnter() {
-    this.menuCtrl.open();
+    this.menuCtrl.enable(true);
   }
 
 }

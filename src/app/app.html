@@ -1,23 +1,22 @@
- <ion-menu type="push" [content]="content" (ionOpen)="menuOpened()" (ionClose)="menuClosed()">
-  <ion-header>
-    <ion-toolbar color = "dark">
-    <button  ion-button menuToggle>
-        <ion-icon class="menu-font" name="menu"></ion-icon>
-      </button>
-      <img class="menu-logo" src="../assets/imgs/branco-transparente.png" />
-    </ion-toolbar>
-  </ion-header>
+<ion-split-pane >
+  <ion-menu class="menu-size" type="push" [content]="content">
+    <ion-header>
+      <ion-toolbar color="dark">
+        <img class="menu-logo" margin-left src="../assets/imgs/branco-transparente.png" />
+      </ion-toolbar>
+    </ion-header>
 
-  <ion-content class="menu-bg" margin-top>
-    <ion-list no-lines>
-      <button class="menu-content-font" ion-item *ngFor="let p of pages" (click)="openPage(p)" color = "light">
-          <ion-icon name="{{p.icon}}"  class="menu-icon"></ion-icon>
+    <ion-content class="menu-bg" margin-top>
+      <ion-list no-lines>
+        <button class="menu-content-font" ion-item *ngFor="let p of pages" (click)="openPage(p)" color="light">
+          <ion-icon name="{{p.icon}}" class="menu-icon"></ion-icon>
           <span>{{p.title}}</span>
-      </button>
-    </ion-list>
-  </ion-content>
+        </button>
+      </ion-list>
+    </ion-content>
 
-</ion-menu> 
+  </ion-menu>
 
-<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
-<ion-nav [root]="rootPage" main #content swipeBackEnabled="false"></ion-nav>
+  <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+  <ion-nav [root]="rootPage" main #content swipeBackEnabled="false"></ion-nav>
+</ion-split-pane>
