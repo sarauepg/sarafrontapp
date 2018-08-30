@@ -1,3 +1,34 @@
 page-usuario {
+    ion-label{
+        color: gray;
+    }
+    
+    ion-card{
+        min-height: 30%;
+    }
 
+    ion-card-header{
+        ion-row{
+            ion-col{
+                padding: 0px 5px !important;
+            }
+        }
+    }
+
+    @media only screen and (min-width: 768px) {
+        .content-padding-side {
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+        .second-card-col {
+            margin-top: 16px !important;
+        }
+    }
+
+    @media only screen and (min-width: 1200px) {
+        .content-padding-side {
+            padding-left: 0%;
+            padding-right: 0%;
+        }
+    }
 }

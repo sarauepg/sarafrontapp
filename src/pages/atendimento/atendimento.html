@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar color="dark">
-    <ion-title>Atendimentos</ion-title>
+    <ion-title icon-start><ion-icon name="medkit"></ion-icon></ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -43,12 +43,13 @@
                 </ion-col>
 
                 <ion-col col-12 col-lg-4>
-                  <ion-item>
-                    <ion-label floating>CPF</ion-label>
-                    <ion-input type="text"></ion-input>
-                  </ion-item>
+                    <ion-item>
+                      <ion-label floating>CPF</ion-label>
+                      <ion-input type="text"></ion-input>
+                    </ion-item>
+  
+                  </ion-col>
 
-                </ion-col>
                 <ion-col col-12 col-lg-4>
                   <ion-item>
                     <ion-label floating>Data</ion-label>
@@ -56,9 +57,10 @@
                   </ion-item>
                 </ion-col>
 
-
               </ion-row>
+
               <ion-row>
+
                 <ion-col col-12 col-lg-4>
                   <ion-item>
                     <ion-label floating>Atendido por</ion-label>
@@ -70,6 +72,7 @@
                     </ion-select>
                   </ion-item>
                 </ion-col>
+
                 <ion-col col-12 col-lg-4>
                   <ion-item>
                     <ion-label floating>Tipo de atendimento</ion-label>
@@ -81,11 +84,58 @@
                     </ion-select>
                   </ion-item>
                 </ion-col>
+
                 <ion-col col-12 col-lg-4>
                   <button icon-start ion-button class="search-btn" color="dark" float-end>
                     <ion-icon name="search"></ion-icon>Pesquisar
                   </button>
                 </ion-col>
+
+              </ion-row>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-card>
+          <ion-card-content>
+            <ion-list>
+              <ion-row>
+                <ion-col col-auto>
+                  <ion-item>Nome</ion-item>
+                </ion-col>
+
+                <ion-col col-auto>
+                  <ion-item>Hora</ion-item>
+                </ion-col>
+
+                <ion-col col-auto>
+                  <ion-item>Paciente</ion-item>
+                </ion-col>
+                
+                <ion-col col-auto>
+                  <ion-item>CPF</ion-item>
+                </ion-col>
+                
+                <ion-col col-auto>
+                  <ion-item>Responsável</ion-item>
+                </ion-col>
+                
+                <ion-col col-auto>
+                  <ion-item>Tipo de atendimento</ion-item>
+                </ion-col>
+                
+                <ion-col col-auto>
+                  <ion-item>Visualizar detalhes</ion-item>
+                </ion-col>
+                                
+                <ion-col col-auto>
+                  <ion-item>Editar</ion-item>  
+                </ion-col>
+                
+                <ion-col col-auto>
+                  <ion-item>Excluir</ion-item> 
+                </ion-col>
+                         
               </ion-row>
           </ion-card-content>
         </ion-card>

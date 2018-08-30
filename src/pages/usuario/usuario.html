@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar color = "dark">
-    <ion-title>Usuários</ion-title>
+    <ion-title icon-start><ion-icon name="people"></ion-icon></ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -15,4 +15,136 @@
 
 <ion-content padding fullscreen="true" class="content-bg">
 
-</ion-content>
+    <div margin-top class="content-padding-side">
+      <ion-row>
+        <ion-col col-12 col-md no-padding>
+          <ion-card>
+            <ion-card-header>
+              <ion-row align-items-center>
+                <ion-col>
+                  <p class="card-title">Usuários</p>
+                </ion-col>
+                <ion-col>
+                  <button icon-start ion-button class="add-btn" float-right>
+                    <ion-icon name="add"></ion-icon>Cadastrar Usuário
+                  </button>
+                </ion-col>
+              </ion-row>
+            </ion-card-header>
+            <div class="divider2"></div>
+            <ion-card-content>
+  
+              <ion-list>
+               
+                <ion-row>
+                  <ion-col col-12 col-lg-4>
+                    <ion-item>
+                      <ion-label floating>Nome</ion-label>
+                      <ion-input type="text"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                  
+                  <ion-col col-12 col-lg-4>
+                      <ion-item>
+                        <ion-label floating>CPF</ion-label>
+                        <ion-input type="text"></ion-input>
+                      </ion-item>
+    
+                    </ion-col>
+  
+                  <ion-col col-12 col-lg-4>
+                    <ion-item>
+                      <ion-label floating>Ativo</ion-label>
+                      <ion-select interface="popover">
+                        <ion-option value="nes">Sim</ion-option>
+                        <ion-option value="2es">Não</ion-option>
+                      </ion-select>
+                    </ion-item>
+                  </ion-col>
+                   
+                </ion-row>
+
+                <ion-row>
+                    <ion-col col-12 col-lg-4>
+                        <ion-item>
+                          <ion-label floating>Administrador</ion-label>
+                          <ion-select interface="popover">
+                            <ion-option value="nes">Sim</ion-option>
+                            <ion-option value="2es">Não</ion-option>
+                          </ion-select>
+                        </ion-item>
+                      </ion-col>
+
+                    <ion-col col-12 col-lg-4>
+                        <ion-item>
+                          <ion-label floating>Médico</ion-label>
+                          <ion-select interface="popover">
+                            <ion-option value="nes">Sim</ion-option>
+                            <ion-option value="2es">Não</ion-option>
+                          </ion-select>
+                        </ion-item>
+                      </ion-col>
+
+                    <ion-col col-12 col-lg-4>
+                        <button icon-start ion-button class="search-btn" color="dark" float-end>
+                          <ion-icon name="search"></ion-icon>Pesquisar
+                        </button>
+                      </ion-col>
+                </ion-row>
+              </ion-list>
+            </ion-card-content>
+          </ion-card>
+  
+          <ion-card>
+              <ion-card-content>
+                <ion-list>
+                  <ion-row>
+                    <ion-col col-auto>
+                      <ion-item>Nome</ion-item>
+                    </ion-col>
+                    
+                    <ion-col col-auto>
+                      <ion-item>Usuário</ion-item>
+                    </ion-col>
+
+                    <ion-col col-auto>
+                      <ion-item>CPF</ion-item>
+                    </ion-col>
+    
+                    <ion-col col-auto>
+                      <ion-item>N.º Conselho</ion-item>
+                    </ion-col>
+                    
+                    <ion-col col-auto>
+                      <ion-item>E-mail</ion-item>
+                    </ion-col>
+                    
+                    <ion-col col-auto>
+                      <ion-item>Telefone</ion-item>
+                    </ion-col>
+                    
+                    <ion-col col-auto>
+                      <ion-item>Admin</ion-item>
+                    </ion-col>
+                    
+                    <ion-col col-auto>
+                      <ion-item>Médico</ion-item>
+                    </ion-col>
+                    
+                    <ion-col col-auto>
+                      <ion-item>Ativo</ion-item>
+                    </ion-col>
+
+                    <ion-col col-auto>
+                      <ion-item>Editar</ion-item>  
+                    </ion-col>
+                                                             
+                  </ion-row>
+                </ion-list>
+              </ion-card-content>
+            </ion-card>
+  
+        </ion-col>
+      </ion-row>
+    </div>
+  </ion-content>

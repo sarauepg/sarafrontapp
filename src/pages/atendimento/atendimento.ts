@@ -17,9 +17,8 @@ export class AtendimentoPage {
 
     for (let i = 0; i < 15; i++) {
       this.items.push( this.items.length );
-    }
-
   }
+}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AtendimentoPage');
