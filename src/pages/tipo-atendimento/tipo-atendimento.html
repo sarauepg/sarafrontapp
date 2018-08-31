@@ -28,13 +28,13 @@
           <ion-card-content>
             <ion-list>
               <ion-row>
-                <ion-col col-12 col-md>
+                <ion-col col-12 col-md padding-left padding-right>
                   <ion-item>
                     <ion-label floating>Nome</ion-label>
                     <ion-input type="text"></ion-input>
                   </ion-item>
                 </ion-col>
-                <ion-col col-12 col-md>
+                <ion-col col-12 col-md padding-left padding-right>
                   <ion-item>
                     <ion-label floating>Responsável</ion-label>
                     <ion-select interface="popover">
@@ -118,8 +118,13 @@
                     <p class="card-title">Tipos de atendimento</p>
               </ion-row>
               </ion-card-header>
-          <ion-card-content>
-            ahhiahifha
+              <div class="divider"></div>
+          <ion-card-content margin-top>
+            <ion-list>
+              <button *ngFor="let t of tiposAtendimento" class="lista-tipo-at" ion-button clear block>
+                {{t.nome}}
+              </button>
+              </ion-list>
           </ion-card-content>
         </ion-card>
       </ion-col>
