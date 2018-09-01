@@ -1,5 +1,5 @@
 <ion-header>
-    <ion-navbar  color="dark">
+    <ion-navbar color="dark">
         <ion-buttons right>
             <button ion-button icon-only clear (click)="dismiss()">
                 <ion-icon name="md-close" item-right></ion-icon>
@@ -9,9 +9,130 @@
     </ion-navbar>
 </ion-header>
 
-<ion-content  class="content-bg">
+<ion-content class="content-bg">
 
-    <div >
-    </div>
+    <ion-card>
+        <ion-card-header>
+            <ion-row align-items-left class="modal-card-title">
+                <ion-icon name="ios-list-box-outline" margin-right color="light"></ion-icon>
+                Dados gerais
+            </ion-row>
+        </ion-card-header>
+        <div class="divider2"></div>
+        <ion-card-content>
 
+            <ion-list>
+                <ion-row>
+                    <ion-col col-6 padding-left padding-right>
+                        <ion-item>
+                            <ion-label floating>Nome do paciente</ion-label>
+                            <ion-input type="text"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col col-6 padding-left padding-right>
+                        <ion-item>
+                            <ion-label floating>CPF do paciente</ion-label>
+                            <ion-input type="text"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col col-6 padding-left padding-right>
+                        <ion-item>
+                            <ion-label floating>Data</ion-label>
+                            <ion-input type="text"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col col-6 padding-left padding-right>
+                        <ion-item>
+                            <ion-label floating>Hora</ion-label>
+                            <ion-input type="text"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col col-6 padding-left padding-right>
+                        <ion-item>
+                            <ion-label floating>Tipo de atendimento</ion-label>
+                            <ion-select interface="popover">
+                                <ion-option value="nes">tipoat</ion-option>
+                                <!-- <ion-option value="nes">Enfermeiro(a)</ion-option>
+                                                            <ion-option value="n64">Médico(a)</ion-option>
+                                                            <ion-option value="ps">Todos(as)</ion-option> -->
+                            </ion-select>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col col-6 padding-left padding-right>
+                        <ion-item hidden>
+                            <ion-label floating>Responsável</ion-label>
+                            <ion-select interface="popover">
+                                <ion-option value="nes">tipoat</ion-option>
+                                <!-- <ion-option value="nes">Enfermeiro(a)</ion-option>
+                                                                <ion-option value="n64">Médico(a)</ion-option>
+                                                                <ion-option value="ps">Todos(as)</ion-option> -->
+                            </ion-select>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+            </ion-list>
+
+        </ion-card-content>
+    </ion-card>
+    <ion-card>
+        <ion-card-header>
+            <ion-row align-items-left class="modal-card-title">
+                <ion-icon name="ios-thermometer-outline" margin-right color="light"></ion-icon>
+                Aferiveis
+            </ion-row>
+        </ion-card-header>
+        <div class="divider2"></div>
+        <ion-card-content>
+            <ion-list>
+                <ion-row>
+                    <ion-col col-4 padding-left padding-right>
+                        <ion-item>
+                            <ion-label floating>Hora</ion-label>
+                            <ion-input type="text"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col col-4 padding-left padding-right>
+                        <ion-item>
+                            <ion-label floating>Hora</ion-label>
+                            <ion-input type="text"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col col-4 padding-left padding-right>
+                        <ion-item>
+                            <ion-label floating>Hora</ion-label>
+                            <ion-input type="text"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+        <ion-card-header>
+            <ion-row align-items-left class="modal-card-title">
+                <ion-icon name="ios-clipboard-outline" margin-right color="light"></ion-icon>
+                Anotações
+            </ion-row>
+        </ion-card-header>
+        <div class="divider2"></div>
+        <ion-card-content>
+            <ion-item>
+                <ion-label floating>Observações médicas</ion-label>
+                <ion-textarea type="text"></ion-textarea>
+            </ion-item>
+        </ion-card-content>
+    </ion-card>
 </ion-content>
+<ion-footer>
+    <ion-toolbar color="white">
+        <ion-buttons right>
+            <button icon-start ion-button margin-right color="light" >
+                <ion-icon name = "checkmark"></ion-icon> salvar
+            </button>
+            <button icon-start ion-button color = "gray" >
+                    <ion-icon name = "close"></ion-icon> cancelar
+                </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-footer>

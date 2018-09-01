@@ -26,7 +26,7 @@
           </ion-card-header>
           <div class="divider"></div>
           <ion-card-content>
-          <form [formGroup]="formTipoAt">
+          <form [formGroup]="formTipoAt" (ngSubmit)="adicionarTipoAtendimento()">
             <ion-list>
               <ion-row>
                 <ion-col col-12 col-md padding-left padding-right>
@@ -108,13 +108,13 @@
                 </ion-col>
               </ion-row>
             </ion-list>
-            <button ion-button block class="add-btn" (click)="adicionarTipoAtendimento()" >ADICIONAR >></button>
+            <button ion-button block class="add-btn" type="submit" >ADICIONAR >></button>
             </form>
           </ion-card-content>
         </ion-card>
       </ion-col>
       <ion-col col-12 col-md no-padding>
-        <ion-card>
+        <ion-card >
             <ion-card-header>
                 <ion-row justify-content-center>
                     <p class="card-title">Tipos de atendimento</p>
