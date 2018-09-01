@@ -51,8 +51,11 @@
   
                 <ion-col col-12 col-lg-4>
                   <ion-item>
-                    <ion-label floating>Data</ion-label>
-                    <ion-input type="tel"></ion-input>
+                    <ion-label floating>Ativo</ion-label>
+                    <ion-select interface="popover">
+                      <ion-option value="yes">Sim</ion-option>
+                      <ion-option value="no">Não</ion-option>
+                    </ion-select>
                   </ion-item>
                 </ion-col>
   
@@ -62,24 +65,20 @@
   
                 <ion-col col-12 col-lg-4>
                   <ion-item>
-                    <ion-label floating>Atendido por</ion-label>
+                    <ion-label floating>Administrador</ion-label>
                     <ion-select interface="popover">
-                      <ion-option value="nes">Nome de alguem que atendeu</ion-option>
-                      <!-- <ion-option value="nes">Enfermeiro(a)</ion-option>
-                        <ion-option value="n64">Médico(a)</ion-option>
-                        <ion-option value="ps">Todos(as)</ion-option> -->
+                      <ion-option value="yes">Sim</ion-option>
+                      <ion-option value="no">Não</ion-option>
                     </ion-select>
                   </ion-item>
                 </ion-col>
   
                 <ion-col col-12 col-lg-4>
                   <ion-item>
-                    <ion-label floating>Tipo de atendimento</ion-label>
+                    <ion-label floating>Médico</ion-label>
                     <ion-select interface="popover">
-                      <ion-option value="nes">Nome do tipo de atendimento</ion-option>
-                      <!-- <ion-option value="nes">Enfermeiro(a)</ion-option>
-                        <ion-option value="n64">Médico(a)</ion-option>
-                        <ion-option value="ps">Todos(as)</ion-option> -->
+                      <ion-option value="yes">Sim</ion-option>
+                      <ion-option value="no">Não</ion-option>
                     </ion-select>
                   </ion-item>
                 </ion-col>
@@ -104,24 +103,29 @@
                   <ion-card-content>
                     <ion-grid>
                       <ion-row class="table-header">
-                        <ion-col class="max-w-100">Data</ion-col>
-                        <ion-col class="max-w-60">Hora</ion-col>
-                        <ion-col>Paciente</ion-col>
+                        <ion-col class="max-w-130">Nome</ion-col>
+                        <ion-col class="max-w-130">Usuário</ion-col>
                         <ion-col class="max-w-130">CPF</ion-col>
-                        <ion-col>Responsável</ion-col>
-                        <ion-col class="max-w-180">Tipo de atendimento</ion-col>
+                        <ion-col>N.º Conselho</ion-col>
+                        <ion-col class="max-w-135">E-mail</ion-col>
+                        <ion-col class="max-w-130">Telefone</ion-col>
+                        <ion-col class="max-w-60">Admin</ion-col>
+                        <ion-col class="max-w-80">Médico</ion-col>
+                        <ion-col class="max-w-60">Ativo</ion-col>
                         <ion-col class="max-w-135">Visualizar/Editar</ion-col>
-                        <ion-col class="max-w-65">Excluir</ion-col>
+                        
                       </ion-row>
                       <ion-row *ngFor="let i of items" align-items-center class="table-content">
-                        <ion-col class="max-w-100">{{i}}</ion-col>
-                        <ion-col class="max-w-60">Hora</ion-col>
-                        <ion-col>Paciente</ion-col>
+                        <ion-col class="max-w-130">Nume teste</ion-col>
+                        <ion-col class="max-w-130">teste</ion-col>
                         <ion-col class="max-w-130">CPF</ion-col>
-                        <ion-col>Responsável</ion-col>
-                        <ion-col class="max-w-180">Tipo de atendimento</ion-col>
+                        <ion-col>N.º Conselho</ion-col>
+                        <ion-col class="max-w-135">E-mail</ion-col>
+                        <ion-col class="max-w-130">Telefone</ion-col>
+                        <ion-col class="max-w-60"><ion-checkbox></ion-checkbox></ion-col>
+                        <ion-col class="max-w-80"><ion-checkbox></ion-checkbox></ion-col>
+                        <ion-col class="max-w-60"><ion-checkbox></ion-checkbox></ion-col>
                         <ion-col class="max-w-135"><button ion-button block icon-only clear><ion-icon color="gray" name="eye"></ion-icon></button></ion-col>
-                        <ion-col class="max-w-65"><button ion-button block icon-only clear><ion-icon color="gray" name="trash"></ion-icon></button></ion-col>
                       </ion-row>
                     </ion-grid>
                     <ion-infinite-scroll (ionInfinite)="doInfinite($event)">

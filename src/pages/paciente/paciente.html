@@ -85,24 +85,22 @@
                       <ion-row class="table-header">
                         <ion-col>Nome</ion-col>
                         <ion-col class="max-w-130">CPF</ion-col>
-                        <ion-col class="max-w-130">Nascimento</ion-col>
-                        <ion-col>E-mail</ion-col>
+                        <ion-col class="max-w-130">Data de Nascimento</ion-col>
+                        <ion-col class="max-w-135">E-mail</ion-col>
                         <ion-col class="max-w-130">Telefone</ion-col>
                         <ion-col class="max-w-180">Lotação</ion-col>                        
                         <ion-col class="max-w-135">Visualizar/Editar</ion-col>
-                        <ion-col class="max-w-65">Excluir</ion-col>
                       </ion-row>
                       
                       <ion-row *ngFor="let i of items" align-items-center class="table-content">
-                        <ion-col>Nome</ion-col>
-                        <ion-col class="max-w-130">CPF</ion-col>
-                        <ion-col class="max-w-130">Nascimento</ion-col>
-                        <ion-col>E-mail</ion-col>
-                        <ion-col class="max-w-130">Telefone</ion-col>
-                        <ion-col class="max-w-180">Lotação</ion-col>                        
+                        <ion-col>Nome absurdamente grande buga</ion-col>
+                        <ion-col class="max-w-130">000.000.000-99</ion-col>
+                        <ion-col class="max-w-130">07/01/1998</ion-col>
+                        <ion-col class="max-w-135">umemailaleatorio@buga.com</ion-col>
+                        <ion-col class="max-w-130">(42)99941-8724</ion-col>
+                        <ion-col class="max-w-180">SEBISA</ion-col>                        
                         <ion-col class="max-w-135"><button ion-button block icon-only clear><ion-icon color="gray" name="eye"></ion-icon></button></ion-col>
-                        <ion-col class="max-w-65"><button ion-button block icon-only clear><ion-icon color="gray" name="trash"></ion-icon></button></ion-col>
-                      
+                        
                       </ion-row>
                     </ion-grid>
                     <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
