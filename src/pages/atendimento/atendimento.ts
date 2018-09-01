@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events, ModalController } from 'ionic-angular';
 
 @IonicPage({
   name: 'Atendimento',
@@ -13,7 +13,7 @@ export class AtendimentoPage {
 
   items = [];
   
-  constructor(public events: Events, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public modalCtrl: ModalController, public events: Events, public navCtrl: NavController, public navParams: NavParams) {
 
     for (let i = 0; i < 15; i++) {
       this.items.push( this.items.length );
@@ -36,5 +36,16 @@ export class AtendimentoPage {
       infiniteScroll.complete();
     }, 500);
   }
+
+  abrirModalCadastroAtendimento() {
+		console.log();
+		const modal = this.modalCtrl.create("ModalCadastroAtendimento", {enableBackdropDismiss: false});
+		/*modal.onDidDismiss(data => {
+			if(data != undefined){
+				this.businessHours = data;
+			}
+		  });*/
+		modal.present();
+	}
 
 }

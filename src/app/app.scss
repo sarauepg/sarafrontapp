@@ -58,6 +58,11 @@
     margin-right: 2% !important;
 }
 
+.col-divider {
+    border-left: 1px solid #59c2c8  !important;
+    margin: 5% 0px;
+}
+
 .font-size-small{
     font-size: 1.1em;
     color: gray;
@@ -109,4 +114,13 @@ ion-card-header{
 }
 ion-card-content{
     padding: 2px 16px !important;
+}
+
+@media only screen and (min-height: 600px) and (min-width: 768px) {
+    .modal-wrapper {
+        width: 700px !important;
+        left: calc(50% - (700px/2)) !important;
+        height: 80% !important;
+        top: 10% !important;
+    }   
 }
