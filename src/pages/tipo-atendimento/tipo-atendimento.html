@@ -26,21 +26,22 @@
           </ion-card-header>
           <div class="divider"></div>
           <ion-card-content>
+          <form [formGroup]="formTipoAt">
             <ion-list>
               <ion-row>
                 <ion-col col-12 col-md padding-left padding-right>
-                  <ion-item>
+                  <ion-item [class.invalid]="formTipoAt.controls.nome.invalid && (formTipoAt.controls.nome.dirty || formSubmit)">
                     <ion-label floating>Nome</ion-label>
-                    <ion-input type="text"></ion-input>
+                    <ion-input type="text" formControlName="nome" [(ngModel)]="tipoAt.nome"></ion-input>
                   </ion-item>
                 </ion-col>
                 <ion-col col-12 col-md padding-left padding-right>
-                  <ion-item>
+                  <ion-item [class.invalid]="formTipoAt.controls.responsavel.invalid && (formTipoAt.controls.responsavel.dirty || formSubmit)">
                     <ion-label floating>Responsável</ion-label>
-                    <ion-select interface="popover">
-                      <ion-option value="nes">Enfermeiro(a)</ion-option>
-                      <ion-option value="n64">Médico(a)</ion-option>
-                      <ion-option value="ps">Todos(as)</ion-option>
+                    <ion-select interface="popover" formControlName="responsavel" [(ngModel)]="tipoAt.responsavel">
+                      <ion-option value="E">Enfermeiro(a)</ion-option>
+                      <ion-option value="M">Médico(a)</ion-option>
+                      <ion-option value="T">Todos(as)</ion-option>
                     </ion-select>
                   </ion-item>
                 </ion-col>
@@ -48,7 +49,7 @@
               <ion-row>
                 <ion-item>
                   <ion-label>Agendável</ion-label>
-                  <ion-checkbox></ion-checkbox>
+                  <ion-checkbox formControlName="agendavel" [(ngModel)]="tipoAt.agendavel"></ion-checkbox>
                 </ion-item>
               </ion-row>
             </ion-list>
@@ -58,13 +59,13 @@
                 <ion-col col-12 col-md>
                   <ion-item>
                     <ion-label>Frequência cardíaca</ion-label>
-                    <ion-checkbox></ion-checkbox>
+                    <ion-checkbox formControlName="frequenciaCardiaca" [(ngModel)]="aferiveis[6].selecionado"></ion-checkbox>
                   </ion-item>
                 </ion-col>
                 <ion-col col-12 col-md>
                   <ion-item>
                     <ion-label>Glicemia</ion-label>
-                    <ion-checkbox></ion-checkbox>
+                    <ion-checkbox formControlName="glicemia" [(ngModel)]="aferiveis[4].selecionado"></ion-checkbox>
                   </ion-item>
                 </ion-col>
 
@@ -73,14 +74,14 @@
                 <ion-col col-12 col-md>
                   <ion-item>
                     <ion-label>Frequência respiratória</ion-label>
-                    <ion-checkbox></ion-checkbox>
+                    <ion-checkbox formControlName="frequenciaRespiratoria" [(ngModel)]="aferiveis[7].selecionado"></ion-checkbox>
                   </ion-item>
                 </ion-col>
 
                 <ion-col col-12 col-md>
                   <ion-item>
                     <ion-label>Peso</ion-label>
-                    <ion-checkbox></ion-checkbox>
+                    <ion-checkbox formControlName="peso" [(ngModel)]="aferiveis[1].selecionado"></ion-checkbox>
                   </ion-item>
                 </ion-col>
               </ion-row>
@@ -88,13 +89,13 @@
                 <ion-col col-12 col-md>
                   <ion-item>
                     <ion-label>Pressão arterial</ion-label>
-                    <ion-checkbox></ion-checkbox>
+                    <ion-checkbox formControlName="pressaoArterial" [(ngModel)]="aferiveis[2].selecionado"></ion-checkbox>
                   </ion-item>
                 </ion-col>
                 <ion-col col-12 col-md>
                   <ion-item>
                     <ion-label>Temperatura</ion-label>
-                    <ion-checkbox></ion-checkbox>
+                    <ion-checkbox formControlName="temperatura" [(ngModel)]="aferiveis[0].selecionado"></ion-checkbox>
                   </ion-item>
                 </ion-col>
               </ion-row>
@@ -102,12 +103,13 @@
                 <ion-col col-12 col-md>
                   <ion-item>
                     <ion-label>Saturação</ion-label>
-                    <ion-checkbox></ion-checkbox>
+                    <ion-checkbox formControlName="saturacao" [(ngModel)]="aferiveis[5].selecionado"></ion-checkbox>
                   </ion-item>
                 </ion-col>
               </ion-row>
             </ion-list>
-            <button ion-button block class="add-btn" >ADICIONAR >></button>
+            <button ion-button block class="add-btn" (click)="adicionarTipoAtendimento()" >ADICIONAR >></button>
+            </form>
           </ion-card-content>
         </ion-card>
       </ion-col>

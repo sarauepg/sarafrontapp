@@ -17,7 +17,6 @@ export class RequestService {
 
     getData(url) {
         return new Promise((resolve, reject) => {
-                //let getRequest = () => {
                     this.http.get(url)
                         .timeout(this.TIMEOUT)
                         .toPromise()
@@ -27,8 +26,21 @@ export class RequestService {
                         .catch((error) => {
                             reject(this.getJsonData(error));
                         });
-                //}
-               // getRequest();
+        });
+
+    }
+
+    postData(url, dados?) {
+        return new Promise((resolve, reject) => {
+                    this.http.post(url, dados)
+                        .timeout(this.TIMEOUT)
+                        .toPromise()
+                        .then((resp: any) => {
+                            resolve(this.getJsonData(resp));
+                        })
+                        .catch((error) => {
+                            reject(this.getJsonData(error));
+                        });
         });
 
     }

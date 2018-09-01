@@ -16,5 +16,6 @@ export const APP_CONFIG = {
 	WEBSERVICE: {
 		// TIPO DE ATENDIMENTO
 		LISTAR_TIPO_ATENDIMENTO: END_POINT + "tipoatendimento/listar",
+		ADICIONAR_TIPO_ATENDIMENTO: END_POINT + "tipoatendimento/cadastrar",
 	}
 };
