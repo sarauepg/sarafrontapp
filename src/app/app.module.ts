@@ -17,7 +17,7 @@ import { VisaoGeralPage } from '../pages/visao-geral/visao-geral';
 import { HttpModule } from '@angular/http';
 import { RequestService } from '../service/request.service';
 import { Network } from '@ionic-native/network';
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { Ng2CompleterModule } from "ng2-completer";
 
 @NgModule({
   declarations: [
@@ -34,8 +34,8 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    HttpModule,
-    NgxDatatableModule
+    Ng2CompleterModule,
+    HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

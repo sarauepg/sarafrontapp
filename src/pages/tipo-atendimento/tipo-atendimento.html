@@ -30,20 +30,26 @@
             <ion-list>
               <ion-row>
                 <ion-col col-12 col-md padding-left padding-right>
-                  <ion-item [class.invalid]="formTipoAt.controls.nome.invalid && (formTipoAt.controls.nome.dirty || formSubmit)">
-                    <ion-label floating>Nome</ion-label>
+                  <ion-item [class.invalid]="formTipoAt.controls.nome.invalid && formSubmit">
+                    <ion-label floating>Nome *</ion-label>
                     <ion-input type="text" formControlName="nome" [(ngModel)]="tipoAt.nome"></ion-input>
                   </ion-item>
+                  <div class="invalid-hint" *ngIf="formTipoAt.controls.nome.invalid && formSubmit">
+                      Nome é obrigatório
+                  </div>
                 </ion-col>
                 <ion-col col-12 col-md padding-left padding-right>
-                  <ion-item [class.invalid]="formTipoAt.controls.responsavel.invalid && (formTipoAt.controls.responsavel.dirty || formSubmit)">
-                    <ion-label floating>Responsável</ion-label>
+                  <ion-item [class.invalid]="formTipoAt.controls.responsavel.invalid && formSubmit">
+                    <ion-label floating>Responsável *</ion-label>
                     <ion-select interface="popover" formControlName="responsavel" [(ngModel)]="tipoAt.responsavel">
                       <ion-option value="E">Enfermeiro(a)</ion-option>
                       <ion-option value="M">Médico(a)</ion-option>
                       <ion-option value="T">Todos(as)</ion-option>
                     </ion-select>
                   </ion-item>
+                  <div class="invalid-hint" *ngIf="formTipoAt.controls.responsavel.invalid && formSubmit">
+                      Responsavel é obrigatório
+                  </div>
                 </ion-col>
               </ion-row>
               <ion-row>

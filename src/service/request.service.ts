@@ -55,5 +55,16 @@ export class RequestService {
         return body;
     }
 
+    buildUrlQueryParams(params, urlRequest) {
+        if(params == null)
+            return null;
+
+        for (var key in params) {
+            urlRequest = urlRequest.replace("{" + key + "}", encodeURIComponent(params[key]));
+        }
+        console.log("urlRequest: " + urlRequest);
+        return urlRequest;
+    }
+
 
 }

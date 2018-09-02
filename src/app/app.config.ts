@@ -17,5 +17,11 @@ export const APP_CONFIG = {
 		// TIPO DE ATENDIMENTO
 		LISTAR_TIPO_ATENDIMENTO: END_POINT + "tipoatendimento/listar",
 		ADICIONAR_TIPO_ATENDIMENTO: END_POINT + "tipoatendimento/cadastrar",
+
+		// USUÁRIO
+		LISTAR_RESPONSAVEIS: END_POINT + "usuario/listarResponsaveis?cargo={cargo}",
+
+		// PACIENTE
+		LISTAR_PACIENTES: END_POINT + "paciente/listar",
 	}
 };
