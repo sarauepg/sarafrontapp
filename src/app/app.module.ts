@@ -18,6 +18,9 @@ import { HttpModule } from '@angular/http';
 import { RequestService } from '../service/request.service';
 import { Network } from '@ionic-native/network';
 import { Ng2CompleterModule } from "ng2-completer";
+import { SharedModule } from '../directives/shared.module';
+
+
 
 @NgModule({
   declarations: [
@@ -35,6 +38,7 @@ import { Ng2CompleterModule } from "ng2-completer";
     BrowserModule,
     IonicModule.forRoot(MyApp),
     Ng2CompleterModule,
+    SharedModule,
     HttpModule
   ],
   bootstrap: [IonicApp],

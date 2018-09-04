@@ -9,109 +9,119 @@
     </ion-navbar>
 </ion-header>
 
-<ion-content class="content-bg">
-    <ion-card>
-        <ion-card-header>
-            <ion-row align-items-left class="modal-card-title">
-                <ion-icon name="ios-list-box-outline" margin-right color="light"></ion-icon>
-                Dados gerais
-            </ion-row>
-        </ion-card-header>
-        <div class="divider2"></div>
-        <ion-card-content>
-
-            <ion-list>
-                <ion-row>
-                    <ion-col col-6 padding-left padding-right>
-                            <ng2-completer (selected)="selecionado($event)" style="color:black !important;" [(ngModel)]="p" [datasource]="dataService" [minSearchLength]="0"></ng2-completer>`
-                       </ion-col>
-                    <ion-col col-6 padding-left paddin g-right>
-                        <ion-item>
-                            <ion-label floating>CPF do paciente</ion-label>
-                            <ion-input [(ngModel)] = "atendimento.paciente.pessoa.cpf" type="text"></ion-input>
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-6 padding-left padding-right>
-                        <ion-item>
-                            <ion-label floating>Data</ion-label>
-                            <ion-input type="text"></ion-input>
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-6 padding-left padding-right>
-                        <ion-item>
-                            <ion-label floating>Hora</ion-label>
-                            <ion-input type="text"></ion-input>
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-6 padding-left padding-right>
-                        <ion-item>
-                            <ion-label floating>Tipo de atendimento</ion-label>
-                            <ion-select [(ngModel)]="atendimento.tipoAtendimento" interface="popover" (ionChange)="listarAtributosDeTipoAt()">
-                                <ion-option *ngFor="let t of tiposAtendimento" [value]="t">{{t.nome}}</ion-option>
-                            </ion-select>
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-6 padding-left padding-right>
-                        <ion-item [hidden]="atendimento.tipoAtendimento == null">
-                            <ion-label floating>Responsável</ion-label>
-                            <ion-select [(ngModel)]="atendimento.usuario" interface="popover">
-                                <ion-option *ngFor="let r of responsaveis" [value]="r">{{r.pessoa.nome + ' - ' + r.uf.sigla
-                                    + '.' + r.numeroConselho}}</ion-option>
-                            </ion-select>
-                        </ion-item>
-                    </ion-col>
+    <ion-content class="content-bg">
+            <form [formGroup]="form">
+        <ion-card>
+            <ion-card-header>
+                <ion-row align-items-left class="modal-card-title">
+                    <ion-icon name="ios-list-box-outline" margin-right color="light"></ion-icon>
+                    Dados gerais
                 </ion-row>
-            </ion-list>
+            </ion-card-header>
+            <div class="divider2"></div>
+            <ion-card-content>
+                <ion-list>
+                    <ion-row>
+                        <ion-col class="completer" col-6 padding-left padding-right [class.invalid]="form.controls.nome.invalid && (form.controls.nome.dirty || formSubmit)">
+                            <ion-label class="completer-label">Nome do paciente *</ion-label>
+                            <ng2-completer formControlName="nome" [textNoResults]="'Nenhum resultado encontrado'" (selected)="selecionado($event)" [(ngModel)]="p"
+                                [datasource]="dataService" [minSearchLength]="0"></ng2-completer>
+                        </ion-col>
+                        <ion-col col-6 padding-left paddin g-right>
+                            <ion-item [class.invalid]="form.controls.cpf.invalid &&  formSubmit">
+                                <ion-label floating>CPF do paciente</ion-label>
+                                <ion-input formControlName="cpf" [mask]="{mask:'999.999.999-99'}" disabled [(ngModel)]="atendimento.paciente.pessoa.cpf"
+                                    type="text"></ion-input>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-6 padding-left padding-right>
+                            <ion-item [class.invalid]="form.controls.data.invalid && (form.controls.data.dirty || formSubmit)">
+                                <ion-label floating>Data *</ion-label>
+                                <ion-input formControlName="data" [mask]="{mask:'99-99-9999'}" [(ngModel)]="atendimento.data" type="text"></ion-input>
+                            </ion-item>
+                            <div class="invalid-hint" *ngIf="form.controls.data.errors?.invalid && ((form.controls.data.dirty && form.controls.data.touched) || formSubmit)">
+                                    Data inválida
+                                </div>
+                        </ion-col>
+                        <ion-col col-6 padding-left padding-right>
+                            <ion-item [class.invalid]="form.controls.hora.invalid && (form.controls.hora.dirty || formSubmit)">
+                                <ion-label floating>Hora *</ion-label>
+                                <ion-input formControlName="hora" [mask]="{mask:'99:99'}" [(ngModel)]="atendimento.hora" type="text"></ion-input>
+                            </ion-item>
+                            <div class="invalid-hint" *ngIf="form.controls.hora.errors?.invalid && ((form.controls.hora.dirty && form.controls.hora.touched) || formSubmit)">
+                                    Hora inválida
+                                </div>
+                        </ion-col>
+                        <ion-col col-6 padding-left padding-right>
+                            <ion-item [class.invalid]="form.controls.tipoAtendimento.invalid && (form.controls.tipoAtendimento.dirty || formSubmit)">
+                                <ion-label floating>Tipo de atendimento *</ion-label>
+                                <ion-select formControlName="tipoAtendimento" [(ngModel)]="atendimento.tipoAtendimento" interface="popover" (ionChange)="listarAtributosDeTipoAt()">
+                                    <ion-option *ngFor="let t of tiposAtendimento" [value]="t">{{t.nome}}</ion-option>
+                                </ion-select>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-6 padding-left padding-right>
+                            <ion-item [class.invalid]="form.controls.responsavel.invalid && (form.controls.responsavel.dirty || formSubmit)" [hidden]="atendimento.tipoAtendimento == null">
+                                <ion-label floating>Responsável *</ion-label>
+                                <ion-select formControlName="responsavel" [(ngModel)]="atendimento.usuario" interface="popover">
+                                    <ion-option *ngFor="let r of responsaveis" [value]="r">{{r.pessoa.nome + ' - ' + r.uf.sigla
+                                        + '.' + r.numeroConselho}}</ion-option>
+                                </ion-select>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                </ion-list>
 
-        </ion-card-content>
-    </ion-card>
-    <ion-card *ngIf="atendimento.tipoAtendimento != null">
-        <ion-card-header>
-            <ion-row align-items-left class="modal-card-title">
-                <ion-icon name="ios-thermometer-outline" margin-right color="light"></ion-icon>
-                Aferiveis
-            </ion-row>
-        </ion-card-header>
-        <div class="divider2"></div>
-        <ion-card-content>
-            <ion-list>
-                <ion-row>
-                    <ion-col *ngFor="let a of atendimento.tipoAtendimento.aferiveis" col-4 padding-left padding-right>
-                        <ion-item>
-                            <ion-label floating>{{a.nome}}</ion-label>
-                            <ion-input type="text"></ion-input>
-                        </ion-item>
-                    </ion-col>
+            </ion-card-content>
+        </ion-card>
+        <ion-card *ngIf="atendimento.valoresAferidos.length > 0">
+            <ion-card-header>
+                <ion-row align-items-left class="modal-card-title">
+                    <ion-icon name="ios-thermometer-outline" margin-right color="light"></ion-icon>
+                    Aferiveis
                 </ion-row>
-            </ion-list>
-        </ion-card-content>
-    </ion-card>
+            </ion-card-header>
+            <div class="divider2"></div>
+            <ion-card-content>
+                <ion-list>
+                    <ion-row>
+                        <ion-col *ngFor="let a of atendimento.valoresAferidos;" col-4 padding-left padding-right>
+                            <ion-item>
+                                <ion-label floating>{{a.nomeAferivel}}</ion-label>
+                                <ion-input [(ngModel)]="a.valorAferido" [ngModelOptions]="{standalone: true}" type="number"></ion-input>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                </ion-list>
+            </ion-card-content>
+        </ion-card>
 
-    <ion-card>
-        <ion-card-header>
-            <ion-row align-items-left class="modal-card-title">
-                <ion-icon name="ios-clipboard-outline" margin-right color="light"></ion-icon>
-                Anotações
-            </ion-row>
-        </ion-card-header>
-        <div class="divider2"></div>
-        <ion-card-content>
-            <ion-item>
-                <ion-label floating>Observações médicas</ion-label>
-                <ion-textarea type="text"></ion-textarea>
-            </ion-item>
-        </ion-card-content>
-    </ion-card>
-</ion-content>
-<ion-footer>
-    <ion-toolbar color="white">
-        <ion-buttons right>
-            <button icon-start ion-button margin-right color="light">
-                <ion-icon name="checkmark"></ion-icon> salvar
-            </button>
-            <button icon-start ion-button color="gray" (click)="dismiss()">
-                <ion-icon name="close"></ion-icon> cancelar
-            </button>
-        </ion-buttons>
-    </ion-toolbar>
-</ion-footer>
+        <ion-card>
+            <ion-card-header>
+                <ion-row align-items-left class="modal-card-title">
+                    <ion-icon name="ios-clipboard-outline" margin-right color="light"></ion-icon>
+                    Anotações
+                </ion-row>
+            </ion-card-header>
+            <div class="divider2"></div>
+            <ion-card-content>
+                <ion-item>
+                    <ion-label floating>Observações médicas</ion-label>
+                    <ion-textarea [(ngModel)]="atendimento.anotacao" [ngModelOptions]="{standalone: true}" type="text"></ion-textarea>
+                </ion-item>
+            </ion-card-content>
+        </ion-card>
+</form>
+    </ion-content>
+    <ion-footer>
+        <ion-toolbar color="white">
+            <ion-buttons right>
+                <button type="submit" (click)="salvarAtendimento()" icon-start ion-button margin-right color="light">
+                    <ion-icon name="checkmark"></ion-icon> salvar
+                </button>
+                <button icon-start ion-button color="gray" (click)="dismiss()">
+                    <ion-icon name="close"></ion-icon> cancelar
+                </button>
+            </ion-buttons>
+        </ion-toolbar>
+    </ion-footer>

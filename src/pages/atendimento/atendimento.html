@@ -36,104 +36,98 @@
           <div class="divider2"></div>
           <ion-card-content>
             <ion-list>
-            <ion-row>
-              <ion-col col-12 col-lg-4 padding-left padding-right>
-                <ion-item>
-                  <ion-label floating>Nome</ion-label>
-                  <ion-input type="text"></ion-input>
-                </ion-item>
-              </ion-col>
+              <ion-row>
+                <ion-col col-12 col-lg-4 padding-left padding-right>
+                  <ion-label class="completer-label">Nome do paciente </ion-label>
+                  <ng2-completer [textNoResults]="'Nenhum resultado encontrado'" (selected)="selecionado($event)" [(ngModel)]="p" [datasource]="dataService"
+                    [minSearchLength]="0"></ng2-completer>
+                </ion-col>
 
-              <ion-col col-12 col-lg-4 padding-left padding-right>
-                <ion-item>
-                  <ion-label floating>CPF</ion-label>
-                  <ion-input type="text"></ion-input>
-                </ion-item>
+                <ion-col col-12 col-lg-4 padding-left padding-right>
+                  <ion-item>
+                    <ion-label floating>Data inicial</ion-label>
+                    <ion-input type="text" [mask]="{mask:'99-99-9999'}" [(ngModel)]="filtro.dataInicio"></ion-input>
+                  </ion-item>
 
-              </ion-col>
+                </ion-col>
 
-              <ion-col col-12 col-lg-4 padding-left padding-right>
-                <ion-item>
-                  <ion-label floating>Data</ion-label>
-                  <ion-input type="tel"></ion-input>
-                </ion-item>
-              </ion-col>
+                <ion-col col-12 col-lg-4 padding-left padding-right>
+                  <ion-item>
+                    <ion-label floating>Data final</ion-label>
+                    <ion-input type="text" [mask]="{mask:'99-99-9999'}" [(ngModel)]="filtro.dataFim"></ion-input>
+                  </ion-item>
+                </ion-col>
 
-            </ion-row>
+              </ion-row>
 
-            <ion-row>
+              <ion-row>
 
-              <ion-col col-12 col-lg-4 padding-left padding-right>
-                <ion-item>
-                  <ion-label floating>Atendido por</ion-label>
-                  <ion-select interface="popover">
-                    <ion-option value="nes">Nome de alguem que atendeu</ion-option>
-                    <!-- <ion-option value="nes">Enfermeiro(a)</ion-option>
-                      <ion-option value="n64">Médico(a)</ion-option>
-                      <ion-option value="ps">Todos(as)</ion-option> -->
-                  </ion-select>
-                </ion-item>
-              </ion-col>
+                <ion-col col-12 col-lg-4 padding-left padding-right>
+                  <ion-item>
+                    <ion-label floating>Responsável</ion-label>
+                    <ion-select  interface="popover">
+                      <ion-option *ngFor="let r of responsaveis" [value]="r">{{r.pessoa.nome + ' - ' + r.uf.sigla + '.' +
+                        r.numeroConselho}}</ion-option>
+                    </ion-select>
+                  </ion-item>
+                </ion-col>
 
-              <ion-col col-12 col-lg-4 padding-left padding-right>
-                <ion-item>
-                  <ion-label floating>Tipo de atendimento</ion-label>
-                  <ion-select interface="popover">
-                    <ion-option value="nes">Nome do tipo de atendimento</ion-option>
-                    <!-- <ion-option value="nes">Enfermeiro(a)</ion-option>
-                      <ion-option value="n64">Médico(a)</ion-option>
-                      <ion-option value="ps">Todos(as)</ion-option> -->
-                  </ion-select>
-                </ion-item>
-              </ion-col>
+                <ion-col col-12 col-lg-4 padding-left padding-right>
+                  <ion-item>
+                    <ion-label floating>Tipo de atendimento</ion-label>
+                    <ion-select interface="popover" (ionChange)="listarAtributosDeTipoAt()">
+                      <ion-option *ngFor="let t of tiposAtendimento" [value]="t">{{t.nome}}</ion-option>
+                    </ion-select>
+                  </ion-item>
+                </ion-col>
 
-              <ion-col col-12 col-lg-4 >
-                <button icon-start ion-button class="search-btn" color="dark" float-end>
-                  <ion-icon name="search"></ion-icon>Pesquisar
-                </button>
-              </ion-col>
+                <ion-col col-12 col-lg-4>
+                  <button icon-start ion-button class="search-btn" color="dark" float-end>
+                    <ion-icon name="search"></ion-icon>Pesquisar
+                  </button>
+                </ion-col>
 
-            </ion-row>
-          </ion-list>
+              </ion-row>
+            </ion-list>
           </ion-card-content>
         </ion-card>
       </ion-col>
-      </ion-row>
-      </div>
+    </ion-row>
+  </div>
 
-        <div margin-top class="content-padding-side">
-          <ion-row>
-            <ion-col col-12 col-md no-padding>
-              <ion-card>
-                <ion-card-content>
-                  <ion-grid>
-                    <ion-row class="table-header">
-                      <ion-col class="max-w-100">Data</ion-col>
-                      <ion-col class="max-w-60">Hora</ion-col>
-                      <ion-col>Paciente</ion-col>
-                      <ion-col class="max-w-130">CPF</ion-col>
-                      <ion-col>Responsável</ion-col>
-                      <ion-col class="max-w-180">Tipo de atendimento</ion-col>
-                      <ion-col class="max-w-135">Visualizar/Editar</ion-col>
-                      <ion-col class="max-w-65">Excluir</ion-col>
-                    </ion-row>
-                    <ion-row *ngFor="let i of items" align-items-center class="table-content">
-                      <ion-col class="max-w-100">07/07/2017</ion-col>
-                      <ion-col class="max-w-60">00:00</ion-col>
-                      <ion-col>João Davi Mauda Júnior</ion-col>
-                      <ion-col class="max-w-130">000.000.000-00</ion-col>
-                      <ion-col>Vanessa Moraes de Souza</ion-col>
-                      <ion-col class="max-w-180">Eletrocardiograma</ion-col>
-                      <ion-col class="max-w-135"><button ion-button block icon-only clear><ion-icon color="gray" name="eye"></ion-icon></button></ion-col>
-                      <ion-col class="max-w-65"><button ion-button block icon-only clear><ion-icon color="gray" name="trash"></ion-icon></button></ion-col>
-                    </ion-row>
-                  </ion-grid>
-                  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-                    <ion-infinite-scroll-content></ion-infinite-scroll-content>
-                  </ion-infinite-scroll>
-                </ion-card-content>
-              </ion-card>
-            </ion-col>
-          </ion-row>
-        </div>
+  <div margin-top class="content-padding-side">
+    <ion-row>
+      <ion-col col-12 col-md no-padding>
+        <ion-card>
+          <ion-card-content>
+            <ion-grid>
+              <ion-row class="table-header">
+                <ion-col class="max-w-100">Data</ion-col>
+                <ion-col class="max-w-60">Hora</ion-col>
+                <ion-col>Paciente</ion-col>
+                <ion-col class="max-w-130">CPF</ion-col>
+                <ion-col>Responsável</ion-col>
+                <ion-col class="max-w-180">Tipo de atendimento</ion-col>
+                <ion-col class="max-w-135">Visualizar/Editar</ion-col>
+                <ion-col class="max-w-65">Excluir</ion-col>
+              </ion-row>
+              <ion-row *ngFor="let i of items" align-items-center class="table-content">
+                <ion-col class="max-w-100">07/07/2017</ion-col>
+                <ion-col class="max-w-60">00:00</ion-col>
+                <ion-col>João Davi Mauda Júnior</ion-col>
+                <ion-col class="max-w-130">000.000.000-00</ion-col>
+                <ion-col>Vanessa Moraes de Souza</ion-col>
+                <ion-col class="max-w-180">Eletrocardiograma</ion-col>
+                <ion-col class="max-w-135"><button ion-button block icon-only clear><ion-icon color="gray" name="eye"></ion-icon></button></ion-col>
+                <ion-col class="max-w-65"><button ion-button block icon-only clear><ion-icon color="gray" name="trash"></ion-icon></button></ion-col>
+              </ion-row>
+            </ion-grid>
+            <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+              <ion-infinite-scroll-content></ion-infinite-scroll-content>
+            </ion-infinite-scroll>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </div>
 </ion-content>
