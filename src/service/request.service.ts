@@ -66,5 +66,24 @@ export class RequestService {
         return urlRequest;
     }
 
+    buildHttpBodyFormData(params, urlRequest) {
+        if(params == null)
+            return null;
+
+        var first = true;
+        for (var key in params) {
+            if(params[key] != null){
+                if(first) {
+                    first = false;
+                } else {
+                    urlRequest += "&"
+                }
+                urlRequest += key + "=" + encodeURIComponent(params[key]);
+            }
+        }
+        console.log("urlRequest: " + urlRequest);
+        return urlRequest;
+    }
+
 
 }

@@ -30,7 +30,7 @@
                         <ion-col col-6 padding-left paddin g-right>
                             <ion-item [class.invalid]="form.controls.cpf.invalid &&  formSubmit">
                                 <ion-label floating>CPF do paciente</ion-label>
-                                <ion-input formControlName="cpf" [mask]="{mask:'999.999.999-99'}" disabled [(ngModel)]="atendimento.paciente.pessoa.cpf"
+                                <ion-input formControlName="cpf" [mask]="{mask:'999.999.999-99'}" [(ngModel)]="atendimento.paciente.pessoa.cpf"
                                     type="text"></ion-input>
                             </ion-item>
                         </ion-col>

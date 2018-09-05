@@ -22,8 +22,8 @@ export class ModalCadastroAtendimentoPage {
     formSubmit = false;
     private form: FormGroup;
     atendimento: any = {};
-    tiposAtendimento: any;
-    responsaveis: any;
+    tiposAtendimento: any = [];
+    responsaveis: any = [];
     pacientes: any = [];
     dataService: CompleterData;
     searchData: Array<PessoaModel> = [];
@@ -53,14 +53,13 @@ export class ModalCadastroAtendimentoPage {
             this.pacienteSelecionado = true;
             this.atendimento.paciente.pessoa.id = selected.originalObject.id;
             this.atendimento.paciente.pessoa.cpf = selected.originalObject.cpf;
-            console.log(this.atendimento.paciente.pessoa.id);
-            console.log(this.atendimento.paciente.pessoa.cpf);
         }
     }
 
 
-    dismiss() {
-        this.viewCtrl.dismiss();
+    dismiss(data?) {
+        data ? this.viewCtrl.dismiss(data) : this.viewCtrl.dismiss();
+    
     }
 
     initVariables() {
@@ -131,7 +130,7 @@ export class ModalCadastroAtendimentoPage {
             this.requestService.postData(APP_CONFIG.WEBSERVICE.CADASTRAR_ATENDIMENTO, data).then((response: any) => {
                 console.log(response);
                 loading.dismiss();
-                this.dismiss();
+                this.dismiss(true);
             }, erro => {
                 console.error(erro);
                 loading.dismiss();

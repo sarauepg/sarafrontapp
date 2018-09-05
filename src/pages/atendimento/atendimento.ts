@@ -1,26 +1,27 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Events, ModalController, LoadingController, ViewController, ToastController } from 'ionic-angular';
-import { CompleterData, CompleterService } from 'ng2-completer';
+import { CompleterData, CompleterService, CompleterItem } from 'ng2-completer';
 import { PessoaModel } from '../../model/pessoa.model';
 import { RequestService } from '../../service/request.service';
 import { FormBuilder } from '@angular/forms';
 import { APP_CONFIG } from '../../app/app.config';
+import moment from 'moment';
 
-@IonicPage({
-  name: 'Atendimento',
-  segment: 'atendimento'
-})
-@Component({
-  selector: 'page-atendimento',
-  templateUrl: 'atendimento.html',
-})
+@IonicPage({ name: 'Atendimento', segment: 'atendimento' })
+@Component({ selector: 'page-atendimento', templateUrl: 'atendimento.html', })
 export class AtendimentoPage {
 
   items = [];
-  tiposAtendimento: any;
-  responsaveis: any;
+  tiposAtendimento: any = [];
+  responsaveis: any = [];
   pacientes: any = [];
   filtro: any = {};
+  atendimentos: any = [];
+  dataInicial: string;
+  dataFinal: string;
+  listPage: number = 1;
+  listSize: number = 10;
+  list: any = [];
 
   dataService: CompleterData;
   searchData: Array<PessoaModel> = [];
@@ -37,10 +38,6 @@ export class AtendimentoPage {
     public loadingCtrl: LoadingController,
     private requestService: RequestService) {
 
-    for (let i = 0; i < 15; i++) {
-      this.items.push(this.items.length);
-    }
-
     this.initVariables();
     this.dataService = completerService.local(this.searchData, 'nome', 'nome');
   }
@@ -52,6 +49,38 @@ export class AtendimentoPage {
     this.listarPacientes();
     this.listarResponsaveis();
     loading.dismiss();
+  }
+
+  selecionado(selected: CompleterItem) {
+    if (selected) {
+      this.filtro.idPaciente = selected.originalObject.id;
+    }
+  }
+
+  filtrarAtendimento() {
+    let loading = this.loadingCtrl.create();
+    loading.present();
+    this.listPage = 1;
+    this.list = [];
+    if (this.dataInicial != null && this.dataInicial != undefined) {
+      this.filtro.dataInicial = moment(this.dataInicial, 'DD-MM-YYYY').format('YYYY-MM-DD');
+      this.filtro.dataFinal = moment(this.dataFinal, 'DD-MM-YYYY').format('YYYY-MM-DD');
+    }
+    let urlRequest = this.requestService.buildHttpBodyFormData(this.filtro, APP_CONFIG.WEBSERVICE.FILTRAR_ATENDIMENTO);
+    this.requestService.getData(urlRequest).then((atendimentos: any) => {
+      this.atendimentos = atendimentos;
+      let tam = this.listSize;
+      this.listSize > this.atendimentos.length ? tam = this.atendimentos.length : tam = this.listSize;
+      for (let i = 0; i < tam; i++) {
+        this.list.push(this.atendimentos[i]);
+      }
+      console.log(this.atendimentos);
+      loading.dismiss();
+    }, error => {
+      console.error(error);
+      loading.dismiss();
+      this.presentToast(error.errorMessage);
+    });
   }
 
   listarTiposDeAtedimento() {
@@ -75,15 +104,15 @@ export class AtendimentoPage {
     });
   }
 
-  listarResponsaveis(){
+  listarResponsaveis() {
     let urlRequest = this.requestService.buildUrlQueryParams({ cargo: "T" }, APP_CONFIG.WEBSERVICE.LISTAR_RESPONSAVEIS);
-        this.requestService.getData(urlRequest)
-            .then((responsaveis: any) => {
-                this.responsaveis = responsaveis;
-                console.log(this.responsaveis);
-            }, error => {
-                console.error(error);
-            });
+    this.requestService.getData(urlRequest)
+      .then((responsaveis: any) => {
+        this.responsaveis = responsaveis;
+        console.log(this.responsaveis);
+      }, error => {
+        console.error(error);
+      });
   }
 
   ionViewDidLoad() {
@@ -91,14 +120,13 @@ export class AtendimentoPage {
   }
 
   doInfinite(infiniteScroll) {
-    console.log('Begin async operation');
-
+    this.listPage = this.listPage + 1;
     setTimeout(() => {
-      for (let i = 0; i < 15; i++) {
-        this.items.push(this.items.length);
+      let tam = (this.listPage * this.listSize);
+      tam > this.atendimentos.length ? tam = this.atendimentos.length : tam = tam
+      for (let i = ((this.listPage * this.listSize) - this.listSize); i < tam; i++) {
+        this.list.push(this.atendimentos[i]);
       }
-
-      console.log('Async operation has ended');
       infiniteScroll.complete();
     }, 500);
   }
@@ -106,12 +134,20 @@ export class AtendimentoPage {
   abrirModalCadastroAtendimento() {
     console.log();
     const modal = this.modalCtrl.create("ModalCadastroAtendimento", { enableBackdropDismiss: false });
-		/*modal.onDidDismiss(data => {
-			if(data != undefined){
-				this.businessHours = data;
-			}
-		  });*/
+    modal.onDidDismiss(data => {
+      if (data) {
+        this.presentToast("Atendimento cadastrado com sucesso!");
+      }
+    });
     modal.present();
+  }
+
+  presentToast(msg) {
+    const toast = this.toastCtrl.create({
+      message: msg,
+      duration: 5000
+    });
+    toast.present();
   }
 
 }

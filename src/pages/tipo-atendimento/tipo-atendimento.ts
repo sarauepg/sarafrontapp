@@ -18,7 +18,7 @@ import { Aferivel } from '../../model/aferivel.model';
 export class TipoAtendimentoPage {
 
   private formTipoAt: FormGroup;
-  tiposAtendimento: any;
+  tiposAtendimento: any = [];
   tipoAt: any = {};
   aferiveis: Array<Aferivel> = new Array<Aferivel>();
   formSubmit = false;
@@ -88,6 +88,7 @@ export class TipoAtendimentoPage {
         console.log(response);
         this.listarTiposDeAtedimento();
         this.formTipoAt.reset();
+        this.formSubmit = false;
         loading.dismiss();
         this.presentToast("Tipo de atendimento cadastrado com sucesso!");
       }, erro => {

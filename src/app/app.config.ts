@@ -20,6 +20,7 @@ export const APP_CONFIG = {
 
 		// ATENDIMENTO
 		CADASTRAR_ATENDIMENTO: END_POINT + "atendimento/cadastrar",
+		FILTRAR_ATENDIMENTO: END_POINT + "atendimento/filtrar?",
 
 		// USUÁRIO
 		LISTAR_RESPONSAVEIS: END_POINT + "usuario/listarResponsaveis?cargo={cargo}",
