@@ -33,8 +33,6 @@ export class AtendimentoPage {
     public navParams: NavParams,
     public toastCtrl: ToastController,
     private completerService: CompleterService,
-    private viewCtrl: ViewController,
-    private formBuilder: FormBuilder,
     public loadingCtrl: LoadingController,
     private requestService: RequestService) {
 

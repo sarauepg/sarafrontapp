@@ -62,9 +62,9 @@
 
               <ion-row>
 
-                <ion-col col-12 col-lg-4 padding-left padding-right>
+                <ion-col col-12 col-lg-5 >
                   <ion-item>
-                    <ion-label floating>Responsável</ion-label>
+                    <ion-label floating padding-left>Responsável</ion-label>
                     <ion-select  interface="popover"[(ngModel)]="filtro.idResponsavel">
                       <ion-option *ngFor="let r of responsaveis" [value]="r.pessoa.id" >{{r.pessoa.nome + ' - ' + r.uf.sigla + '.' +
                         r.numeroConselho}}</ion-option>
@@ -72,16 +72,16 @@
                   </ion-item>
                 </ion-col>
 
-                <ion-col col-12 col-lg-4 padding-left padding-right>
+                <ion-col col-12 col-lg-5 >
                   <ion-item>
-                    <ion-label floating>Tipo de atendimento</ion-label>
+                    <ion-label floating padding-left>Tipo de atendimento</ion-label>
                     <ion-select interface="popover" [(ngModel)]="filtro.idTipoAtendimento">
                       <ion-option *ngFor="let t of tiposAtendimento" [value]="t.id" >{{t.nome}}</ion-option>
                     </ion-select>
                   </ion-item>
                 </ion-col>
 
-                <ion-col col-12 col-lg-4>
+                <ion-col col-12 col-lg-2>
                   <button icon-start ion-button class="search-btn" color="dark" float-end (click) = "filtrarAtendimento()">
                     <ion-icon name="search"></ion-icon>Pesquisar
                   </button>

@@ -127,10 +127,20 @@
     }
 }
 
+.radio .radio-icon {
+    display: none;
+    }
+ .popover-content{
+    width: 500px !important;
+    }
+
 ion-input{
     color: #555 !important;
 }
 ion-select{
+    color: #555 !important;
+}
+ion-textarea{
     color: #555 !important;
 }
 ion-card-header{
@@ -138,6 +148,11 @@ ion-card-header{
 }
 ion-card-content{
     padding: 2px 16px !important;
+}
+ion-select{
+    border: 1px solid #cfcfcf !important ;
+    border-radius: 5px !important;
+    padding-left: 8px !important;
 }
 
 @media only screen and (min-height: 600px) and (min-width: 768px) {

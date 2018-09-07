@@ -7,7 +7,6 @@ import { CompleterService, CompleterData, CompleterItem } from 'ng2-completer';
 import { PessoaModel } from '../../../../model/pessoa.model';
 import { ValorAferidoModel } from '../../../../model/valor-aferido.model';
 import moment from 'moment';
-import * as cpfCnpj from 'cpf_cnpj';
 
 @IonicPage({
     name: 'ModalCadastroAtendimento'
@@ -59,7 +58,6 @@ export class ModalCadastroAtendimentoPage {
 
     dismiss(data?) {
         data ? this.viewCtrl.dismiss(data) : this.viewCtrl.dismiss();
-    
     }
 
     initVariables() {
@@ -118,8 +116,8 @@ export class ModalCadastroAtendimentoPage {
             let loading = this.loadingCtrl.create();
             loading.present();
             this.atendimento.ativo = true;
-            let dataAt = moment(this.atendimento.data, 'DD-MM-YYYY').format('YYYY-MM-DD');
-            this.atendimento.data = dataAt;
+            this.atendimento.usuario.pessoa.dataNascimento = moment(this.atendimento.usuario.pessoa.dataNascimento, 'DD-MM-YYYY').format('YYYY-MM-DD');
+            this.atendimento.data = moment(this.atendimento.data, 'DD-MM-YYYY').format('YYYY-MM-DD');
             this.atendimento.valoresAferidos.forEach(v => {
                 if (v.valorAferido != null) {
                     v.valorAferido = parseFloat(v.valorAferido);

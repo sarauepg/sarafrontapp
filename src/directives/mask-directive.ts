@@ -1,7 +1,7 @@
 import {Directive, Input} from '@angular/core';
 import {NgControl} from '@angular/forms';
 
-export enum MaskType {
+export enum     MaskType {
     CPF_CNPJ,
     CELLPHONE
 }

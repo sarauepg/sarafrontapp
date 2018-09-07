@@ -27,5 +27,10 @@ export const APP_CONFIG = {
 
 		// PACIENTE
 		LISTAR_PACIENTES: END_POINT + "paciente/listar",
+		CADASTRAR_PACIENTES: END_POINT + "paciente/cadastrar",
+		FILTRAR_PACIENTE: END_POINT + "paciente/filtrar?",
+
+		// LOTAÇÃO
+		LISTAR_LOTACOES: END_POINT + "lotacao/listar"
 	}
 };

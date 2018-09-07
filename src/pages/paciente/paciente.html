@@ -6,8 +6,10 @@
 -->
 <ion-header>
 
-  <ion-navbar color = "dark">
-    <ion-title icon-start><ion-icon name="people"></ion-icon></ion-title>
+  <ion-navbar color="dark">
+    <ion-title icon-start>
+      <ion-icon name="people"></ion-icon>
+    </ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -15,100 +17,95 @@
 
 <ion-content padding fullscreen="true" class="content-bg">
 
-    <div margin-top class="content-padding-side">
-      <ion-row>
-        <ion-col col-12 col-md no-padding>
-          <ion-card>
-            <ion-card-header>
-              <ion-row align-items-center>
-                <ion-col>
-                  <p class="card-title">Pacientes</p>
-                </ion-col>
-                <ion-col>
-                  <button icon-start ion-button class="add-btn" float-right>
-                    <ion-icon name="add"></ion-icon>Cadastrar Paciente
-                  </button>
-                </ion-col>
-              </ion-row>
-            </ion-card-header>
-            <div class="divider2"></div>
-            <ion-card-content>
-  
+  <div margin-top class="content-padding-side">
+    <ion-row>
+      <ion-col col-12 col-md no-padding>
+        <ion-card>
+          <ion-card-header>
+            <ion-row align-items-center>
+              <ion-col>
+                <p class="card-title">Pacientes</p>
+              </ion-col>
+              <ion-col>
+                <button icon-start ion-button class="add-btn" (click)="abrirModalCadastroPaciente()" float-right>
+                  <ion-icon name="add"></ion-icon>Cadastrar Paciente
+                </button>
+              </ion-col>
+            </ion-row>
+          </ion-card-header>
+          <div class="divider2"></div>
+          <ion-card-content>
+            <ion-list>
               <ion-row>
-                <ion-col col-12 col-lg-4>
-                  <ion-item>
-                    <ion-label floating>Nome</ion-label>
-                    <ion-input type="text"></ion-input>
-                  </ion-item>
+                <ion-col col-12 col-lg-8 padding-left padding-right>
+                  <ion-label class="completer-label">Nome</ion-label>
+                  <ng2-completer [textNoResults]="'Nenhum resultado encontrado'" (selected)="selecionado($event)" [(ngModel)]="p" [datasource]="dataService"
+                    [minSearchLength]="0"></ng2-completer>
                 </ion-col>
-  
-                <ion-col col-12 col-lg-3>
+
+                <ion-col col-12 col-lg-4 padding-left padding-right>
                   <ion-item>
                     <ion-label floating>CPF</ion-label>
-                    <ion-input type="text"></ion-input>
+                    <ion-input [mask]="{mask:'999.999.999-99'}" [(ngModel)]="filtro.cpf" type="text"></ion-input>
                   </ion-item>
-  
                 </ion-col>
-  
-                <ion-col col-12 col-lg-3>
-                    <ion-item>
-                      <ion-label floating>Lotação</ion-label>
-                      <ion-select interface="popover">
-                        <ion-option value="nes">DEINFO</ion-option>
-                        <!-- <ion-option value="nes">Enfermeiro(a)</ion-option>
-                          <ion-option value="n64">Médico(a)</ion-option>
-                          <ion-option value="ps">Todos(as)</ion-option> -->
-                      </ion-select>
-                    </ion-item>
+              </ion-row>
+              <ion-row>
+                <ion-col col-12 col-lg-10>
+                  <ion-item>
+                    <ion-label floating padding-left>Lotação</ion-label>
+                    <ion-select [(ngModel)]="filtro.idLotacao" interface="popover">
+                      <ion-option *ngFor="let l of lotacoes" [value]="l.id">{{l.sigla + ' - ' + l.nome}}</ion-option>
+                    </ion-select>
+                  </ion-item>
                 </ion-col>
 
                 <ion-col col-12 col-lg-2>
-                    <button icon-start ion-button class="search-btn" color="dark" float-end>
-                      <ion-icon name="search"></ion-icon>Pesquisar
-                    </button>
-                 </ion-col>
-  
+                  <button icon-start ion-button class="search-btn" color="dark" float-end (click) = "filtrarPaciente()">
+                    <ion-icon name="search"></ion-icon>Pesquisar
+                  </button>
+                </ion-col>
               </ion-row>
-  
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        </ion-row>
-        </div>
-  
-          <div margin-top class="content-padding-side">
-            <ion-row>
-              <ion-col col-12 col-md no-padding>
-                <ion-card>
-                  <ion-card-content>
-                    <ion-grid>
-                      <ion-row class="table-header">
-                        <ion-col>Nome</ion-col>
-                        <ion-col class="max-w-130">CPF</ion-col>
-                        <ion-col class="max-w-130">Data de Nascimento</ion-col>
-                        <ion-col class="max-w-135">E-mail</ion-col>
-                        <ion-col class="max-w-130">Telefone</ion-col>
-                        <ion-col class="max-w-180">Lotação</ion-col>                        
-                        <ion-col class="max-w-135">Visualizar/Editar</ion-col>
-                      </ion-row>
-                      
-                      <ion-row *ngFor="let i of items" align-items-center class="table-content">
-                        <ion-col>Nome absurdamente grande buga</ion-col>
-                        <ion-col class="max-w-130">000.000.000-99</ion-col>
-                        <ion-col class="max-w-130">07/01/1998</ion-col>
-                        <ion-col class="max-w-135">umemailaleatorio@buga.com</ion-col>
-                        <ion-col class="max-w-130">(42)99941-8724</ion-col>
-                        <ion-col class="max-w-180">SEBISA</ion-col>                        
-                        <ion-col class="max-w-135"><button ion-button block icon-only clear><ion-icon color="gray" name="eye"></ion-icon></button></ion-col>
-                        
-                      </ion-row>
-                    </ion-grid>
-                    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-                      <ion-infinite-scroll-content></ion-infinite-scroll-content>
-                    </ion-infinite-scroll>
-                  </ion-card-content>
-                </ion-card>
-              </ion-col>
-            </ion-row>
-          </div>
-  </ion-content>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <div margin-top class="content-padding-side">
+    <ion-row>
+      <ion-col col-12 col-md no-padding>
+        <ion-card *ngIf="list.length > 0">
+          <ion-card-content>
+            <ion-grid>
+              <ion-row class="table-header">
+                <ion-col>Nome</ion-col>
+                <ion-col class="max-w-130">CPF</ion-col>
+                <ion-col class="max-w-130">Data de Nascimento</ion-col>
+                <ion-col >E-mail</ion-col>
+                <ion-col class="max-w-130">Telefone</ion-col>
+                <ion-col class="max-w-135">Lotação</ion-col>
+                <ion-col class="max-w-135">Visualizar/Editar</ion-col>
+              </ion-row>
+
+              <ion-row *ngFor="let l of list" align-items-center class="table-content">
+                <ion-col>{{l.pessoa.nome}}</ion-col>
+                <ion-col class="max-w-130">{{l.pessoa.cpf}}</ion-col>
+                <ion-col class="max-w-130">{{l.pessoa.dataNascimento}}</ion-col>
+                <ion-col >{{l.pessoa.email}}</ion-col>
+                <ion-col class="max-w-130">{{l.pessoa.telefonePrimario}}</ion-col>
+                <ion-col class="max-w-135">{{l.pessoa.lotacao.sigla}}</ion-col>
+                <ion-col class="max-w-135"><button ion-button block icon-only clear><ion-icon color="gray" name="eye"></ion-icon></button></ion-col>
+
+              </ion-row>
+            </ion-grid>
+            <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="list.length < listPacientes.length">
+              <ion-infinite-scroll-content></ion-infinite-scroll-content>
+            </ion-infinite-scroll>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>
