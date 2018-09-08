@@ -40,7 +40,7 @@
                 </ion-col>
                 <ion-col col-12 col-md padding-left padding-right>
                   <ion-item [class.invalid]="formTipoAt.controls.responsavel.invalid && formSubmit">
-                    <ion-label floating>Responsável *</ion-label>
+                    <ion-label floating padding-left>Responsável *</ion-label>
                     <ion-select interface="popover" formControlName="responsavel" [(ngModel)]="tipoAt.responsavel">
                       <ion-option value="E">Enfermeiro(a)</ion-option>
                       <ion-option value="M">Médico(a)</ion-option>
@@ -55,7 +55,7 @@
               <ion-row>
                 <ion-item>
                   <ion-label>Agendável</ion-label>
-                  <ion-checkbox formControlName="agendavel" [(ngModel)]="tipoAt.agendavel"></ion-checkbox>
+                  <ion-checkbox color = "dark" formControlName="agendavel" [(ngModel)]="tipoAt.agendavel"></ion-checkbox>
                 </ion-item>
               </ion-row>
             </ion-list>
@@ -65,13 +65,13 @@
                 <ion-col col-12 col-md>
                   <ion-item>
                     <ion-label>Frequência cardíaca</ion-label>
-                    <ion-checkbox formControlName="frequenciaCardiaca" [(ngModel)]="aferiveis[6].selecionado"></ion-checkbox>
+                    <ion-checkbox color = "dark" formControlName="frequenciaCardiaca" [(ngModel)]="aferiveis[6].selecionado"></ion-checkbox>
                   </ion-item>
                 </ion-col>
                 <ion-col col-12 col-md>
                   <ion-item>
                     <ion-label>Glicemia</ion-label>
-                    <ion-checkbox formControlName="glicemia" [(ngModel)]="aferiveis[4].selecionado"></ion-checkbox>
+                    <ion-checkbox color = "dark" formControlName="glicemia" [(ngModel)]="aferiveis[4].selecionado"></ion-checkbox>
                   </ion-item>
                 </ion-col>
 
@@ -80,14 +80,14 @@
                 <ion-col col-12 col-md>
                   <ion-item>
                     <ion-label>Frequência respiratória</ion-label>
-                    <ion-checkbox formControlName="frequenciaRespiratoria" [(ngModel)]="aferiveis[7].selecionado"></ion-checkbox>
+                    <ion-checkbox color = "dark" formControlName="frequenciaRespiratoria" [(ngModel)]="aferiveis[7].selecionado"></ion-checkbox>
                   </ion-item>
                 </ion-col>
 
                 <ion-col col-12 col-md>
                   <ion-item>
                     <ion-label>Peso</ion-label>
-                    <ion-checkbox formControlName="peso" [(ngModel)]="aferiveis[1].selecionado"></ion-checkbox>
+                    <ion-checkbox color = "dark" formControlName="peso" [(ngModel)]="aferiveis[1].selecionado"></ion-checkbox>
                   </ion-item>
                 </ion-col>
               </ion-row>
@@ -95,13 +95,13 @@
                 <ion-col col-12 col-md>
                   <ion-item>
                     <ion-label>Pressão arterial</ion-label>
-                    <ion-checkbox formControlName="pressaoArterial" [(ngModel)]="aferiveis[2].selecionado"></ion-checkbox>
+                    <ion-checkbox color = "dark" formControlName="pressaoArterial" [(ngModel)]="aferiveis[2].selecionado"></ion-checkbox>
                   </ion-item>
                 </ion-col>
                 <ion-col col-12 col-md>
                   <ion-item>
                     <ion-label>Temperatura</ion-label>
-                    <ion-checkbox formControlName="temperatura" [(ngModel)]="aferiveis[0].selecionado"></ion-checkbox>
+                    <ion-checkbox color = "dark" formControlName="temperatura" [(ngModel)]="aferiveis[0].selecionado"></ion-checkbox>
                   </ion-item>
                 </ion-col>
               </ion-row>
@@ -109,7 +109,7 @@
                 <ion-col col-12 col-md>
                   <ion-item>
                     <ion-label>Saturação</ion-label>
-                    <ion-checkbox formControlName="saturacao" [(ngModel)]="aferiveis[5].selecionado"></ion-checkbox>
+                    <ion-checkbox color = "dark" formControlName="saturacao" [(ngModel)]="aferiveis[5].selecionado"></ion-checkbox>
                   </ion-item>
                 </ion-col>
               </ion-row>

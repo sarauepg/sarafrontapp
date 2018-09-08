@@ -6,134 +6,129 @@
 -->
 <ion-header>
 
-  <ion-navbar color = "dark">
-    <ion-title icon-start><ion-icon name="people"></ion-icon></ion-title>
+  <ion-navbar color="dark">
+    <ion-title icon-start>
+      <ion-icon name="people"></ion-icon>
+    </ion-title>
   </ion-navbar>
 
 </ion-header>
 
 <ion-content padding fullscreen="true" class="content-bg">
 
-    <div margin-top class="content-padding-side">
-      <ion-row>
-        <ion-col col-12 col-md no-padding>
-          <ion-card>
-            <ion-card-header>
-              <ion-row align-items-center>
-                <ion-col>
-                  <p class="card-title">Usuários</p>
-                </ion-col>
-                <ion-col>
-                  <button icon-start ion-button class="add-btn" float-right>
-                    <ion-icon name="add"></ion-icon>Cadastrar usuário
-                  </button>
-                </ion-col>
-              </ion-row>
-            </ion-card-header>
-            <div class="divider2"></div>
-            <ion-card-content>
-  
+  <div margin-top class="content-padding-side">
+    <ion-row>
+      <ion-col col-12 col-md no-padding>
+        <ion-card>
+          <ion-card-header>
+            <ion-row align-items-center>
+              <ion-col>
+                <p class="card-title">Usuários</p>
+              </ion-col>
+              <ion-col>
+                <button icon-start ion-button class="add-btn" (click)="abrirModalCadastroUsuario()" float-right>
+                  <ion-icon name="add"></ion-icon>Cadastrar usuário
+                </button>
+              </ion-col>
+            </ion-row>
+          </ion-card-header>
+          <div class="divider2"></div>
+          <ion-card-content>
+            <ion-list>
               <ion-row>
-                <ion-col col-12 col-lg-4>
-                  <ion-item>
-                    <ion-label floating>Nome</ion-label>
-                    <ion-input type="text"></ion-input>
-                  </ion-item>
+                <ion-col col-12 col-lg-4 padding-left padding-right>
+                  <ion-label class="completer-label">Nome</ion-label>
+                  <ng2-completer [textNoResults]="'Nenhum resultado encontrado'" (selected)="selecionado($event)" [(ngModel)]="p" [datasource]="dataService"
+                    [minSearchLength]="0"></ng2-completer>
                 </ion-col>
-  
-                <ion-col col-12 col-lg-4>
+                <ion-col col-12 col-lg-4 padding-left padding-right>
                   <ion-item>
                     <ion-label floating>CPF</ion-label>
-                    <ion-input type="text"></ion-input>
+                    <ion-input [mask]="{mask:'999.999.999-99'}" [(ngModel)]="filtro.cpf" type="text"></ion-input>
                   </ion-item>
-  
                 </ion-col>
-  
                 <ion-col col-12 col-lg-4>
                   <ion-item>
-                    <ion-label floating>Ativo</ion-label>
-                    <ion-select interface="popover">
-                      <ion-option value="yes">Sim</ion-option>
-                      <ion-option value="no">Não</ion-option>
+                    <ion-label floating padding-left>Status</ion-label>
+                    <ion-select interface="popover" [(ngModel)]="filtro.ativo">
+                      <ion-option value="null">Todos</ion-option>
+                      <ion-option [value]="true">Ativo</ion-option>
+                      <ion-option [value]="false">Inativo</ion-option>
                     </ion-select>
                   </ion-item>
                 </ion-col>
-  
               </ion-row>
-  
+            </ion-list>
+            <ion-list>
               <ion-row>
-  
-                <ion-col col-12 col-lg-4>
+                <ion-col col-12 col-lg-5>
                   <ion-item>
-                    <ion-label floating>Administrador</ion-label>
-                    <ion-select interface="popover">
-                      <ion-option value="yes">Sim</ion-option>
-                      <ion-option value="no">Não</ion-option>
+                    <ion-label floating padding-left>Tipo de usuário(a)</ion-label>
+                    <ion-select interface="popover" [(ngModel)]="filtro.administrador">
+                      <ion-option value="null">Todos(as)</ion-option>
+                      <ion-option [value]="true">Administradores(as)</ion-option>
+                      <ion-option [value]="false">Não administradores(as)</ion-option>
                     </ion-select>
                   </ion-item>
                 </ion-col>
-  
-                <ion-col col-12 col-lg-4>
+                <ion-col col-12 col-lg-5>
                   <ion-item>
-                    <ion-label floating>Médico</ion-label>
-                    <ion-select interface="popover">
-                      <ion-option value="yes">Sim</ion-option>
-                      <ion-option value="no">Não</ion-option>
+                    <ion-label floating padding-left>Cargo</ion-label>
+                    <ion-select interface="popover" [(ngModel)]="filtro.medico">
+                      <ion-option value="null">Todos(as)</ion-option>
+                      <ion-option [value]="true">Médicos(as)</ion-option>
+                      <ion-option [value]="false">Enfermeiros(as)</ion-option>
                     </ion-select>
                   </ion-item>
                 </ion-col>
-  
-                <ion-col col-12 col-lg-4>
-                  <button icon-start ion-button class="search-btn" color="dark" float-end>
+                <ion-col col-12 col-lg-2>
+                  <button icon-start ion-button class="search-btn" color="dark" float-end (click)="filtrarUsuario()">
                     <ion-icon name="search"></ion-icon>Pesquisar
                   </button>
                 </ion-col>
-  
               </ion-row>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        </ion-row>
-        </div>
-  
-          <div margin-top class="content-padding-side">
-            <ion-row>
-              <ion-col col-12 col-md no-padding>
-                <ion-card>
-                  <ion-card-content>
-                    <ion-grid>
-                      <ion-row class="table-header">
-                        <ion-col class="max-w-130">Nome</ion-col>
-                        <ion-col class="max-w-130">Usuário</ion-col>
-                        <ion-col class="max-w-130">CPF</ion-col>
-                        <ion-col>N.º Conselho</ion-col>
-                        <ion-col class="max-w-135">E-mail</ion-col>
-                        <ion-col class="max-w-130">Telefone</ion-col>
-                        <ion-col class="max-w-60">Admin</ion-col>
-                        <ion-col class="max-w-80">Médico</ion-col>
-                        <ion-col class="max-w-60">Ativo</ion-col>
-                        <ion-col class="max-w-135">Visualizar/Editar</ion-col>
-                        
-                      </ion-row>
-                      <ion-row *ngFor="let i of items" align-items-center class="table-content">
-                        <ion-col class="max-w-130">Nume teste</ion-col>
-                        <ion-col class="max-w-130">teste</ion-col>
-                        <ion-col class="max-w-130">CPF</ion-col>
-                        <ion-col>N.º Conselho</ion-col>
-                        <ion-col class="max-w-135">E-mail</ion-col>
-                        <ion-col class="max-w-130">Telefone</ion-col>
-                        <ion-col class="max-w-60"><ion-checkbox></ion-checkbox></ion-col>
-                        <ion-col class="max-w-80"><ion-checkbox></ion-checkbox></ion-col>
-                        <ion-col class="max-w-60"><ion-checkbox></ion-checkbox></ion-col>
-                        <ion-col class="max-w-135"><button ion-button block icon-only clear><ion-icon color="gray" name="eye"></ion-icon></button></ion-col>
-                      </ion-row>
-                    </ion-grid>
-                    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-                      <ion-infinite-scroll-content></ion-infinite-scroll-content>
-                    </ion-infinite-scroll>
-                  </ion-card-content>
-                </ion-card>
-              </ion-col>
-            </ion-row>
-          </div>
-  </ion-content>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <div margin-top class="content-padding-side">
+    <ion-row>
+      <ion-col col-12 col-md no-padding>
+        <ion-card *ngIf="list.length > 0">
+          <ion-card-content>
+            <ion-grid>
+              <ion-row class="table-header">
+                <ion-col>Nome</ion-col>
+                <ion-col class="max-w-130">Usuário</ion-col>
+                <ion-col class="max-w-115">N.º Conselho</ion-col>
+                <ion-col>E-mail</ion-col>
+                <ion-col class="max-w-130">Telefone</ion-col>
+                <ion-col class="max-w-60">Admin</ion-col>
+                <ion-col class="max-w-80">Médico</ion-col>
+                <ion-col class="max-w-60">Ativo</ion-col>
+                <ion-col class="max-w-135">Visualizar/Editar</ion-col>
+              </ion-row>
+              <ion-row *ngFor="let l of list" align-items-center class="table-content">
+                <ion-col>{{l.pessoa.nome}}</ion-col>
+                <ion-col class="max-w-130">{{l.nomeUsuario}}</ion-col>
+                <ion-col class="max-w-115">{{l.uf.sigla + '-' + l.numeroConselho}}</ion-col>
+                <ion-col>{{l.pessoa.email}}</ion-col>
+                <ion-col class="max-w-130">{{l.pessoa.telefonePrimario}}</ion-col>
+                <ion-col class="max-w-60 list-check"><ion-icon *ngIf="l.administrador" name="md-checkmark"></ion-icon></ion-col>
+                <ion-col class="max-w-80 list-check"><ion-icon *ngIf="l.medico" name="md-checkmark"></ion-icon></ion-col>
+                <ion-col class="max-w-60 list-check"><ion-icon *ngIf="l.ativo" name="md-checkmark"></ion-icon></ion-col>
+                <ion-col class="max-w-135"><button ion-button block icon-only clear><ion-icon color="gray" name="eye"></ion-icon></button></ion-col>
+              </ion-row>
+            </ion-grid>
+            <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="list.length < listUsuarios.length">
+              <ion-infinite-scroll-content></ion-infinite-scroll-content>
+            </ion-infinite-scroll>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

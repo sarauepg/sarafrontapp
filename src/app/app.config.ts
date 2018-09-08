@@ -24,6 +24,9 @@ export const APP_CONFIG = {
 
 		// USUÁRIO
 		LISTAR_RESPONSAVEIS: END_POINT + "usuario/listarResponsaveis?cargo={cargo}",
+		CADASTRAR_USUARIOS: END_POINT + "usuario/cadastrar",
+		LISTAR_USUARIOS: END_POINT + "usuario/listar",
+		FILTRAR_USUARIO: END_POINT + "usuario/filtrar?",
 
 		// PACIENTE
 		LISTAR_PACIENTES: END_POINT + "paciente/listar",

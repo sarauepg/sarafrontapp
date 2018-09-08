@@ -22,6 +22,29 @@ page-usuario {
         }
     }
 
+    .list-check{
+        text-align: center !important;
+    }
+
+    .completer-label{
+        margin-bottom: 0px; 
+        font-size: 1.2em; 
+        color: #999;
+    }
+
+    /deep/ .completer-input  {
+        display: block;
+            width: 100%;
+            //height: 34px;
+            padding: 2px 12px;
+            font-size: 1.2em;
+            color: #555;
+            background-color: transparent;
+            background-image: none;
+            border: 0px solid #cfcfcf ;
+            border-bottom: 1px solid #cfcfcf ;
+        }
+
     @media only screen and (min-width: 768px) {
         .content-padding-side {
             padding-left: 0px;
