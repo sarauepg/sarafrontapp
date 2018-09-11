@@ -19,6 +19,7 @@ import { RequestService } from '../service/request.service';
 import { Network } from '@ionic-native/network';
 import { Ng2CompleterModule } from "ng2-completer";
 import { SharedModule } from '../directives/shared.module';
+import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 
 
 
@@ -39,6 +40,7 @@ import { SharedModule } from '../directives/shared.module';
     IonicModule.forRoot(MyApp),
     Ng2CompleterModule,
     SharedModule,
+    Ng2GoogleChartsModule,
     HttpModule
   ],
   bootstrap: [IonicApp],
