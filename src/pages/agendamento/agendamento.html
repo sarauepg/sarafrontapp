@@ -6,13 +6,47 @@
 -->
 <ion-header>
 
-  <ion-navbar color = "dark">
-    <ion-title icon-start><ion-icon name="calendar"></ion-icon>Agenda</ion-title>
+  <ion-navbar color="dark">
+    <ion-title icon-start>
+      <ion-icon name="calendar"></ion-icon>Agenda
+    </ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding fullscreen="true" class="content-bg">
+  <div margin-top class="content-padding-side">
+    <ion-row>
+      <ion-col col-12 col-md no-padding>
+        <ion-card>
+          <ion-card-header>
+            <div>
+              <ion-row align-items-center>
+                <ion-col class="max-w-35">
+                  <button ion-button clear icon-only color="gray">
+                    <ion-icon name="ios-arrow-back-outline"></ion-icon>
+                  </button>
+                </ion-col>
+                <ion-col class="max-w-130">
+                  <ion-item>
+                    <ion-label floating>Data</ion-label>
+                    <ion-input type="text" [mask]="{mask:'99-99-9999'}" [(ngModel)]="data"></ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col class="max-w-35">
+                  <button ion-button clear icon-only color="gray">
+                    <ion-icon name="ios-arrow-forward-outline"></ion-icon>
+                  </button>
+                </ion-col>
+              </ion-row>
+            </div>
+          </ion-card-header>
+          <ion-card-content>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </div>
 
 </ion-content>
