@@ -5,35 +5,38 @@ import { RequestService } from '../../../../service/request.service';
 import { APP_CONFIG } from '../../../../app/app.config';
 import { CompleterService, CompleterData, CompleterItem } from 'ng2-completer';
 import { PessoaModel } from '../../../../model/pessoa.model';
-import { ValorAferidoModel } from '../../../../model/valor-aferido.model';
 import moment from 'moment';
+import { MaskType } from '../../../../directives/mask-directive';
 
 @IonicPage({
-    name: 'ModalCadastroAtendimento'
+    name: 'ModalCadastroAgendamento'
 })
 @Component({
-    selector: 'page-modal-cadastro-atendimento',
-    templateUrl: 'modal-cadastro-atendimento.html'
+    selector: 'page-modal-cadastro-agendamento',
+    templateUrl: 'modal-cadastro-agendamento.html'
 })
-export class ModalCadastroAtendimentoPage {
+export class ModalCadastroAgendamentoPage {
     @ViewChild(Content) content: Content;
+
+    MaskType = MaskType;
 
     formSubmit = false;
     private form: FormGroup;
-    atendimento: any = {};
+    agendamento: any = {};
     tiposAtendimento: any = [];
     responsaveis: any = [];
     pacientes: any = [];
     dataService: CompleterData;
     searchData: Array<PessoaModel> = [];
+    dataAgendamento: string;
     p: string;
     pacienteSelecionado: boolean = false;
 
     constructor(public toastCtrl: ToastController, private completerService: CompleterService, private viewCtrl: ViewController, private formBuilder: FormBuilder, public loadingCtrl: LoadingController, private requestService: RequestService) {
 
-        this.atendimento.paciente = {};
-        this.atendimento.paciente.pessoa = {};
-        this.atendimento.valoresAferidos = [];
+        this.agendamento.paciente = {};
+        this.agendamento.paciente.pessoa = {};
+        this.agendamento.valoresAferidos = [];
         this.initVariables();
         this.dataService = completerService.local(this.searchData, 'nome', 'nome');
 
@@ -45,13 +48,16 @@ export class ModalCadastroAtendimentoPage {
             tipoAtendimento: ['', Validators.required],
             responsavel: ['', Validators.required]
         });
+
     }
 
     selecionado(selected: CompleterItem) {
         if (selected) {
             this.pacienteSelecionado = true;
-            this.atendimento.paciente.pessoa.id = selected.originalObject.id;
-            this.atendimento.paciente.pessoa.cpf = selected.originalObject.cpf;
+            this.agendamento.paciente.pessoa.id = selected.originalObject.id;
+            this.agendamento.paciente.pessoa.cpf = selected.originalObject.cpf;
+            this.agendamento.paciente.pessoa.telefonePrimario = selected.originalObject.telefonePrimario;
+            this.agendamento.paciente.pessoa.telefoneSecundario = selected.originalObject.telefoneSecundario;
         }
     }
 
@@ -89,43 +95,15 @@ export class ModalCadastroAtendimentoPage {
         });
     }
 
-    listarAtributosDeTipoAt() {
-        let loading = this.loadingCtrl.create();
-        loading.present();
-        this.atendimento.valoresAferidos = [];
-        if (this.atendimento.tipoAtendimento.aferiveis != null) {
-            this.atendimento.tipoAtendimento.aferiveis.forEach(a => {
-                this.atendimento.valoresAferidos.push(new ValorAferidoModel(a.id, a.nome, null))
-            });
-        }
-        let urlRequest = this.requestService.buildUrlQueryParams({ cargo: this.atendimento.tipoAtendimento.responsavel }, APP_CONFIG.WEBSERVICE.LISTAR_RESPONSAVEIS);
-        this.requestService.getData(urlRequest)
-            .then((responsaveis: any) => {
-                this.responsaveis = responsaveis;
-                console.log(this.responsaveis);
-                loading.dismiss();
-            }, error => {
-                console.error(error);
-                loading.dismiss();
-            });
-    }
-
-    salvarAtendimento() {
+    salvarAgendamento() {
         this.formSubmit = true;
-        if (this.form.valid) {
             let loading = this.loadingCtrl.create();
             loading.present();
-            this.atendimento.ativo = true;
-            this.atendimento.usuario.pessoa.dataNascimento = moment(this.atendimento.usuario.pessoa.dataNascimento, 'DD-MM-YYYY').format('YYYY-MM-DD');
-            this.atendimento.data = moment(this.atendimento.data, 'DD-MM-YYYY').format('YYYY-MM-DD');
-            this.atendimento.valoresAferidos.forEach(v => {
-                if (v.valorAferido != null) {
-                    v.valorAferido = parseFloat(v.valorAferido);
-                }
-            });
-            console.log(this.atendimento);
-            let data = JSON.parse(JSON.stringify(this.atendimento));
-            this.requestService.postData(APP_CONFIG.WEBSERVICE.CADASTRAR_ATENDIMENTO, data).then((response: any) => {
+            this.agendamento.status = 'M';
+            this.agendamento.data = moment(this.dataAgendamento, 'DD-MM-YYYY').format('YYYY-MM-DD');
+            console.log(this.agendamento);
+            let data = JSON.parse(JSON.stringify(this.agendamento));
+            this.requestService.postData(APP_CONFIG.WEBSERVICE.CADASTRAR_AGENDAMENTO, data).then((response: any) => {
                 console.log(response);
                 loading.dismiss();
                 this.dismiss(true);
@@ -134,7 +112,7 @@ export class ModalCadastroAtendimentoPage {
                 loading.dismiss();
                 this.presentToast(erro.errorMessage);
             });
-        }
+        
     }
 
     presentToast(msg) {

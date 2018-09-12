@@ -94,7 +94,7 @@ export class AtendimentoPage {
     this.requestService.getData(APP_CONFIG.WEBSERVICE.LISTAR_PACIENTES).then((pacientes: any) => {
       this.pacientes = pacientes;
       pacientes.forEach(p => {
-        this.searchData.push(new PessoaModel(p.pessoa.nome, p.pessoa.cpf, p.pessoa.id));
+        this.searchData.push(new PessoaModel(p.pessoa.id, p.pessoa.nome, p.pessoa.cpf, p.pessoa.telefonePrimario, p.pessoa.telefoneSecundario));
       });
       console.log(this.pacientes);
     }, error => {

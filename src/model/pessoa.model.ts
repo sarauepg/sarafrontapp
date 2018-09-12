@@ -1,7 +1,10 @@
 export class PessoaModel{
-    constructor(public nome: string, public cpf: string, public id:number){
+    constructor(public id:number, public nome: string, public cpf: string, public telefonePrimario: string, public telefoneSecundario: string){
+        this.id = id;
         this.nome = nome;
         this.cpf = cpf;
-        this.id = id;
+        this.telefonePrimario = telefonePrimario;
+        this.telefoneSecundario = telefoneSecundario;
+
     }
 }

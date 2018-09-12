@@ -62,7 +62,7 @@ export class UsuarioPage {
     this.requestService.getData(APP_CONFIG.WEBSERVICE.LISTAR_USUARIOS).then((usuarios: any) => {
       this.usuarios = usuarios;
       usuarios.forEach(p => {
-        this.searchData.push(new PessoaModel(p.pessoa.nome, p.pessoa.cpf, p.pessoa.id));
+        this.searchData.push(new PessoaModel(p.pessoa.id, p.pessoa.nome, p.pessoa.cpf, p.pessoa.telefonePrimario, p.pessoa.telefoneSecundario));
       });
       console.log(this.usuarios);
     }, error => {

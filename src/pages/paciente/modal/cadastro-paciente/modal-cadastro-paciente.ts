@@ -5,7 +5,6 @@ import { RequestService } from "../../../../service/request.service";
 import { MaskType } from '../../../../directives/mask-directive';
 import moment from 'moment';
 import { APP_CONFIG } from "../../../../app/app.config";
-import { CompleterService } from "ng2-completer";
 
 @IonicPage({
     name: 'ModalCadastroPaciente'

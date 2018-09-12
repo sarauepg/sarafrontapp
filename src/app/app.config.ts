@@ -18,6 +18,10 @@ export const APP_CONFIG = {
 		LISTAR_TIPO_ATENDIMENTO: END_POINT + "tipoatendimento/listar",
 		ADICIONAR_TIPO_ATENDIMENTO: END_POINT + "tipoatendimento/cadastrar",
 
+		// AGENDAMENTO
+		CADASTRAR_AGENDAMENTO: END_POINT + "agendamento/cadastrar",
+		FILTRAR_AGENDAMENTO: END_POINT + "agendamento/filtrar?",
+
 		// ATENDIMENTO
 		CADASTRAR_ATENDIMENTO: END_POINT + "atendimento/cadastrar",
 		FILTRAR_ATENDIMENTO: END_POINT + "atendimento/filtrar?",
