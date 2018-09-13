@@ -103,7 +103,7 @@
                         <ion-col col-6 padding-left padding-right>
                             <ion-item [ngClass]="{'invalid': form.controls.telefoneSecundario.invalid && (form.controls.telefoneSecundario.dirty || formSubmit)}">
                                 <ion-label floating>Telefone</ion-label>
-                                <ion-input formControlName="telefoneSecundario" [mask]="{type: MaskType.CELLPHONE}" [(ngModel)]="paciente.pessoa.telefoneSecundario" type="tel"></ion-input>
+                                <ion-input formControlName="telefoneSecundario" [mask]="{type: MaskType.CELLPHONE}" [(ngModel)]="telefoneSecundario" type="tel"></ion-input>
                             </ion-item>
                             <div class="invalid-hint" *ngIf="form.controls.telefoneSecundario.errors?.minlength && form.controls.telefoneSecundario.dirty">
                                 Telefone inválido

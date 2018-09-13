@@ -19,6 +19,7 @@ export class ModalCadastroPacientePage {
     lotacoes: any = [];
     paciente: any = {};
     telefonePrimario: string;
+    telefoneSecundario: string;
 
     constructor(public toastCtrl: ToastController,
         private viewCtrl: ViewController,
@@ -64,7 +65,7 @@ export class ModalCadastroPacientePage {
             loading.present();
             this.paciente.pessoa.cpf = this.unmask(this.paciente.pessoa.cpf);
             this.paciente.pessoa.telefonePrimario = this.unmask(this.telefonePrimario);
-            this.paciente.pessoa.telefoneSecundario = this.unmask(this.paciente.pessoa.telefoneSecundario);
+            this.paciente.pessoa.telefoneSecundario = this.unmask(this.telefoneSecundario);
             let dataNasc = moment(this.paciente.pessoa.dataNascimento, 'DD-MM-YYYY').format('YYYY-MM-DD');
             this.paciente.pessoa.dataNascimento = dataNasc;
             console.log(this.paciente);

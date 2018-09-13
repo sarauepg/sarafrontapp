@@ -10,142 +10,204 @@
 </ion-header>
 
 <ion-content class="content-bg">
-
-    <ion-card>
-        <ion-card-header>
-            <ion-row align-items-left class="modal-card-title">
-                <ion-icon name="ios-list-box-outline" margin-right color="light"></ion-icon>
-                Dados gerais
-            </ion-row>
-        </ion-card-header>
-        <div class="divider2"></div>
-        <ion-card-content>
-            <ion-list>
-                <ion-row>
-                    <ion-col class="completer" col-12 padding-left padding-right>
-                        <ion-item>
-                            <ion-label floating>Nome *</ion-label>
-                            <ion-input type="text" [(ngModel)]="usuario.pessoa.nome"></ion-input>
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-6 padding-left paddin g-right>
-                        <ion-item>
-                            <ion-label floating>CPF *</ion-label>
-                            <ion-input [mask]="{mask:'999.999.999-99'}" [(ngModel)]="usuario.pessoa.cpf" type="text"></ion-input>
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-6 padding-left padding-right>
-                        <ion-item>
-                            <ion-label floating>Data de nascimento *</ion-label>
-                            <ion-input [mask]="{mask:'99-99-9999'}" [(ngModel)]="usuario.pessoa.dataNascimento" type="text"></ion-input>
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-2>
-                        <ion-item>
-                            <ion-label floating padding-left>UF *</ion-label>
-                            <ion-select [(ngModel)]="usuario.uf" interface="popover">
-                                <ion-option *ngFor="let u of ufs" [value]="u">{{u.sigla}}</ion-option>
-                            </ion-select>
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-4 padding-right>
-                        <ion-item>
-                            <ion-label floating>Nº Conselho *</ion-label>
-                            <ion-input [(ngModel)]="usuario.numeroConselho" type="number"></ion-input>
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-6 align-self-end>
-                        <ion-item>
-                            <ion-label>Médico</ion-label>
-                            <ion-checkbox color="dark" [(ngModel)]="usuario.medico"></ion-checkbox>
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-12>
-                        <ion-item>
-                            <ion-label floating padding-left>Lotação *</ion-label>
-                            <ion-select [(ngModel)]="usuario.pessoa.lotacao" interface="popover">
-                                <ion-option *ngFor="let l of lotacoes" [value]="l">{{l.sigla + ' - ' + l.nome}}</ion-option>
-                            </ion-select>
-                        </ion-item>
-                    </ion-col>
+    <form [formGroup]="form">
+        <ion-card>
+            <ion-card-header>
+                <ion-row align-items-left class="modal-card-title">
+                    <ion-icon name="ios-list-box-outline" margin-right color="light"></ion-icon>
+                    Dados gerais
                 </ion-row>
-            </ion-list>
-        </ion-card-content>
-    </ion-card>
+            </ion-card-header>
+            <div class="divider2"></div>
+            <ion-card-content>
 
-    <ion-card>
-        <ion-card-header>
-            <ion-row align-items-left class="modal-card-title">
-                <ion-icon name="ios-call-outline" margin-right color="light"></ion-icon>
-                Contato
-            </ion-row>
-        </ion-card-header>
-        <div class="divider2"></div>
-        <ion-card-content>
-            <ion-list>
-                <ion-row>
-                    <ion-col col-6 padding-left padding-right>
-                        <ion-item>
-                            <ion-label floating>Telefone *</ion-label>
-                            <ion-input [mask]="{type: MaskType.CELLPHONE}" type="tel" [(ngModel)]="usuario.pessoa.telefonePrimario"></ion-input>
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-6 padding-left padding-right>
-                        <ion-item>
-                            <ion-label floating>E-mail *</ion-label>
-                            <ion-input [(ngModel)]="usuario.pessoa.email" type="email"></ion-input>
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-6 padding-left padding-right>
-                        <ion-item>
-                            <ion-label floating>Telefone</ion-label>
-                            <ion-input [mask]="{type: MaskType.CELLPHONE}" [(ngModel)]="usuario.pessoa.telefoneSecundario" type="tel"></ion-input>
-                        </ion-item>
-                    </ion-col>
-                </ion-row>
-            </ion-list>
-        </ion-card-content>
-    </ion-card>
+                <ion-list>
+                    <ion-row>
+                        <ion-col class="completer" col-12 padding-left padding-right>
+                            <ion-item [ngClass]="{'invalid': form.controls.nome.invalid && (form.controls.nome.dirty || form.controls.nome.touched || formSubmit)}">
+                                <ion-label floating>Nome *</ion-label>
+                                <ion-input formControlName="nome" type="text" [(ngModel)]="usuario.pessoa.nome" cmaxlength="100"></ion-input>
+                            </ion-item>
+                            <div class="invalid-hint" *ngIf="form.controls.nome.errors?.required && (form.controls.nome.touched || formSubmit)">
+                                Campo obrigatório
+                            </div>
+                        </ion-col>
+                        <ion-col col-6 padding-left paddin g-right>
+                            <ion-item [ngClass]="{'invalid': form.controls.cpf.invalid && (form.controls.cpf.dirty || formSubmit)}">
+                                <ion-label floating>CPF *</ion-label>
+                                <ion-input formControlName="cpf" [mask]="{mask:'999.999.999-99'}" [(ngModel)]="usuario.pessoa.cpf" type="text"></ion-input>
+                            </ion-item>
+                            <div class="invalid-hint" *ngIf="form.controls.cpf.errors?.required && (form.controls.cpf.touched || formSubmit)">
+                                Campo obrigatório
+                            </div>
+                            <div class="invalid-hint" *ngIf="form.controls.cpf.errors?.cpf && form.controls.cpf.dirty">
+                                CPF inválido
+                            </div>
+                        </ion-col>
+                        <ion-col col-6 padding-left padding-right>
+                            <ion-item [ngClass]="{'invalid': form.controls.dataNasc.invalid && (form.controls.dataNasc.dirty || form.controls.dataNasc.touched || formSubmit)}">
+                                <ion-label floating>Data de nascimento *</ion-label>
+                                <ion-input formControlName="dataNasc" [mask]="{mask:'99-99-9999'}" [(ngModel)]="usuario.pessoa.dataNascimento" type="text"></ion-input>
+                            </ion-item>
+                            <div class="invalid-hint" *ngIf="form.controls.dataNasc.errors?.required && (form.controls.dataNasc.touched || formSubmit)">
+                                Campo obrigatório
+                            </div>
+                            <div class="invalid-hint" *ngIf="(form.controls.dataNasc.errors?.data || form.controls.dataNasc.errors?.minlength) && form.controls.dataNasc.dirty">
+                                Data inválida
+                            </div>
+                        </ion-col>
+                        <ion-col col-2>
+                            <ion-item>
+                                <ion-label floating padding-left>UF *</ion-label>
+                                <ion-select formControlName="uf" [(ngModel)]="usuario.uf" interface="popover" [ngClass]="{'invalid-box': form.controls.uf.invalid && (form.controls.uf.touched || formSubmit)}">
+                                    <ion-option *ngFor="let u of ufs" [value]="u">{{u.sigla}}</ion-option>
+                                </ion-select>
+                            </ion-item>
+                            <div class="invalid-hint" *ngIf="form.controls.uf.errors?.required && (form.controls.uf.touched || formSubmit)">
+                                Campo obrigatório
+                            </div>
+                        </ion-col>
+                        <ion-col col-4 padding-right>
+                            <ion-item [ngClass]="{'invalid': form.controls.numeroConselho.invalid && (form.controls.numeroConselho.dirty || form.controls.numeroConselho.touched || formSubmit)}">
+                                <ion-label floating>Nº Conselho *</ion-label>
+                                <ion-input formControlName="numeroConselho" [(ngModel)]="usuario.numeroConselho" type="number"></ion-input>
+                            </ion-item>
+                            <div class="invalid-hint" *ngIf="form.controls.numeroConselho.errors?.required && (form.controls.numeroConselho.touched || formSubmit)">
+                                Campo obrigatório
+                            </div>
+                        </ion-col>
+                        <ion-col col-6 align-self-end>
+                            <ion-item>
+                                <ion-label>Médico</ion-label>
+                                <ion-checkbox formControlName="medico" color="dark" [(ngModel)]="usuario.medico"></ion-checkbox>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-12>
+                            <ion-item>
+                                <ion-label floating padding-left>Lotação *</ion-label>
+                                <ion-select formControlName="lotacao" [(ngModel)]="usuario.pessoa.lotacao" interface="popover" [ngClass]="{'invalid-box':   form.controls.lotacao.invalid && (form.controls.lotacao.touched || formSubmit)}">
+                                    <ion-option *ngFor="let l of lotacoes" [value]="l">{{l.sigla + ' - ' + l.nome}}</ion-option>
+                                </ion-select>
+                            </ion-item>
+                            <div class="invalid-hint" *ngIf="form.controls.lotacao.errors?.required && (form.controls.lotacao.touched || formSubmit)">
+                                Campo obrigatório
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                </ion-list>
+            </ion-card-content>
+        </ion-card>
 
-    <ion-card>
-        <ion-card-header>
-            <ion-row align-items-left class="modal-card-title">
-                <ion-icon name="ios-person-outline" margin-right color="light"></ion-icon>
-                Informações de usuário
-            </ion-row>
-        </ion-card-header>
-        <div class="divider2"></div>
-        <ion-card-content>
-            <ion-list>
-                <ion-row>
-                    <ion-col col-6 padding-left padding-right>
-                        <ion-item>
-                            <ion-label floating>Nome de usuário *</ion-label>
-                            <ion-input type="text" [(ngModel)]="usuario.nomeUsuario"></ion-input>
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-6 align-self-end>
-                        <ion-item>
-                            <ion-label>Administrador</ion-label>
-                            <ion-checkbox color="dark" [(ngModel)]="usuario.administrador"></ion-checkbox>
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-12 padding-left padding-right>
-                        <ion-item>
-                            <ion-label floating>Senha *</ion-label>
-                            <ion-input [(ngModel)]="usuario.senha" type="password"></ion-input>
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-12 padding-left padding-right>
-                        <ion-item>
-                            <ion-label floating>Repetir senha*</ion-label>
-                            <ion-input type="password"></ion-input>
-                        </ion-item>
-                    </ion-col>
+        <ion-card>
+            <ion-card-header>
+                <ion-row align-items-left class="modal-card-title">
+                    <ion-icon name="ios-call-outline" margin-right color="light"></ion-icon>
+                    Contato
                 </ion-row>
-            </ion-list>
-        </ion-card-content>
-    </ion-card>
+            </ion-card-header>
+            <div class="divider2"></div>
+            <ion-card-content>
+                <ion-list>
+                    <ion-row>
+                        <ion-col col-6 padding-left padding-right>
+                            <ion-item [ngClass]="{'invalid': form.controls.telefonePrimario.invalid && (form.controls.telefonePrimario.dirty || form.controls.telefonePrimario.touched || formSubmit)}">
+                                <ion-label floating>Telefone *</ion-label>
+                                <ion-input formControlName="telefonePrimario" [mask]="{type: MaskType.CELLPHONE}" type="tel" [(ngModel)]="telefonePrimario"></ion-input>
+                            </ion-item>
+                            <div class="invalid-hint" *ngIf="form.controls.telefonePrimario.errors?.required && (form.controls.telefonePrimario.touched || formSubmit)">
+                                    Campo obrigatório
+                                </div>
+                                <div class="invalid-hint" *ngIf="form.controls.telefonePrimario.errors?.minlength && form.controls.telefonePrimario.dirty">
+                                    Telefone inválido
+                                </div>
+                        </ion-col>
+                        <ion-col col-6 padding-left padding-right>
+                            <ion-item [ngClass]="{'invalid': form.controls.email.invalid && (form.controls.email.dirty || form.controls.email.touched || formSubmit)}">
+                                <ion-label floating>E-mail *</ion-label>
+                                <ion-input formControlName="email" [(ngModel)]="usuario.pessoa.email" type="email" cmaxlength="60"></ion-input>
+                            </ion-item>
+                            <div class="invalid-hint" *ngIf="form.controls.email.errors?.required && (form.controls.email.touched || formSubmit)">
+                                    Campo obrigatório
+                                </div>
+                            <div class="invalid-hint" *ngIf="form.controls.email.errors?.email && form.controls.email.dirty">
+                                    E-mail inválido
+                                </div>
+                        </ion-col>
+                        <ion-col col-6 padding-left padding-right>
+                            <ion-item [ngClass]="{'invalid': form.controls.telefoneSecundario.invalid && (form.controls.telefoneSecundario.dirty || formSubmit)}">
+                                <ion-label floating>Telefone</ion-label>
+                                <ion-input formControlName="telefoneSecundario" [mask]="{type: MaskType.CELLPHONE}" [(ngModel)]="telefoneSecundario" type="tel"></ion-input>
+                            </ion-item>
+                            <div class="invalid-hint" *ngIf="form.controls.telefoneSecundario.errors?.minlength && form.controls.telefoneSecundario.dirty">
+                                    Telefone inválido
+                                </div>
+                        </ion-col>
+                    </ion-row>
+                </ion-list>
+            </ion-card-content>
+        </ion-card>
+
+        <ion-card>
+            <ion-card-header>
+                <ion-row align-items-left class="modal-card-title">
+                    <ion-icon name="ios-person-outline" margin-right color="light"></ion-icon>
+                    Informações de usuário
+                </ion-row>
+            </ion-card-header>
+            <div class="divider2"></div>
+            <ion-card-content>
+                <ion-list>
+                    <ion-row>
+                        <ion-col col-6 padding-left padding-right>
+                            <ion-item [ngClass]="{'invalid': form.controls.nomeUsuario.invalid && (form.controls.nomeUsuario.dirty || form.controls.nomeUsuario.touched || formSubmit)}">
+                                <ion-label floating>Nome de usuário *</ion-label>
+                                <ion-input formControlName="nomeUsuario" type="text" [(ngModel)]="usuario.nomeUsuario" cmaxlength="16"></ion-input>
+                            </ion-item>
+                            <div class="invalid-hint" *ngIf="form.controls.nomeUsuario.errors?.required && (form.controls.nomeUsuario.touched || formSubmit)">
+                                    Campo obrigatório
+                                </div>
+                                <div class="invalid-hint" *ngIf="form.controls.nomeUsuario.errors?.minlength && form.controls.nomeUsuario.dirty">
+                                    Seu usuário deve conter no mínimo 4 dígitos
+                                </div>
+                        </ion-col>
+                        <ion-col col-6 align-self-end>
+                            <ion-item>
+                                <ion-label>Administrador</ion-label>
+                                <ion-checkbox formControlName="administrador" color="dark" [(ngModel)]="usuario.administrador"></ion-checkbox>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row no-padding no-margin formGroupName="senhaGroup">
+                        <ion-col col-12 padding-left padding-right>
+                            <ion-item [ngClass]="{'invalid': form.controls.senhaGroup.controls.senha.invalid && formSubmit}">
+                                <ion-label floating>Senha *</ion-label>
+                                <ion-input formControlName="senha" [(ngModel)]="usuario.senha" type="password" cmaxlength="20"></ion-input>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-12 padding-left padding-right>
+                            <ion-item [ngClass]="{'invalid': (form.controls.senhaGroup.invalid || form.controls.senhaGroup.controls.repetirSenha.invalid) && formSubmit}">
+                                <ion-label floating>Repetir senha*</ion-label>
+                                <ion-input formControlName="repetirSenha" type="password" cmaxlength="20"></ion-input>
+                            </ion-item>
+                            <div class="invalid-hint" *ngIf="(form.controls.senhaGroup.invalid || form.controls.senhaGroup.controls.repetirSenha.invalid || form.controls.senhaGroup.controls.senha.invalid) && formSubmit">
+                                    <div *ngIf="form.controls.senhaGroup.controls.repetirSenha.errors?.minlength || 
+                                                form.controls.senhaGroup.controls.repetirSenha.errors?.required || 
+                                                form.controls.senhaGroup.controls.senha.errors?.minlength || 
+                                                form.controls.senhaGroup.controls.senha.errors?.required">
+                                        Sua senha deve conter no mínimo 6 dígitos
+                                    </div>
+                                    <div *ngIf="form.controls.senhaGroup.controls.repetirSenha.errors?.pattern || 
+                                                form.controls.senhaGroup.controls.senha.errors?.pattern">
+                                        Senha deve conter no mínimo uma letra e um número
+                                    </div>
+                                    <div *ngIf="form.controls.senhaGroup.errors?.mismatch">Insira a mesma senha do campo anterior</div>
+                                </div>
+                        </ion-col>
+                    </ion-row>
+                </ion-list>
+            </ion-card-content>
+        </ion-card>
+    </form>
 </ion-content>
 
 <ion-footer>

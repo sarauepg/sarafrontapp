@@ -1,11 +1,11 @@
 import { IonicPage, Content, ToastController, ViewController, LoadingController } from "ionic-angular";
 import { Component, ViewChild } from "@angular/core";
-import { FormGroup, FormBuilder } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
 import { RequestService } from "../../../../service/request.service";
 import { MaskType } from '../../../../directives/mask-directive';
 import moment from 'moment';
 import { APP_CONFIG } from "../../../../app/app.config";
-import { CompleterService } from "ng2-completer";
+import * as cpfCnpj from 'cpf_cnpj';
 
 @IonicPage({
     name: 'ModalCadastroUsuario'
@@ -21,8 +21,11 @@ export class ModalCadastroUsuarioPage {
 
     formSubmit = false;
     private form: FormGroup;
+    telefonePrimario: string;
+    telefoneSecundario: string;
     lotacoes: any = [];
     usuario: any = {};
+    atLeastOneLetterOneDigitRegExp: RegExp = /[^\w\d]*(([0-9]+.*[A-Za-z]+.*)|[A-Za-z]+.*([0-9]+.*))/;
     ufs: any = [
         { sigla: "PR", id: 1 },
         { sigla: "AC", id: 2 },
@@ -61,6 +64,26 @@ export class ModalCadastroUsuarioPage {
 
         this.usuario.pessoa = {};
         this.listarLotacoes();
+
+        this.form = this.formBuilder.group({
+            nome: ['', Validators.required],
+            cpf: ['', [Validators.required, this.cpfValidator]],
+            dataNasc: ['', [Validators.required, Validators.minLength(10), this.dataValidator]],
+            uf: ['', Validators.required],
+            numeroConselho: ['', Validators.required],
+            medico: [false, Validators.required],
+            lotacao: ['', Validators.required],
+            telefonePrimario: ['', [Validators.required, Validators.minLength(14)]],
+            telefoneSecundario: ['', Validators.minLength(14)],
+            email: ['', Validators.email],
+            nomeUsuario: ['', [Validators.required, Validators.minLength(4)]],
+            administrador: [false, Validators.required],
+            senhaGroup: this.formBuilder.group({
+                senha: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this.atLeastOneLetterOneDigitRegExp)]],
+                repetirSenha: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this.atLeastOneLetterOneDigitRegExp)]]
+            }, { validator: this.samePasswordValidator }),
+
+        });
     }
 
     dismiss(data?) {
@@ -77,33 +100,53 @@ export class ModalCadastroUsuarioPage {
     }
 
     salvarUsuario() {
-        let loading = this.loadingCtrl.create();
-        loading.present();
-        this.usuario.pessoa.cpf = this.unmask(this.usuario.pessoa.cpf);
-        this.usuario.pessoa.telefonePrimario = this.unmask(this.usuario.pessoa.telefonePrimario);
-        this.usuario.pessoa.telefoneSecundario = this.unmask(this.usuario.pessoa.telefoneSecundario);
-        let dataNasc = moment(this.usuario.pessoa.dataNascimento, 'DD-MM-YYYY').format('YYYY-MM-DD');
-        this.usuario.pessoa.dataNascimento = dataNasc;
-        this.usuario.ativo = true;
-        console.log(this.usuario);
-        let data = JSON.parse(JSON.stringify(this.usuario));
-        this.requestService.postData(APP_CONFIG.WEBSERVICE.CADASTRAR_USUARIOS, data).then((response: any) => {
-            console.log(response);
-            loading.dismiss();
-            this.dismiss(true);
-        }, erro => {
-            console.error(erro);
-            loading.dismiss();
-            this.presentToast(erro.errorMessage);
-        });
+        this.formSubmit = true;
+        if (this.form.valid) {
+            let loading = this.loadingCtrl.create();
+            loading.present();
+            this.usuario.pessoa.cpf = this.unmask(this.usuario.pessoa.cpf);
+            this.usuario.pessoa.telefonePrimario = this.unmask(this.telefonePrimario);
+            this.usuario.pessoa.telefoneSecundario = this.unmask(this.telefoneSecundario);
+            let dataNasc = moment(this.usuario.pessoa.dataNascimento, 'DD-MM-YYYY').format('YYYY-MM-DD');
+            this.usuario.pessoa.dataNascimento = dataNasc;
+            this.usuario.ativo = true;
+            console.log(this.usuario);
+            let data = JSON.parse(JSON.stringify(this.usuario));
+            this.requestService.postData(APP_CONFIG.WEBSERVICE.CADASTRAR_USUARIOS, data).then((response: any) => {
+                console.log(response);
+                loading.dismiss();
+                this.dismiss(true);
+            }, erro => {
+                console.error(erro);
+                loading.dismiss();
+                this.presentToast(erro.errorMessage);
+            });
+        }
     }
 
     private unmask(value): string {
-		if (!value) return "";
-		// return value.replace(/\D+/g, '');
-		// console.log(value);
-		return value.replace(/[^a-z0-9]/gi, "");
-	}
+        if (!value) return "";
+        // return value.replace(/\D+/g, '');
+        // console.log(value);
+        return value.replace(/[^a-z0-9]/gi, "");
+    }
+
+    private cpfValidator(control: FormControl) {
+        let cpf = cpfCnpj.CPF.isValid(control.value);
+        let valid = cpf ? null : { cpf: true };
+        return valid;
+    }
+
+    private dataValidator(control: FormControl) {
+        let data = moment(control.value, 'DD-MM-YYYY').isValid();
+        let valid = data ? null : { data: true };
+        return valid;
+    }
+
+    private samePasswordValidator(formGroup: FormGroup) {
+        let confirm = formGroup.controls.senha.value === formGroup.controls.repetirSenha.value ? null : { mismatch: true };
+        return confirm;
+    }
 
     presentToast(msg) {
         const toast = this.toastCtrl.create({
