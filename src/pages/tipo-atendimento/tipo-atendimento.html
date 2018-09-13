@@ -30,25 +30,25 @@
             <ion-list>
               <ion-row>
                 <ion-col col-12 col-md padding-left padding-right>
-                  <ion-item [class.invalid]="formTipoAt.controls.nome.invalid && formSubmit">
+                  <ion-item [ngClass]="{'invalid': formTipoAt.controls.nome.invalid && (formTipoAt.controls.nome.dirty || formTipoAt.controls.nome.touched || formSubmit)}">
                     <ion-label floating>Nome *</ion-label>
-                    <ion-input type="text" formControlName="nome" [(ngModel)]="tipoAt.nome"></ion-input>
+                    <ion-input type="text" formControlName="nome" [(ngModel)]="tipoAt.nome" cmaxlength="100"></ion-input>
                   </ion-item>
-                  <div class="invalid-hint" *ngIf="formTipoAt.controls.nome.invalid && formSubmit">
-                      Nome é obrigatório
+                  <div class="invalid-hint" *ngIf="formTipoAt.controls.nome.errors?.required && (formTipoAt.controls.nome.touched || formSubmit)">
+                      Campo obrigatório
                   </div>
                 </ion-col>
                 <ion-col col-12 col-md padding-left padding-right>
-                  <ion-item [class.invalid]="formTipoAt.controls.responsavel.invalid && formSubmit">
+                  <ion-item >
                     <ion-label floating padding-left>Responsável *</ion-label>
-                    <ion-select interface="popover" formControlName="responsavel" [(ngModel)]="tipoAt.responsavel">
+                    <ion-select interface="popover" formControlName="responsavel" [(ngModel)]="tipoAt.responsavel" [ngClass]="{'invalid-box':   formTipoAt.controls.responsavel.invalid &&  (formTipoAt.controls.responsavel.touched || formSubmit)}">
                       <ion-option value="E">Enfermeiro(a)</ion-option>
                       <ion-option value="M">Médico(a)</ion-option>
                       <ion-option value="T">Todos(as)</ion-option>
                     </ion-select>
                   </ion-item>
-                  <div class="invalid-hint" *ngIf="formTipoAt.controls.responsavel.invalid && formSubmit">
-                      Responsavel é obrigatório
+                  <div class="invalid-hint" *ngIf="formTipoAt.controls.responsavel.errors?.required && (formTipoAt.controls.responsavel.touched || formSubmit)">
+                    Campo obrigatório
                   </div>
                 </ion-col>
               </ion-row>

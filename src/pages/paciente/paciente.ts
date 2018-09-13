@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, Events, ModalController, ToastController, LoadingController } from 'ionic-angular';
 import { CompleterService, CompleterData, CompleterItem } from 'ng2-completer';
 import { PessoaModel } from '../../model/pessoa.model';
 import { RequestService } from '../../service/request.service';
 import { APP_CONFIG } from '../../app/app.config';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @IonicPage({
   name: 'Paciente',
@@ -14,6 +15,8 @@ import { APP_CONFIG } from '../../app/app.config';
   templateUrl: 'paciente.html',
 })
 export class PacientePage {
+
+  private form: FormGroup;
 
   items = [];
   filtro: any = {};
@@ -35,10 +38,13 @@ export class PacientePage {
     private completerService: CompleterService,
     public modalCtrl: ModalController,
     public loadingCtrl: LoadingController,
-    private requestService: RequestService) {
-      
+    private requestService: RequestService,
+    private formBuilder: FormBuilder) {
+
     this.dataService = completerService.local(this.searchData, 'nome', 'nome');
     this.initVariables();
+
+    
   }
 
   selecionado(selected: CompleterItem) {
@@ -60,8 +66,11 @@ export class PacientePage {
     loading.present();
     this.listPage = 1;
     this.list = [];
-    if(this.filtro.cpf != null || this.filtro.cpf != undefined){
+    if (this.filtro.cpf != null || this.filtro.cpf != undefined) {
       this.filtro.cpf = this.unmask(this.filtro.cpf);
+    }
+    if(this.filtro.idLotacao == "null"){
+      delete this.filtro.idLotacao;
     }
     let urlRequest = this.requestService.buildHttpBodyFormData(this.filtro, APP_CONFIG.WEBSERVICE.FILTRAR_PACIENTE);
     this.requestService.getData(urlRequest).then((pacientes: any) => {
@@ -82,18 +91,18 @@ export class PacientePage {
 
   listarLotacoes() {
     this.requestService.getData(APP_CONFIG.WEBSERVICE.LISTAR_LOTACOES).then((lotacoes: any) => {
-        this.lotacoes = lotacoes;
-        console.log(this.lotacoes);
+      this.lotacoes = lotacoes;
+      console.log(this.lotacoes);
     }, error => {
-        console.error(error);
+      console.error(error);
     });
-}
+  }
 
   listarPacientes() {
     this.requestService.getData(APP_CONFIG.WEBSERVICE.LISTAR_PACIENTES).then((pacientes: any) => {
       this.pacientes = pacientes;
       pacientes.forEach(p => {
-        this.searchData.push(new PessoaModel(p.pessoa.nome, p.pessoa.cpf, p.pessoa.id));
+        this.searchData.push(new PessoaModel(p.pessoa.id, p.pessoa.nome, p.pessoa.cpf, p.pessoa.telefonePrimario, p.pessoa.telefoneSecundario));
       });
       console.log(this.pacientes);
     }, error => {
@@ -129,11 +138,11 @@ export class PacientePage {
   }
 
   private unmask(value): string {
-		if (!value) return "";
-		// return value.replace(/\D+/g, '');
-		// console.log(value);
-		return value.replace(/[^a-z0-9]/gi, "");
-	}
+    if (!value) return "";
+    // return value.replace(/\D+/g, '');
+    // console.log(value);
+    return value.replace(/[^a-z0-9]/gi, "");
+  }
 
   presentToast(msg) {
     const toast = this.toastCtrl.create({

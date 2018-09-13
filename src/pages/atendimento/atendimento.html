@@ -35,36 +35,44 @@
           <div class="divider2"></div>
           <ion-card-content>
             <ion-list>
+                <form [formGroup]="formData">
               <ion-row>
                 <ion-col col-12 col-lg-4 padding-left padding-right>
                   <ion-label class="completer-label">Nome do paciente </ion-label>
-                  <ng2-completer [textNoResults]="'Nenhum resultado encontrado'" (selected)="selecionado($event)" [(ngModel)]="p" [datasource]="dataService"
+                  <ng2-completer formControlName="nome" [textNoResults]="'Nenhum resultado encontrado'" (selected)="selecionado($event)" [(ngModel)]="p" [datasource]="dataService"
                     [minSearchLength]="0"></ng2-completer>
                 </ion-col>
-
+                
+                  
                 <ion-col col-12 col-lg-4 padding-left padding-right>
-                  <ion-item>
+                  <ion-item [ngClass]="{'invalid': formData.controls.dataInicio.invalid && (formData.controls.dataInicio.dirty || formSubmit)}">
                     <ion-label floating>Data inicial</ion-label>
-                    <ion-input type="text" [mask]="{mask:'99-99-9999'}" [(ngModel)]="dataInicial"></ion-input>
+                    <ion-input formControlName="dataInicio" type="text" [mask]="{mask:'99-99-9999'}" [(ngModel)]="dataInicial"></ion-input>
                   </ion-item>
-
+                  <div class="invalid-hint" *ngIf="(formData.controls.dataInicio.errors?.data || formData.controls.dataInicio.errors?.minlength) && formData.controls.dataInicio.dirty">
+                      Data inválida
+                  </div>
                 </ion-col>
 
                 <ion-col col-12 col-lg-4 padding-left padding-right>
-                  <ion-item>
+                  <ion-item [ngClass]="{'invalid': formData.controls.dataFim.invalid && (formData.controls.dataFim.dirty || formSubmit)}">
                     <ion-label floating>Data final</ion-label>
-                    <ion-input type="text" [mask]="{mask:'99-99-9999'}" [(ngModel)]="dataFinal"></ion-input>
+                    <ion-input formControlName="dataFim" type="text" [mask]="{mask:'99-99-9999'}" [(ngModel)]="dataFinal"></ion-input>
                   </ion-item>
+                  <div class="invalid-hint" *ngIf="(formData.controls.dataFim.errors?.data || formData.controls.dataFim.errors?.minlength) && formData.controls.dataFim.dirty">
+                      Data inválida
+                  </div>
                 </ion-col>
-
+              
               </ion-row>
-
+            </form>
               <ion-row>
 
                 <ion-col col-12 col-lg-5 >
                   <ion-item>
                     <ion-label floating padding-left>Responsável</ion-label>
                     <ion-select  interface="popover"[(ngModel)]="filtro.idResponsavel">
+                        <ion-option value="null">Todos</ion-option>
                       <ion-option *ngFor="let r of responsaveis" [value]="r.pessoa.id" >{{r.pessoa.nome + ' - ' + r.uf.sigla + '.' +
                         r.numeroConselho}}</ion-option>
                     </ion-select>
@@ -75,6 +83,7 @@
                   <ion-item>
                     <ion-label floating padding-left>Tipo de atendimento</ion-label>
                     <ion-select interface="popover" [(ngModel)]="filtro.idTipoAtendimento">
+                        <ion-option value="null">Todos</ion-option>
                       <ion-option *ngFor="let t of tiposAtendimento" [value]="t.id" >{{t.nome}}</ion-option>
                     </ion-select>
                   </ion-item>

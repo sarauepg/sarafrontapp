@@ -9,85 +9,112 @@
     </ion-navbar>
 </ion-header>
 
-<ion-content class="content-bg">
-
-    <ion-card>
-        <ion-card-header>
-            <ion-row align-items-left class="modal-card-title">
-                <ion-icon name="ios-list-box-outline" margin-right color="light"></ion-icon>
-                Dados gerais
-            </ion-row>
-        </ion-card-header>
-        <div class="divider2"></div>
-        <ion-card-content>
-            <ion-list>
-                <ion-row>
-                    <ion-col class="completer" col-12 padding-left padding-right>
-                        <ion-item>
-                            <ion-label floating>Nome *</ion-label>
-                            <ion-input type="text" [(ngModel)]="paciente.pessoa.nome"></ion-input>
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-6 padding-left paddin g-right>
-                        <ion-item>
-                            <ion-label floating>CPF *</ion-label>
-                            <ion-input [mask]="{mask:'999.999.999-99'}" [(ngModel)]="paciente.pessoa.cpf" type="text"></ion-input>
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-6 padding-left padding-right>
-                        <ion-item>
-                            <ion-label floating>Data de nascimento *</ion-label>
-                            <ion-input [mask]="{mask:'99-99-9999'}" [(ngModel)]="paciente.pessoa.dataNascimento" type="text"></ion-input>
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-12>
-                        <ion-item>
-                            <ion-label floating padding-left>Lotação *</ion-label>
-                            <ion-select [(ngModel)]="paciente.pessoa.lotacao" interface="popover">
+    <ion-content class="content-bg">
+        <form [formGroup]="form">
+        <ion-card>
+            <ion-card-header>
+                <ion-row align-items-left class="modal-card-title">
+                    <ion-icon name="ios-list-box-outline" margin-right color="light"></ion-icon>
+                    Dados gerais
+                </ion-row>
+            </ion-card-header>
+            <div class="divider2"></div>
+            <ion-card-content>
+                <ion-list>
+                    <ion-row>
+                        <ion-col class="completer" col-12 padding-left padding-right>
+                            <ion-item [ngClass]="{'invalid': form.controls.nome.invalid && (form.controls.nome.dirty || form.controls.nome.touched || formSubmit)}">
+                                <ion-label floating>Nome *</ion-label>
+                                <ion-input formControlName="nome" type="text" [(ngModel)]="paciente.pessoa.nome" cmaxlength="100"></ion-input>
+                            </ion-item>
+                            <div class="invalid-hint" *ngIf="form.controls.nome.errors?.required && (form.controls.nome.touched || formSubmit)">
+                                Campo obrigatório
+                            </div>
+                        </ion-col>
+                        <ion-col col-6 padding-left paddin g-right>
+                            <ion-item [ngClass]="{'invalid': form.controls.cpf.invalid && (form.controls.cpf.dirty || formSubmit)}">
+                                <ion-label floating>CPF *</ion-label>
+                                <ion-input formControlName="cpf" [mask]="{mask:'999.999.999-99'}" [(ngModel)]="paciente.pessoa.cpf" type="text"></ion-input>
+                            </ion-item>
+                            <div class="invalid-hint" *ngIf="form.controls.cpf.errors?.required && (form.controls.cpf.touched || formSubmit)">
+                                Campo obrigatório
+                            </div>
+                            <div class="invalid-hint" *ngIf="form.controls.cpf.errors?.cpf && form.controls.cpf.dirty">
+                                CPF inválido
+                            </div>
+                        </ion-col>
+                        <ion-col col-6 padding-left padding-right>
+                            <ion-item [ngClass]="{'invalid': form.controls.dataNasc.invalid && (form.controls.dataNasc.dirty || form.controls.dataNasc.touched || formSubmit)}">
+                                <ion-label floating>Data de nascimento *</ion-label>
+                                <ion-input formControlName="dataNasc" [mask]="{mask:'99-99-9999'}" [(ngModel)]="paciente.pessoa.dataNascimento" type="text"></ion-input>
+                            </ion-item>
+                            <div class="invalid-hint" *ngIf="form.controls.dataNasc.errors?.required && (form.controls.dataNasc.touched || formSubmit)">
+                                Campo obrigatório
+                            </div>
+                            <div class="invalid-hint" *ngIf="(form.controls.dataNasc.errors?.data || form.controls.dataNasc.errors?.minlength) && form.controls.dataNasc.dirty">
+                                Data inválida
+                            </div>
+                        </ion-col>
+                        <ion-col col-12>
+                            <ion-item>
+                                <ion-label floating padding-left>Lotação *</ion-label>
+                                <ion-select formControlName="lotacao" [(ngModel)]="paciente.pessoa.lotacao" interface="popover" [ngClass]="{'invalid-box':   form.controls.lotacao.invalid && (form.controls.lotacao.touched || formSubmit)}">
                                     <ion-option *ngFor="let l of lotacoes" [value]="l">{{l.sigla + ' - ' + l.nome}}</ion-option>
-                            </ion-select>
-                        </ion-item>
-                    </ion-col>
-                </ion-row>
-            </ion-list>
-        </ion-card-content>
-    </ion-card>
+                                </ion-select>
+                            </ion-item>
+                            <div class="invalid-hint" *ngIf="form.controls.lotacao.errors?.required && (form.controls.lotacao.touched || formSubmit)">
+                                Campo obrigatório
+                              </div>
+                        </ion-col>
+                    </ion-row>
+                </ion-list>
+            </ion-card-content>
+        </ion-card>
 
-    <ion-card>
-        <ion-card-header>
-            <ion-row align-items-left class="modal-card-title">
-                <ion-icon name="ios-call-outline" margin-right color="light"></ion-icon>
-                Contato
-            </ion-row>
-        </ion-card-header>
-        <div class="divider2"></div>
-        <ion-card-content>
-            <ion-list>
-                <ion-row>
-                    <ion-col col-6 padding-left padding-right>
-                        <ion-item>
-                            <ion-label floating>Telefone *</ion-label>
-                            <ion-input [mask]="{type: MaskType.CELLPHONE}" type="tel" [(ngModel)]="paciente.pessoa.telefonePrimario"></ion-input>
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-6 padding-left padding-right>
-                        <ion-item>
-                            <ion-label floating>E-mail</ion-label>
-                            <ion-input [(ngModel)]="paciente.pessoa.email" type="email"></ion-input>
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-6 padding-left padding-right>
-                        <ion-item>
-                            <ion-label floating>Telefone</ion-label>
-                            <ion-input [mask]="{type: MaskType.CELLPHONE}" [(ngModel)]="paciente.pessoa.telefoneSecundario" type="tel"></ion-input>
-                        </ion-item>
-                    </ion-col>
+        <ion-card>
+            <ion-card-header>
+                <ion-row align-items-left class="modal-card-title">
+                    <ion-icon name="ios-call-outline" margin-right color="light"></ion-icon>
+                    Contato
                 </ion-row>
-            </ion-list>
-        </ion-card-content>
-    </ion-card>
+            </ion-card-header>
+            <div class="divider2"></div>
+            <ion-card-content>
+                <ion-list>
+                    <ion-row>
+                        <ion-col col-6 padding-left padding-right>
+                            <ion-item [ngClass]="{'invalid': form.controls.telefonePrimario.invalid && (form.controls.telefonePrimario.dirty || form.controls.telefonePrimario.touched || formSubmit)}">
+                                <ion-label floating>Telefone *</ion-label>
+                                <ion-input formControlName="telefonePrimario" [mask]="{type: MaskType.CELLPHONE}" type="tel" [(ngModel)]="telefonePrimario"></ion-input>
+                            </ion-item>
+                            <div class="invalid-hint" *ngIf="form.controls.telefonePrimario.errors?.required && (form.controls.telefonePrimario.touched || formSubmit)">
+                                Campo obrigatório
+                            </div>
+                            <div class="invalid-hint" *ngIf="form.controls.telefonePrimario.errors?.minlength && form.controls.telefonePrimario.dirty">
+                                Telefone inválido
+                            </div>
+                        </ion-col>
+                        <ion-col col-6 padding-left padding-right>
+                            <ion-item>
+                                <ion-label floating>E-mail</ion-label>
+                                <ion-input formControlName="email" [(ngModel)]="paciente.pessoa.email" type="email" cmaxlength="60"></ion-input>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-6 padding-left padding-right>
+                            <ion-item [ngClass]="{'invalid': form.controls.telefoneSecundario.invalid && (form.controls.telefoneSecundario.dirty || formSubmit)}">
+                                <ion-label floating>Telefone</ion-label>
+                                <ion-input formControlName="telefoneSecundario" [mask]="{type: MaskType.CELLPHONE}" [(ngModel)]="paciente.pessoa.telefoneSecundario" type="tel"></ion-input>
+                            </ion-item>
+                            <div class="invalid-hint" *ngIf="form.controls.telefoneSecundario.errors?.minlength && form.controls.telefoneSecundario.dirty">
+                                Telefone inválido
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                </ion-list>
+            </ion-card-content>
+        </ion-card>
 
-    <ion-card>
+        <ion-card>
             <ion-card-header>
                 <ion-row align-items-left class="modal-card-title">
                     <ion-icon name="ios-clipboard-outline" margin-right color="light"></ion-icon>
@@ -97,22 +124,23 @@
             <div class="divider2"></div>
             <ion-card-content>
                 <ion-item>
-                    <ion-textarea [(ngModel)]="paciente.observacaoMedica" [ngModelOptions]="{standalone: true}" type="text"></ion-textarea>
+                    <ion-textarea formControlName="obsMedicas" [(ngModel)]="paciente.observacaoMedica" type="text"></ion-textarea>
                 </ion-item>
             </ion-card-content>
         </ion-card>
+    </form>
 
-</ion-content>
+    </ion-content>
 
-<ion-footer>
-    <ion-toolbar color="white">
-        <ion-buttons right>
-            <button type="submit" (click)="salvarPaciente()" icon-start ion-button margin-right color="light">
-                <ion-icon name="checkmark"></ion-icon> salvar
-            </button>
-            <button icon-start ion-button color="gray" (click)="dismiss()">
-                <ion-icon name="close"></ion-icon> cancelar
-            </button>
-        </ion-buttons>
-    </ion-toolbar>
-</ion-footer>
+    <ion-footer>
+        <ion-toolbar color="white">
+            <ion-buttons right>
+                <button type="submit" (click)="salvarPaciente()" icon-start ion-button margin-right color="light">
+                    <ion-icon name="checkmark"></ion-icon> salvar
+                </button>
+                <button icon-start ion-button color="gray" (click)="dismiss()">
+                    <ion-icon name="close"></ion-icon> cancelar
+                </button>
+            </ion-buttons>
+        </ion-toolbar>
+    </ion-footer>

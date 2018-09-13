@@ -1,19 +1,14 @@
 import { IonicPage, Content, ToastController, ViewController, LoadingController } from "ionic-angular";
-import { Component, ViewChild } from "@angular/core";
-import { FormGroup, FormBuilder } from "@angular/forms";
+import { Component, ViewChild, ChangeDetectorRef } from "@angular/core";
+import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
 import { RequestService } from "../../../../service/request.service";
 import { MaskType } from '../../../../directives/mask-directive';
 import moment from 'moment';
+import * as cpfCnpj from 'cpf_cnpj';
 import { APP_CONFIG } from "../../../../app/app.config";
-import { CompleterService } from "ng2-completer";
 
-@IonicPage({
-    name: 'ModalCadastroPaciente'
-})
-@Component({
-    selector: 'page-modal-cadastro-paciente',
-    templateUrl: 'modal-cadastro-paciente.html'
-})
+@IonicPage({name: 'ModalCadastroPaciente'})
+@Component({selector: 'page-modal-cadastro-paciente', templateUrl: 'modal-cadastro-paciente.html'})
 export class ModalCadastroPacientePage {
     @ViewChild(Content) content: Content;
 
@@ -23,17 +18,30 @@ export class ModalCadastroPacientePage {
     private form: FormGroup;
     lotacoes: any = [];
     paciente: any = {};
+    telefonePrimario: string;
 
     constructor(public toastCtrl: ToastController,
         private viewCtrl: ViewController,
         private formBuilder: FormBuilder,
         public loadingCtrl: LoadingController,
-        private requestService: RequestService) {
+        private requestService: RequestService,
+        private cdRef: ChangeDetectorRef) {
 
         this.paciente.pessoa = {};
         this.paciente.pessoa.email = "";
         this.paciente.observacaoMedica = "";
         this.listarLotacoes();
+
+        this.form = this.formBuilder.group({
+            nome: ['', Validators.required],
+            cpf: ['', [Validators.required, this.cpfValidator]],
+            dataNasc: ['', [Validators.required, Validators.minLength(10), this.dataValidator]],
+            lotacao: ['', Validators.required],
+            telefonePrimario: ['', [Validators.required, Validators.minLength(14)]],
+            telefoneSecundario: ['', Validators.minLength(14)],
+            email: [''],
+            obsMedicas: ['']
+        });
     }
 
     dismiss(data?) {
@@ -50,32 +58,47 @@ export class ModalCadastroPacientePage {
     }
 
     salvarPaciente() {
-        let loading = this.loadingCtrl.create();
-        loading.present();
-        this.paciente.pessoa.cpf = this.unmask(this.paciente.pessoa.cpf);
-        this.paciente.pessoa.telefonePrimario = this.unmask(this.paciente.pessoa.telefonePrimario);
-        this.paciente.pessoa.telefoneSecundario = this.unmask(this.paciente.pessoa.telefoneSecundario);
-        let dataNasc = moment(this.paciente.pessoa.dataNascimento, 'DD-MM-YYYY').format('YYYY-MM-DD');
-        this.paciente.pessoa.dataNascimento = dataNasc;
-        console.log(this.paciente);
-        let data = JSON.parse(JSON.stringify(this.paciente));
-        this.requestService.postData(APP_CONFIG.WEBSERVICE.CADASTRAR_PACIENTES, data).then((response: any) => {
-            console.log(response);
-            loading.dismiss();
-            this.dismiss(true);
-        }, erro => {
-            console.error(erro);
-            loading.dismiss();
-            this.presentToast(erro.errorMessage);
-        });
+        this.formSubmit = true;
+        if (this.form.valid) {
+            let loading = this.loadingCtrl.create();
+            loading.present();
+            this.paciente.pessoa.cpf = this.unmask(this.paciente.pessoa.cpf);
+            this.paciente.pessoa.telefonePrimario = this.unmask(this.telefonePrimario);
+            this.paciente.pessoa.telefoneSecundario = this.unmask(this.paciente.pessoa.telefoneSecundario);
+            let dataNasc = moment(this.paciente.pessoa.dataNascimento, 'DD-MM-YYYY').format('YYYY-MM-DD');
+            this.paciente.pessoa.dataNascimento = dataNasc;
+            console.log(this.paciente);
+            let data = JSON.parse(JSON.stringify(this.paciente));
+            this.requestService.postData(APP_CONFIG.WEBSERVICE.CADASTRAR_PACIENTES, data).then((response: any) => {
+                console.log(response);
+                loading.dismiss();
+                this.dismiss(true);
+            }, erro => {
+                console.error(erro);
+                loading.dismiss();
+                this.presentToast(erro.errorMessage);
+            });
+        }
     }
 
     private unmask(value): string {
-		if (!value) return "";
-		// return value.replace(/\D+/g, '');
-		// console.log(value);
-		return value.replace(/[^a-z0-9]/gi, "");
-	}
+        if (!value) return "";
+        // return value.replace(/\D+/g, '');
+        // console.log(value);
+        return value.replace(/[^a-z0-9]/gi, "");
+    }
+
+    private cpfValidator(control: FormControl) {
+        let cpf = cpfCnpj.CPF.isValid(control.value);
+        let valid = cpf ? null : { cpf: true };
+        return valid;
+    }
+
+    private dataValidator(control: FormControl) {
+        let data = moment(control.value, 'DD-MM-YYYY').isValid();
+        let valid = data ? null : { data: true };
+        return valid;
+    }
 
     presentToast(msg) {
         const toast = this.toastCtrl.create({

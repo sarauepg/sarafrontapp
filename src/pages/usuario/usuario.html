@@ -104,7 +104,7 @@
                 <ion-col>Nome</ion-col>
                 <ion-col class="max-w-130">Usuário</ion-col>
                 <ion-col class="max-w-115">N.º Conselho</ion-col>
-                <ion-col>E-mail</ion-col>
+                <ion-col class="max-w-180">E-mail</ion-col>
                 <ion-col class="max-w-130">Telefone</ion-col>
                 <ion-col class="max-w-60">Admin</ion-col>
                 <ion-col class="max-w-80">Médico</ion-col>
@@ -115,7 +115,7 @@
                 <ion-col>{{l.pessoa.nome}}</ion-col>
                 <ion-col class="max-w-130">{{l.nomeUsuario}}</ion-col>
                 <ion-col class="max-w-115">{{l.uf.sigla + '-' + l.numeroConselho}}</ion-col>
-                <ion-col>{{l.pessoa.email}}</ion-col>
+                <ion-col class="max-w-180">{{l.pessoa.email}}</ion-col>
                 <ion-col class="max-w-130">{{l.pessoa.telefonePrimario}}</ion-col>
                 <ion-col class="max-w-60 list-check"><ion-icon *ngIf="l.administrador" name="md-checkmark"></ion-icon></ion-col>
                 <ion-col class="max-w-80 list-check"><ion-icon *ngIf="l.medico" name="md-checkmark"></ion-icon></ion-col>
