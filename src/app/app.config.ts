@@ -21,6 +21,7 @@ export const APP_CONFIG = {
 		// AGENDAMENTO
 		CADASTRAR_AGENDAMENTO: END_POINT + "agendamento/cadastrar",
 		FILTRAR_AGENDAMENTO: END_POINT + "agendamento/filtrar?",
+		ALTERAR_AGENDAMENTO: END_POINT + "agendamento/alterar",
 
 		// ATENDIMENTO
 		CADASTRAR_ATENDIMENTO: END_POINT + "atendimento/cadastrar",

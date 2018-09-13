@@ -55,6 +55,7 @@
                   <ion-item>
                     <ion-label floating padding-left>Lotação</ion-label>
                     <ion-select [(ngModel)]="filtro.idLotacao" interface="popover">
+                      <ion-option value="null">Todas</ion-option>
                       <ion-option *ngFor="let l of lotacoes" [value]="l.id">{{l.sigla + ' - ' + l.nome}}</ion-option>
                     </ion-select>
                   </ion-item>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, Events, ModalController, ToastController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, Events, ModalController, ToastController, LoadingController, AlertController } from 'ionic-angular';
 import { RequestService } from '../../service/request.service';
 import { APP_CONFIG } from '../../app/app.config';
 import moment from 'moment';
@@ -24,10 +24,11 @@ export class AgendamentoPage {
   listSize: number = 10;
   list: any = [];
 
-  constructor(public loadingCtrl: LoadingController, private requestService: RequestService, public modalCtrl: ModalController, public toastCtrl: ToastController, public events: Events, public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private alertCtrl: AlertController, public loadingCtrl: LoadingController, private requestService: RequestService, public modalCtrl: ModalController, public toastCtrl: ToastController, public events: Events, public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams) {
 
     this.listarTiposDeAtendimento();
-    this.dataAgendamento = moment().format('DD-MM-YYYY');
+    this.dataAgendamento = moment().format('DD-MM-YYYY').toString();
+    this.filtrarAgendamento();
 
   }
 
@@ -40,7 +41,7 @@ export class AgendamentoPage {
   }
 
   filtrarAgendamento() {
-    if (moment(this.dataAgendamento, 'DD-MM-YYYY').isValid) {
+    if (moment(this.dataAgendamento, 'DD-MM-YYYY').isValid() && this.dataAgendamento.length == 10) {
       let loading = this.loadingCtrl.create();
       loading.present();
       this.listPage = 1;
@@ -67,6 +68,65 @@ export class AgendamentoPage {
     }
   }
 
+  alertCancelarAgendamento(agendamento) {
+    let alert = this.alertCtrl.create({
+      title: 'Cancelar agendamento',
+      message: 'Você realmente deseja cancelar esse agendamento?',
+      buttons: [
+        {
+          text: 'Não',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Sim',
+          handler: () => {
+            this.cancelarAgendamento(agendamento);
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  atenderAgendamento(agendamento){
+    agendamento.status = 'A';
+    agendamento.data = moment(this.dataAgendamento, 'DD-MM-YYYY').format('YYYY-MM-DD');
+    console.log(agendamento);
+    let data = JSON.parse(JSON.stringify(agendamento));
+    this.requestService.putData(APP_CONFIG.WEBSERVICE.ALTERAR_AGENDAMENTO, data).then((response: any) => {
+      console.log(response);
+    }, erro => {
+      console.error(erro);
+      this.presentToast(erro.errorMessage);
+    });
+  }
+
+  cancelarAgendamento(agendamento) {
+    agendamento.status = 'C';
+    agendamento.data = moment(this.dataAgendamento, 'DD-MM-YYYY').format('YYYY-MM-DD');
+    console.log(agendamento);
+    let data = JSON.parse(JSON.stringify(agendamento));
+    this.requestService.putData(APP_CONFIG.WEBSERVICE.ALTERAR_AGENDAMENTO, data).then((response: any) => {
+      console.log(response);
+    }, erro => {
+      console.error(erro);
+      this.presentToast(erro.errorMessage);
+    });
+  }
+
+  nextDay() {
+    this.dataAgendamento = moment(this.dataAgendamento, 'DD-MM-YYYY').add(1, 'days').format('DD-MM-YYYY').toString();
+    this.filtrarAgendamento();
+  }
+
+  previousDay() {
+    this.dataAgendamento = moment(this.dataAgendamento, 'DD-MM-YYYY').subtract(1, 'days').format('DD-MM-YYYY').toString();
+    this.filtrarAgendamento();
+  }
+
   listarTiposDeAtendimento() {
     this.requestService.getData(APP_CONFIG.WEBSERVICE.LISTAR_TIPO_ATENDIMENTO).then((tiposAtendimento: any) => {
       this.tiposAtendimento = tiposAtendimento;
@@ -82,6 +142,18 @@ export class AgendamentoPage {
     modal.onDidDismiss(data => {
       if (data) {
         this.presentToast("Agendamento cadastrado com sucesso!");
+      }
+    });
+    modal.present();
+  }
+
+  abrirModalCadastroAtendimento(agendamento) {
+    console.log();
+    const modal = this.modalCtrl.create("ModalCadastroAtendimento", { agendamento: agendamento }, { enableBackdropDismiss: false });
+    modal.onDidDismiss(data => {
+      if (data) {
+        this.atenderAgendamento(agendamento);
+        this.presentToast("Atendimento realizado com sucesso!");
       }
     });
     modal.present();

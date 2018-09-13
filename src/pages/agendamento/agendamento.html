@@ -20,27 +20,27 @@
     <ion-row>
       <ion-col col-12 col-md no-padding>
         <ion-card>
-          <ion-card-header margin-bottom>
+          <ion-card-header>
             <div>
-              <ion-row align-items-end>
+              <ion-row align-items-end padding-bottom >
                 <ion-col class="max-w-35">
-                  <button ion-button clear icon-only color="gray">
+                  <button ion-button clear icon-only color="gray" (click)="previousDay()">
                     <ion-icon name="ios-arrow-back-outline"></ion-icon>
                   </button>
                 </ion-col>
                 <ion-col class="max-w-130">
-                  <ion-item>
+                  <ion-item style="background-color: transparent">
                     <ion-label floating>Data</ion-label>
                     <ion-input type="text" [mask]="{mask:'99-99-9999'}" [(ngModel)]="dataAgendamento" (keyup)="filtrarAgendamento()"></ion-input>
                   </ion-item>
                 </ion-col>
                 <ion-col class="max-w-35">
-                  <button ion-button clear icon-only color="gray">
+                  <button ion-button clear icon-only color="gray" (click)="nextDay()">
                     <ion-icon name="ios-arrow-forward-outline"></ion-icon>
                   </button>
                 </ion-col>
                 <ion-col col-12 col-lg-5>
-                  <ion-item>
+                  <ion-item style="background-color: transparent">
                     <ion-label floating padding-left>Tipo de atendimento</ion-label>
                     <ion-select interface="popover" [(ngModel)]="filtro.idTipoAtendimento" (ionChange)="filtrarAgendamento()">
                         <ion-option value="null" >Todos</ion-option>
@@ -58,7 +58,7 @@
           </ion-card-header>
           <div class="divider2"></div>
           <ion-card-content>
-            <ion-grid>
+            <ion-grid *ngIf="list.length > 0">
               <ion-row class="table-header">
                 <ion-col class="max-w-100">Data</ion-col>
                 <ion-col class="max-w-60">Hora</ion-col>
@@ -83,11 +83,14 @@
                   <span *ngIf="l.status == 'A'" style="color: #21cc21">ATENDIDO</span>
                   <span *ngIf="l.status == 'C'" style="color: #e20f0f">CANCELADO</span>
                 </ion-col>
-                <ion-col class="max-w-80"><button ion-button block icon-only clear><ion-icon color="gray" name="checkmark"></ion-icon></button></ion-col>
-                <ion-col class="max-w-80"><button ion-button block icon-only clear><ion-icon color="gray" name="close"></ion-icon></button></ion-col>
+                <ion-col class="max-w-80"><button *ngIf="l.status == 'M'" ion-button block icon-only clear (click)="abrirModalCadastroAtendimento(l)"><ion-icon color="gray" name="checkmark"></ion-icon></button></ion-col>
+                <ion-col class="max-w-80"><button *ngIf="l.status == 'M'" ion-button block icon-only clear (click)="alertCancelarAgendamento(l)"><ion-icon color="gray" name="close"></ion-icon></button></ion-col>
                 <ion-col class="max-w-65"><button ion-button block icon-only clear><ion-icon color="gray" name="create"></ion-icon></button></ion-col>
               </ion-row>
             </ion-grid>
+            <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="list.length < agendamentos.length && list.length > 0">
+              <ion-infinite-scroll-content></ion-infinite-scroll-content>
+            </ion-infinite-scroll>
           </ion-card-content>
         </ion-card>
       </ion-col>

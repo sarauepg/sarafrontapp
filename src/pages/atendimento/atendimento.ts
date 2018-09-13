@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, Events, ModalController, LoadingCo
 import { CompleterData, CompleterService, CompleterItem } from 'ng2-completer';
 import { PessoaModel } from '../../model/pessoa.model';
 import { RequestService } from '../../service/request.service';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { APP_CONFIG } from '../../app/app.config';
 import moment from 'moment';
 
@@ -11,6 +11,8 @@ import moment from 'moment';
 @Component({ selector: 'page-atendimento', templateUrl: 'atendimento.html', })
 export class AtendimentoPage {
 
+  private formData: FormGroup;
+  formSubmit = false;
   items = [];
   tiposAtendimento: any = [];
   responsaveis: any = [];
@@ -34,10 +36,17 @@ export class AtendimentoPage {
     public toastCtrl: ToastController,
     private completerService: CompleterService,
     public loadingCtrl: LoadingController,
-    private requestService: RequestService) {
+    private requestService: RequestService,
+    private formBuilder: FormBuilder) {
 
     this.initVariables();
     this.dataService = completerService.local(this.searchData, 'nome', 'nome');
+
+    this.formData = this.formBuilder.group({
+      nome: [''],
+      dataInicio: ['', [Validators.minLength(10), this.dataValidator]],
+      dataFim: ['', [Validators.minLength(10), this.dataValidator]]
+    });
   }
 
   initVariables() {
@@ -56,29 +65,40 @@ export class AtendimentoPage {
   }
 
   filtrarAtendimento() {
-    let loading = this.loadingCtrl.create();
-    loading.present();
-    this.listPage = 1;
-    this.list = [];
-    if (this.dataInicial != null && this.dataInicial != undefined) {
-      this.filtro.dataInicial = moment(this.dataInicial, 'DD-MM-YYYY').format('YYYY-MM-DD');
-      this.filtro.dataFinal = moment(this.dataFinal, 'DD-MM-YYYY').format('YYYY-MM-DD');
-    }
-    let urlRequest = this.requestService.buildHttpBodyFormData(this.filtro, APP_CONFIG.WEBSERVICE.FILTRAR_ATENDIMENTO);
-    this.requestService.getData(urlRequest).then((atendimentos: any) => {
-      this.atendimentos = atendimentos;
-      let tam = this.listSize;
-      this.listSize > this.atendimentos.length ? tam = this.atendimentos.length : tam = this.listSize;
-      for (let i = 0; i < tam; i++) {
-        this.list.push(this.atendimentos[i]);
+    this.formSubmit = true;
+    if (this.formData.valid) {
+      let loading = this.loadingCtrl.create();
+      loading.present();
+      this.listPage = 1;
+      this.list = [];
+      if (this.dataInicial != null && this.dataInicial != undefined && this.dataInicial != "") {
+        this.filtro.dataInicial = moment(this.dataInicial, 'DD-MM-YYYY').format('YYYY-MM-DD');
       }
-      console.log(this.atendimentos);
-      loading.dismiss();
-    }, error => {
-      console.error(error);
-      loading.dismiss();
-      this.presentToast(error.errorMessage);
-    });
+      if (this.dataFinal != null && this.dataFinal != undefined && this.dataFinal != "") {
+        this.filtro.dataFinal = moment(this.dataFinal, 'DD-MM-YYYY').format('YYYY-MM-DD');
+      }
+      if (this.filtro.idResponsavel == "null") {
+        delete this.filtro.idResponsavel;
+      }
+      if (this.filtro.idTipoAtendimento == "null") {
+        delete this.filtro.idTipoAtendimento;
+      }
+      let urlRequest = this.requestService.buildHttpBodyFormData(this.filtro, APP_CONFIG.WEBSERVICE.FILTRAR_ATENDIMENTO);
+      this.requestService.getData(urlRequest).then((atendimentos: any) => {
+        this.atendimentos = atendimentos;
+        let tam = this.listSize;
+        this.listSize > this.atendimentos.length ? tam = this.atendimentos.length : tam = this.listSize;
+        for (let i = 0; i < tam; i++) {
+          this.list.push(this.atendimentos[i]);
+        }
+        console.log(this.atendimentos);
+        loading.dismiss();
+      }, error => {
+        console.error(error);
+        loading.dismiss();
+        this.presentToast(error.errorMessage);
+      });
+    }
   }
 
   listarTiposDeAtedimento() {
@@ -138,6 +158,15 @@ export class AtendimentoPage {
       }
     });
     modal.present();
+  }
+
+  private dataValidator(control: FormControl) {
+    let data = true;
+    if (control.value != undefined && control.value != "") {
+      data = moment(control.value, 'DD-MM-YYYY').isValid();
+    }
+    let valid = data ? null : { data: true };
+    return valid;
   }
 
   presentToast(msg) {
