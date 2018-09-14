@@ -147,7 +147,13 @@ export class ModalCadastroAtendimentoPage {
                     this.presentToast(v.nomeAferivel + " inválido.");
                 }
             })
-            if (aferiveisValid) {
+            let dataHoraValid = true;
+            if(moment(this.dataAt + " " + this.atendimento.hora, 'DD-MM-YYYY HH:mm').isAfter(moment())){
+                dataHoraValid=false;
+                loading.dismiss();
+                this.presentToast("Um atendimento não pode ser realizado em uma data futura.");
+            }
+            if (aferiveisValid && dataHoraValid) {
                 console.log(this.atendimento);
                 let data = JSON.parse(JSON.stringify(this.atendimento));
                 this.requestService.postData(APP_CONFIG.WEBSERVICE.CADASTRAR_ATENDIMENTO, data).then((response: any) => {

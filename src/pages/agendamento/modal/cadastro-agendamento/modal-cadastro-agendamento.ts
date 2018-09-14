@@ -43,10 +43,11 @@ export class ModalCadastroAgendamentoPage {
         this.form = this.formBuilder.group({
             nome: ['', Validators.required],
             cpf: ['', Validators.required],
-            data: ['', [Validators.required, this.validaData]],
-            hora: ['', [Validators.required, this.validaHora]],
-            tipoAtendimento: ['', Validators.required],
-            responsavel: ['', Validators.required]
+            telefonePrimario: ['', Validators.required],
+            telefoneSecundario: [''],
+            data: ['', [Validators.required, this.dataValidator, Validators.minLength(10)]],
+            hora: ['', [Validators.required, this.horaValidator, Validators.minLength(5)]],
+            tipoAtendimento: ['', Validators.required]
         });
 
     }
@@ -97,22 +98,31 @@ export class ModalCadastroAgendamentoPage {
 
     salvarAgendamento() {
         this.formSubmit = true;
+        if (this.form.valid) {
             let loading = this.loadingCtrl.create();
             loading.present();
             this.agendamento.status = 'M';
             this.agendamento.data = moment(this.dataAgendamento, 'DD-MM-YYYY').format('YYYY-MM-DD');
-            console.log(this.agendamento);
-            let data = JSON.parse(JSON.stringify(this.agendamento));
-            this.requestService.postData(APP_CONFIG.WEBSERVICE.CADASTRAR_AGENDAMENTO, data).then((response: any) => {
-                console.log(response);
+            let dataHoraValid = true;
+            if (moment(this.dataAgendamento + " " + this.agendamento.hora, 'DD-MM-YYYY HH:mm').isBefore(moment())) {
+                dataHoraValid = false;
                 loading.dismiss();
-                this.dismiss(true);
-            }, erro => {
-                console.error(erro);
-                loading.dismiss();
-                this.presentToast(erro.errorMessage);
-            });
-        
+                this.presentToast("Um agendamento não pode ser realizado em uma data passada.");
+            }
+            if (dataHoraValid) {
+                console.log(this.agendamento);
+                let data = JSON.parse(JSON.stringify(this.agendamento));
+                this.requestService.postData(APP_CONFIG.WEBSERVICE.CADASTRAR_AGENDAMENTO, data).then((response: any) => {
+                    console.log(response);
+                    loading.dismiss();
+                    this.dismiss(true);
+                }, erro => {
+                    console.error(erro);
+                    loading.dismiss();
+                    this.presentToast(erro.errorMessage);
+                });
+            }
+        }
     }
 
     presentToast(msg) {
@@ -123,15 +133,15 @@ export class ModalCadastroAgendamentoPage {
         toast.present();
     }
 
-    private validaData(control: FormControl) {
-        let data = moment(control.value, 'DD-MM-YYYY');
-        let valid = (data.isValid && (data.isSameOrBefore(moment()))) ? null : { 'invalid': true };
+    private dataValidator(control: FormControl) {
+        let data = moment(control.value, 'DD-MM-YYYY').isValid();
+        let valid = data ? null : { data: true };
         return valid;
     }
 
-    private validaHora(control: FormControl) {
-        let hora = moment(control.value, 'HH:mm');
-        let valid = hora.isValid ? null : { 'invalid': true };
+    private horaValidator(control: FormControl) {
+        let hora = moment(control.value, 'HH:mm').isValid();
+        let valid = hora ? null : { hora: true };
         return valid;
     }
 }

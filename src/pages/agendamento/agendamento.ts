@@ -98,6 +98,7 @@ export class AgendamentoPage {
     let data = JSON.parse(JSON.stringify(agendamento));
     this.requestService.putData(APP_CONFIG.WEBSERVICE.ALTERAR_AGENDAMENTO, data).then((response: any) => {
       console.log(response);
+      agendamento.data = moment(agendamento.data, 'YYYY-MM-DD').format('DD-MM-YYYY');
     }, erro => {
       console.error(erro);
       this.presentToast(erro.errorMessage);
@@ -111,6 +112,7 @@ export class AgendamentoPage {
     let data = JSON.parse(JSON.stringify(agendamento));
     this.requestService.putData(APP_CONFIG.WEBSERVICE.ALTERAR_AGENDAMENTO, data).then((response: any) => {
       console.log(response);
+      agendamento.data = moment(agendamento.data, 'YYYY-MM-DD').format('DD-MM-YYYY');
     }, erro => {
       console.error(erro);
       this.presentToast(erro.errorMessage);
@@ -142,6 +144,7 @@ export class AgendamentoPage {
     modal.onDidDismiss(data => {
       if (data) {
         this.presentToast("Agendamento cadastrado com sucesso!");
+        this.filtrarAgendamento();
       }
     });
     modal.present();
