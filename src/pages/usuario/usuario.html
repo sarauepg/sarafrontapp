@@ -120,7 +120,7 @@
                 <ion-col class="max-w-60 list-check"><ion-icon *ngIf="l.administrador" name="md-checkmark"></ion-icon></ion-col>
                 <ion-col class="max-w-80 list-check"><ion-icon *ngIf="l.medico" name="md-checkmark"></ion-icon></ion-col>
                 <ion-col class="max-w-60 list-check"><ion-icon *ngIf="l.ativo" name="md-checkmark"></ion-icon></ion-col>
-                <ion-col class="max-w-135"><button ion-button block icon-only clear><ion-icon color="gray" name="eye"></ion-icon></button></ion-col>
+                <ion-col class="max-w-135"><button ion-button block icon-only clear (click)="editarUsuario(l)"><ion-icon color="gray" name="eye"></ion-icon></button></ion-col>
               </ion-row>
             </ion-grid>
             <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="list.length < listUsuarios.length">

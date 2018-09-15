@@ -28,12 +28,12 @@ export class AgendamentoPage {
 
     this.listarTiposDeAtendimento();
     this.dataAgendamento = moment().format('DD-MM-YYYY').toString();
-    this.filtrarAgendamento();
 
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AgendamentoPage');
+    this.filtrarAgendamento();
   }
 
   ionViewWillEnter() {

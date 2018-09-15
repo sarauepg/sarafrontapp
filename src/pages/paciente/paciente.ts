@@ -42,9 +42,7 @@ export class PacientePage {
     private formBuilder: FormBuilder) {
 
     this.dataService = completerService.local(this.searchData, 'nome', 'nome');
-    this.initVariables();
-
-    
+    this.initVariables();  
   }
 
   selecionado(selected: CompleterItem) {
@@ -112,6 +110,7 @@ export class PacientePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PacientePage');
+    this.filtrarPaciente();  
   }
 
   doInfinite(infiniteScroll) {
@@ -132,6 +131,17 @@ export class PacientePage {
     modal.onDidDismiss(data => {
       if (data) {
         this.presentToast("Paciente cadastrado com sucesso!");
+      }
+    });
+    modal.present();
+  }
+
+  editarPaciente(paciente){
+    console.log();
+    const modal = this.modalCtrl.create("ModalCadastroPaciente", {paciente: paciente}, { enableBackdropDismiss: false });
+    modal.onDidDismiss(data => {
+      if (data) {
+        this.presentToast("Paciente editado com sucesso!");
       }
     });
     modal.present();

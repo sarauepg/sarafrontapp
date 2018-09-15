@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events, ModalController, LoadingController, ViewController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events, ModalController, LoadingController, ViewController, ToastController, AlertController } from 'ionic-angular';
 import { CompleterData, CompleterService, CompleterItem } from 'ng2-completer';
 import { PessoaModel } from '../../model/pessoa.model';
 import { RequestService } from '../../service/request.service';
@@ -30,6 +30,7 @@ export class AtendimentoPage {
   p: string;
 
   constructor(public modalCtrl: ModalController,
+    private alertCtrl: AlertController,
     public events: Events,
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -101,6 +102,47 @@ export class AtendimentoPage {
     }
   }
 
+  alertExcluirAtendimento(atendimento) {
+    let alert = this.alertCtrl.create({
+      title: 'Excluir atendimento',
+      message: 'Você realmente deseja excluir esse atendimento?',
+      buttons: [
+        {
+          text: 'Não',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Sim',
+          handler: () => {
+            this.excluirAtendimento(atendimento);
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  excluirAtendimento(atendimento) {
+    atendimento.ativo = false;
+    atendimento.usuario.pessoa.dataNascimento = moment(atendimento.usuario.pessoa.dataNascimento, 'DD-MM-YYYY').format('YYYY-MM-DD');
+    atendimento.data = moment(atendimento.data, 'DD-MM-YYYY').format('YYYY-MM-DD');
+    if (atendimento.paciente.pessoa.dataNascimento != null) {
+      atendimento.paciente.pessoa.dataNascimento = moment(atendimento.paciente.pessoa.dataNascimento, 'DD-MM-YYYY').format('YYYY-MM-DD');
+    }
+    console.log(atendimento);
+    let data = JSON.parse(JSON.stringify(atendimento));
+    this.requestService.putData(APP_CONFIG.WEBSERVICE.ALTERAR_ATENDIMENTO, data).then((response: any) => {
+      console.log(response);
+      this.filtrarAtendimento();
+    }, erro => {
+      console.error(erro);
+      this.presentToast(erro.errorMessage);
+    });
+  }
+
   listarTiposDeAtedimento() {
     this.requestService.getData(APP_CONFIG.WEBSERVICE.LISTAR_TIPO_ATENDIMENTO).then((tiposAtendimento: any) => {
       this.tiposAtendimento = tiposAtendimento;
@@ -135,6 +177,7 @@ export class AtendimentoPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AtendimentoPage');
+    this.filtrarAtendimento();
   }
 
   doInfinite(infiniteScroll) {

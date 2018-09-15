@@ -1,4 +1,4 @@
-import { IonicPage, Content, ToastController, ViewController, LoadingController } from "ionic-angular";
+import { IonicPage, Content, ToastController, ViewController, LoadingController, NavParams, AlertController } from "ionic-angular";
 import { Component, ViewChild, ChangeDetectorRef } from "@angular/core";
 import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
 import { RequestService } from "../../../../service/request.service";
@@ -7,13 +7,14 @@ import moment from 'moment';
 import * as cpfCnpj from 'cpf_cnpj';
 import { APP_CONFIG } from "../../../../app/app.config";
 
-@IonicPage({name: 'ModalCadastroPaciente'})
-@Component({selector: 'page-modal-cadastro-paciente', templateUrl: 'modal-cadastro-paciente.html'})
+@IonicPage({ name: 'ModalCadastroPaciente' })
+@Component({ selector: 'page-modal-cadastro-paciente', templateUrl: 'modal-cadastro-paciente.html' })
 export class ModalCadastroPacientePage {
     @ViewChild(Content) content: Content;
 
     MaskType = MaskType;
 
+    isEditing = false;
     formSubmit = false;
     private form: FormGroup;
     lotacoes: any = [];
@@ -21,7 +22,9 @@ export class ModalCadastroPacientePage {
     telefonePrimario: string;
     telefoneSecundario: string;
 
-    constructor(public toastCtrl: ToastController,
+    constructor(public params: NavParams,
+        private alertCtrl: AlertController,
+        public toastCtrl: ToastController,
         private viewCtrl: ViewController,
         private formBuilder: FormBuilder,
         public loadingCtrl: LoadingController,
@@ -32,17 +35,34 @@ export class ModalCadastroPacientePage {
         this.paciente.pessoa.email = "";
         this.paciente.observacaoMedica = "";
         this.listarLotacoes();
+        this.editarPaciente();
 
         this.form = this.formBuilder.group({
             nome: ['', Validators.required],
             cpf: ['', [Validators.required, this.cpfValidator]],
             dataNasc: ['', [Validators.required, Validators.minLength(10), this.dataValidator]],
-            lotacao: ['', Validators.required],
+            lotacao: [{ value: '', disabled: this.isEditing }, Validators.required],
+            lotacaoIsEditing: [{ value: '', disabled: !this.isEditing }, Validators.required],
             telefonePrimario: ['', [Validators.required, Validators.minLength(14)]],
             telefoneSecundario: ['', Validators.minLength(14)],
             email: [''],
             obsMedicas: ['']
         });
+    }
+
+    editarPaciente() {
+        let paciente: any = this.params.get('paciente');
+        if (paciente != null) {
+            this.isEditing = true;
+            this.paciente.pessoa.nome = paciente.pessoa.nome;
+            this.paciente.pessoa.cpf = paciente.pessoa.cpf;
+            this.paciente.pessoa.dataNascimento = paciente.pessoa.dataNascimento;
+            this.paciente.pessoa.lotacao = paciente.pessoa.lotacao;
+            this.telefonePrimario = paciente.pessoa.telefonePrimario;
+            this.telefoneSecundario = paciente.pessoa.telefoneSecundario;
+            this.paciente.pessoa.email = paciente.pessoa.email;
+            this.paciente.observacaoMedica = paciente.observacaoMedica;
+        }
     }
 
     dismiss(data?) {
@@ -80,6 +100,23 @@ export class ModalCadastroPacientePage {
                 this.presentToast(erro.errorMessage);
             });
         }
+    }
+
+    alterarPaciente() {
+        let alert = this.alertCtrl.create({
+            title: 'Oops!',
+            message: 'Parece que essa funcionalidade ainda não foi implementada. Aguarde futuras versões.',
+            buttons: [
+                {
+                    text: 'Ok',
+                    role: 'cancel',
+                    handler: () => {
+                        console.log('Ok clicked');
+                    }
+                }
+            ]
+        });
+        alert.present();
     }
 
     private unmask(value): string {

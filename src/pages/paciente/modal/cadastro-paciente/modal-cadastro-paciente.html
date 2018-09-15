@@ -34,7 +34,7 @@
                         <ion-col col-6 padding-left paddin g-right>
                             <ion-item [ngClass]="{'invalid': form.controls.cpf.invalid && (form.controls.cpf.dirty || formSubmit)}">
                                 <ion-label floating>CPF *</ion-label>
-                                <ion-input formControlName="cpf" [mask]="{mask:'999.999.999-99'}" [(ngModel)]="paciente.pessoa.cpf" type="text"></ion-input>
+                                <ion-input [disabled]="isEditing" formControlName="cpf" [mask]="{mask:'999.999.999-99'}" [(ngModel)]="paciente.pessoa.cpf" type="text"></ion-input>
                             </ion-item>
                             <div class="invalid-hint" *ngIf="form.controls.cpf.errors?.required && (form.controls.cpf.touched || formSubmit)">
                                 Campo obrigatório
@@ -46,7 +46,7 @@
                         <ion-col col-6 padding-left padding-right>
                             <ion-item [ngClass]="{'invalid': form.controls.dataNasc.invalid && (form.controls.dataNasc.dirty || form.controls.dataNasc.touched || formSubmit)}">
                                 <ion-label floating>Data de nascimento *</ion-label>
-                                <ion-input formControlName="dataNasc" [mask]="{mask:'99-99-9999'}" [(ngModel)]="paciente.pessoa.dataNascimento" type="text"></ion-input>
+                                <ion-input [disabled]="isEditing" formControlName="dataNasc" [mask]="{mask:'99-99-9999'}" [(ngModel)]="paciente.pessoa.dataNascimento" type="text"></ion-input>
                             </ion-item>
                             <div class="invalid-hint" *ngIf="form.controls.dataNasc.errors?.required && (form.controls.dataNasc.touched || formSubmit)">
                                 Campo obrigatório
@@ -55,7 +55,7 @@
                                 Data inválida
                             </div>
                         </ion-col>
-                        <ion-col col-12>
+                        <ion-col *ngIf="!isEditing"  col-12>
                             <ion-item>
                                 <ion-label floating padding-left>Lotação *</ion-label>
                                 <ion-select formControlName="lotacao" [(ngModel)]="paciente.pessoa.lotacao" interface="popover" [ngClass]="{'invalid-box':   form.controls.lotacao.invalid && (form.controls.lotacao.touched || formSubmit)}">
@@ -65,6 +65,12 @@
                             <div class="invalid-hint" *ngIf="form.controls.lotacao.errors?.required && (form.controls.lotacao.touched || formSubmit)">
                                 Campo obrigatório
                               </div>
+                        </ion-col>
+                        <ion-col *ngIf="isEditing" col-12 padding-left padding-right>
+                            <ion-item>
+                                <ion-label floating>Lotação</ion-label>
+                                <ion-input formControlName="lotacaoIsEditing" disabled [(ngModel)]="paciente.pessoa.lotacao.sigla" type="text"></ion-input>
+                            </ion-item>
                         </ion-col>
                     </ion-row>
                 </ion-list>
@@ -135,7 +141,10 @@
     <ion-footer>
         <ion-toolbar color="white">
             <ion-buttons right>
-                <button type="submit" (click)="salvarPaciente()" icon-start ion-button margin-right color="light">
+                <button *ngIf="!isEditing" type="submit" (click)="salvarPaciente()" icon-start ion-button margin-right color="light">
+                    <ion-icon name="checkmark"></ion-icon> salvar
+                </button>
+                <button *ngIf="isEditing" type="submit" (click)="alterarPaciente()" icon-start ion-button margin-right color="light">
                     <ion-icon name="checkmark"></ion-icon> salvar
                 </button>
                 <button icon-start ion-button color="gray" (click)="dismiss()">
