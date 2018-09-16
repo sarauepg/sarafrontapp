@@ -128,6 +128,7 @@ export class UsuarioPage {
     modal.onDidDismiss(data => {
       if (data) {
         this.presentToast("Usuário cadastrado com sucesso!");
+        this.filtrarUsuario();
       }
     });
     modal.present();

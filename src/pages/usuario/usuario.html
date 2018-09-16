@@ -98,6 +98,14 @@
     <ion-row>
       <ion-col col-12 col-md no-padding>
         <ion-card *ngIf="list.length > 0">
+            <ion-card-header>
+                <ion-row align-items-center>
+                  <ion-col>
+                    <p class="register-counter">{{'Total de registros:  ' + listUsuarios.length + '  usuários'}}</p>
+                  </ion-col>
+                </ion-row>
+              </ion-card-header>
+              <div class="divider2"></div>
           <ion-card-content>
             <ion-grid>
               <ion-row class="table-header">

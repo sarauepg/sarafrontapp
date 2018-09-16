@@ -7,7 +7,9 @@
 <ion-header>
 
   <ion-navbar color="dark">
-    <ion-title icon-start><ion-icon name="list"></ion-icon>Tipos de atendimento</ion-title>
+    <ion-title icon-start>
+      <ion-icon name="list"></ion-icon>Tipos de atendimento
+    </ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -21,41 +23,43 @@
         <ion-card>
           <ion-card-header>
             <ion-row justify-content-center>
-                <p class="card-title">Novo tipo de atendimento</p>
-          </ion-row>
+              <p class="card-title">Novo tipo de atendimento</p>
+            </ion-row>
           </ion-card-header>
           <div class="divider"></div>
           <ion-card-content>
-          <form [formGroup]="formTipoAt" (ngSubmit)="adicionarTipoAtendimento()">
             <ion-list>
-              <ion-row>
-                <ion-col col-12 col-md padding-left padding-right>
-                  <ion-item [ngClass]="{'invalid': formTipoAt.controls.nome.invalid && (formTipoAt.controls.nome.dirty || formTipoAt.controls.nome.touched || formSubmit)}">
-                    <ion-label floating>Nome *</ion-label>
-                    <ion-input type="text" formControlName="nome" [(ngModel)]="tipoAt.nome" cmaxlength="100"></ion-input>
-                  </ion-item>
-                  <div class="invalid-hint" *ngIf="formTipoAt.controls.nome.errors?.required && (formTipoAt.controls.nome.touched || formSubmit)">
+              <form [formGroup]="formTipoAt">
+                <ion-row>
+                  <ion-col col-12 col-md padding-left padding-right>
+                    <ion-item [ngClass]="{'invalid': formTipoAt.controls.nome.invalid && (formTipoAt.controls.nome.dirty || formTipoAt.controls.nome.touched || formSubmit)}">
+                      <ion-label floating>Nome *</ion-label>
+                      <ion-input type="text" formControlName="nome" [(ngModel)]="tipoAt.nome" cmaxlength="100"></ion-input>
+                    </ion-item>
+                    <div class="invalid-hint" *ngIf="formTipoAt.controls.nome.errors?.required && (formTipoAt.controls.nome.touched || formSubmit)">
                       Campo obrigatório
-                  </div>
-                </ion-col>
-                <ion-col col-12 col-md padding-left padding-right>
-                  <ion-item >
-                    <ion-label floating padding-left>Responsável *</ion-label>
-                    <ion-select interface="popover" formControlName="responsavel" [(ngModel)]="tipoAt.responsavel" [ngClass]="{'invalid-box':   formTipoAt.controls.responsavel.invalid &&  (formTipoAt.controls.responsavel.touched || formSubmit)}">
-                      <ion-option value="E">Enfermeiro(a)</ion-option>
-                      <ion-option value="M">Médico(a)</ion-option>
-                      <ion-option value="T">Todos(as)</ion-option>
-                    </ion-select>
-                  </ion-item>
-                  <div class="invalid-hint" *ngIf="formTipoAt.controls.responsavel.errors?.required && (formTipoAt.controls.responsavel.touched || formSubmit)">
-                    Campo obrigatório
-                  </div>
-                </ion-col>
-              </ion-row>
+                    </div>
+                  </ion-col>
+                  <ion-col col-12 col-md padding-left padding-right>
+                    <ion-item>
+                      <ion-label floating padding-left>Responsável *</ion-label>
+                      <ion-select interface="popover" formControlName="responsavel" [(ngModel)]="tipoAt.responsavel"
+                        [ngClass]="{'invalid-box':   formTipoAt.controls.responsavel.invalid &&  (formTipoAt.controls.responsavel.touched || formSubmit)}">
+                        <ion-option value="E">Enfermeiro(a)</ion-option>
+                        <ion-option value="M">Médico(a)</ion-option>
+                        <ion-option value="T">Todos(as)</ion-option>
+                      </ion-select>
+                    </ion-item>
+                    <div class="invalid-hint" *ngIf="formTipoAt.controls.responsavel.errors?.required && (formTipoAt.controls.responsavel.touched || formSubmit)">
+                      Campo obrigatório
+                    </div>
+                  </ion-col>
+                </ion-row>
+              </form>
               <ion-row>
                 <ion-item>
                   <ion-label>Agendável</ion-label>
-                  <ion-checkbox color = "dark" formControlName="agendavel" [(ngModel)]="tipoAt.agendavel"></ion-checkbox>
+                  <ion-checkbox color="dark" [(ngModel)]="tipoAt.agendavel"></ion-checkbox>
                 </ion-item>
               </ion-row>
             </ion-list>
@@ -65,13 +69,13 @@
                 <ion-col col-12 col-md>
                   <ion-item>
                     <ion-label>Frequência cardíaca</ion-label>
-                    <ion-checkbox color = "dark" formControlName="frequenciaCardiaca" [(ngModel)]="aferiveis[6].selecionado"></ion-checkbox>
+                    <ion-checkbox color="dark" [(ngModel)]="aferiveis[6].selecionado"></ion-checkbox>
                   </ion-item>
                 </ion-col>
                 <ion-col col-12 col-md>
                   <ion-item>
                     <ion-label>Glicemia</ion-label>
-                    <ion-checkbox color = "dark" formControlName="glicemia" [(ngModel)]="aferiveis[4].selecionado"></ion-checkbox>
+                    <ion-checkbox color="dark" [(ngModel)]="aferiveis[4].selecionado"></ion-checkbox>
                   </ion-item>
                 </ion-col>
 
@@ -80,14 +84,14 @@
                 <ion-col col-12 col-md>
                   <ion-item>
                     <ion-label>Frequência respiratória</ion-label>
-                    <ion-checkbox color = "dark" formControlName="frequenciaRespiratoria" [(ngModel)]="aferiveis[7].selecionado"></ion-checkbox>
+                    <ion-checkbox color="dark" [(ngModel)]="aferiveis[7].selecionado"></ion-checkbox>
                   </ion-item>
                 </ion-col>
 
                 <ion-col col-12 col-md>
                   <ion-item>
                     <ion-label>Peso</ion-label>
-                    <ion-checkbox color = "dark" formControlName="peso" [(ngModel)]="aferiveis[1].selecionado"></ion-checkbox>
+                    <ion-checkbox color="dark" [(ngModel)]="aferiveis[1].selecionado"></ion-checkbox>
                   </ion-item>
                 </ion-col>
               </ion-row>
@@ -95,13 +99,13 @@
                 <ion-col col-12 col-md>
                   <ion-item>
                     <ion-label>Pressão arterial</ion-label>
-                    <ion-checkbox color = "dark" formControlName="pressaoArterial" [(ngModel)]="aferiveis[2].selecionado"></ion-checkbox>
+                    <ion-checkbox color="dark" [(ngModel)]="aferiveis[2].selecionado"></ion-checkbox>
                   </ion-item>
                 </ion-col>
                 <ion-col col-12 col-md>
                   <ion-item>
                     <ion-label>Temperatura</ion-label>
-                    <ion-checkbox color = "dark" formControlName="temperatura" [(ngModel)]="aferiveis[0].selecionado"></ion-checkbox>
+                    <ion-checkbox color="dark" [(ngModel)]="aferiveis[0].selecionado"></ion-checkbox>
                   </ion-item>
                 </ion-col>
               </ion-row>
@@ -109,30 +113,29 @@
                 <ion-col col-12 col-md>
                   <ion-item>
                     <ion-label>Saturação</ion-label>
-                    <ion-checkbox color = "dark" formControlName="saturacao" [(ngModel)]="aferiveis[5].selecionado"></ion-checkbox>
+                    <ion-checkbox color="dark" [(ngModel)]="aferiveis[5].selecionado"></ion-checkbox>
                   </ion-item>
                 </ion-col>
               </ion-row>
             </ion-list>
-            <button margin-bottom ion-button block class="add-btn" type="submit" >ADICIONAR >></button>
-            </form>
+            <button margin-bottom ion-button block class="add-btn" type="submit" (click)="adicionarTipoAtendimento()">ADICIONAR >></button>
           </ion-card-content>
         </ion-card>
       </ion-col>
       <ion-col col-12 col-md no-padding>
-        <ion-card >
-            <ion-card-header>
-                <ion-row justify-content-center>
-                    <p class="card-title">Tipos de atendimento</p>
-              </ion-row>
-              </ion-card-header>
-              <div class="divider"></div>
+        <ion-card>
+          <ion-card-header>
+            <ion-row justify-content-center>
+              <p class="card-title">Tipos de atendimento</p>
+            </ion-row>
+          </ion-card-header>
+          <div class="divider"></div>
           <ion-card-content margin-top>
             <ion-list>
               <button *ngFor="let t of tiposAtendimento" class="lista-tipo-at" ion-button clear block>
                 {{t.nome}}
               </button>
-              </ion-list>
+            </ion-list>
           </ion-card-content>
         </ion-card>
       </ion-col>

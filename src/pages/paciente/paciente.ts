@@ -131,6 +131,7 @@ export class PacientePage {
     modal.onDidDismiss(data => {
       if (data) {
         this.presentToast("Paciente cadastrado com sucesso!");
+        this.filtrarPaciente();
       }
     });
     modal.present();

@@ -69,7 +69,6 @@
                 <ion-col class="max-w-130">Status</ion-col>
                 <ion-col class="max-w-80">Atender</ion-col>
                 <ion-col class="max-w-80">Cancelar</ion-col>
-                <ion-col class="max-w-65">Editar</ion-col>
               </ion-row>
               <ion-row *ngFor="let l of list" align-items-center class="table-content">
                 <ion-col class="max-w-100">{{l.data}}</ion-col>
@@ -85,8 +84,7 @@
                 </ion-col>
                 <ion-col class="max-w-80"><button *ngIf="l.status == 'M'" ion-button block icon-only clear (click)="abrirModalCadastroAtendimento(l)"><ion-icon color="gray" name="checkmark"></ion-icon></button></ion-col>
                 <ion-col class="max-w-80"><button *ngIf="l.status == 'M'" ion-button block icon-only clear (click)="alertCancelarAgendamento(l)"><ion-icon color="gray" name="close"></ion-icon></button></ion-col>
-                <ion-col class="max-w-65"><button ion-button block icon-only clear><ion-icon color="gray" name="create"></ion-icon></button></ion-col>
-              </ion-row>
+               </ion-row>
             </ion-grid>
             <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="list.length < agendamentos.length && list.length > 0">
               <ion-infinite-scroll-content></ion-infinite-scroll-content>

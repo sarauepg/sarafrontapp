@@ -61,6 +61,8 @@ export class ModalCadastroUsuarioPage {
         private requestService: RequestService) {
 
         this.usuario.pessoa = {};
+        this.usuario.medico = false;
+        this.usuario.administrador = false;
         this.listarLotacoes();
         this.editarUsuario();
 
@@ -144,6 +146,8 @@ export class ModalCadastroUsuarioPage {
                 loading.dismiss();
                 this.presentToast(erro.errorMessage);
             });
+        }else{
+            this.presentToast("Por favor, cheque os campos em destaque.");
         }
     }
 

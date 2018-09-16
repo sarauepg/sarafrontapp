@@ -16,6 +16,7 @@ export const APP_CONFIG = {
 	WEBSERVICE: {
 		// TIPO DE ATENDIMENTO
 		LISTAR_TIPO_ATENDIMENTO: END_POINT + "tipoatendimento/listar",
+		LISTAR_TIPO_ATENDIMENTO_AGENDAVEL: END_POINT + "tipoatendimento/listarAgendaveis",
 		ADICIONAR_TIPO_ATENDIMENTO: END_POINT + "tipoatendimento/cadastrar",
 
 		// AGENDAMENTO
@@ -27,6 +28,8 @@ export const APP_CONFIG = {
 		CADASTRAR_ATENDIMENTO: END_POINT + "atendimento/cadastrar",
 		FILTRAR_ATENDIMENTO: END_POINT + "atendimento/filtrar?",
 		ALTERAR_ATENDIMENTO: END_POINT + "atendimento/alterar",
+		AT_X_TIPOAT: END_POINT + "atendimento/atendimentoxtipoat",
+		AT_X_LOTACAO: END_POINT + "atendimento/atendimentoxlotacao",
 
 		// USUÁRIO
 		LISTAR_RESPONSAVEIS: END_POINT + "usuario/listarResponsaveis?cargo={cargo}",

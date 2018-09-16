@@ -130,7 +130,7 @@ export class AgendamentoPage {
   }
 
   listarTiposDeAtendimento() {
-    this.requestService.getData(APP_CONFIG.WEBSERVICE.LISTAR_TIPO_ATENDIMENTO).then((tiposAtendimento: any) => {
+    this.requestService.getData(APP_CONFIG.WEBSERVICE.LISTAR_TIPO_ATENDIMENTO_AGENDAVEL).then((tiposAtendimento: any) => {
       this.tiposAtendimento = tiposAtendimento;
       console.log(this.tiposAtendimento);
     }, error => {

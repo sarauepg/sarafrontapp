@@ -39,8 +39,8 @@
               <ion-row>
                 <ion-col col-12 col-lg-8 padding-left padding-right>
                   <ion-label class="completer-label">Nome</ion-label>
-                  <ng2-completer [textNoResults]="'Nenhum resultado encontrado'" (selected)="selecionado($event)" [(ngModel)]="p" [datasource]="dataService"
-                    [minSearchLength]="0"></ng2-completer>
+                  <ng2-completer [textNoResults]="'Nenhum resultado encontrado'" (selected)="selecionado($event)"
+                    [(ngModel)]="p" [datasource]="dataService" [minSearchLength]="0"></ng2-completer>
                 </ion-col>
 
                 <ion-col col-12 col-lg-4 padding-left padding-right>
@@ -62,7 +62,7 @@
                 </ion-col>
 
                 <ion-col col-12 col-lg-2>
-                  <button icon-start ion-button class="search-btn" color="dark" float-end (click) = "filtrarPaciente()">
+                  <button icon-start ion-button class="search-btn" color="dark" float-end (click)="filtrarPaciente()">
                     <ion-icon name="search"></ion-icon>Pesquisar
                   </button>
                 </ion-col>
@@ -78,6 +78,14 @@
     <ion-row>
       <ion-col col-12 col-md no-padding>
         <ion-card *ngIf="list.length > 0">
+          <ion-card-header>
+            <ion-row align-items-center>
+              <ion-col>
+                <p class="register-counter">{{'Total de registros:  ' + listPacientes.length + '  pacientes'}}</p>
+              </ion-col>
+            </ion-row>
+          </ion-card-header>
+          <div class="divider2"></div>
           <ion-card-content>
             <ion-grid>
               <ion-row class="table-header">
@@ -97,7 +105,9 @@
                 <ion-col class="max-w-180">{{l.pessoa.email}}</ion-col>
                 <ion-col class="max-w-130">{{l.pessoa.telefonePrimario}}</ion-col>
                 <ion-col class="max-w-135">{{l.pessoa.lotacao.sigla}}</ion-col>
-                <ion-col class="max-w-135"><button ion-button block icon-only clear (click)="editarPaciente(l)"><ion-icon color="gray" name="eye"></ion-icon></button></ion-col>
+                <ion-col class="max-w-135"><button ion-button block icon-only clear (click)="editarPaciente(l)">
+                    <ion-icon color="gray" name="eye"></ion-icon>
+                  </button></ion-col>
 
               </ion-row>
             </ion-grid>

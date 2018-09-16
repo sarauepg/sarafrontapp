@@ -99,6 +99,8 @@ export class ModalCadastroPacientePage {
                 loading.dismiss();
                 this.presentToast(erro.errorMessage);
             });
+        }else{
+            this.presentToast("Por favor, cheque os campos em destaque.");
         }
     }
 

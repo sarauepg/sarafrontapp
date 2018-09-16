@@ -32,15 +32,7 @@ export class TipoAtendimentoPage {
 
     this.formTipoAt = this.formBuilder.group({
       nome: ['', Validators.required],
-      responsavel: ['', Validators.required],
-      agendavel: [false, Validators.required],
-      temperatura: [false, Validators.required],
-      peso: [false, Validators.required],
-      pressaoArterial: [false, Validators.required],
-      glicemia: [false, Validators.required],
-      saturacao: [false, Validators.required],
-      frequenciaCardiaca: [false, Validators.required],
-      frequenciaRespiratoria: [false, Validators.required]
+      responsavel: ['', Validators.required]
     });
 
   }
@@ -75,6 +67,13 @@ export class TipoAtendimentoPage {
     });
   }
 
+  resetCheckBoxes(){
+    this.tipoAt.agendavel = false;
+    this.aferiveis.forEach(aferivel => {
+      aferivel.selecionado = false;
+    });
+  }
+
   adicionarTipoAtendimento() {
     this.formSubmit = true;
     if (this.formTipoAt.valid) {
@@ -88,14 +87,18 @@ export class TipoAtendimentoPage {
         console.log(response);
         this.listarTiposDeAtedimento();
         this.formTipoAt.reset();
+        this.resetCheckBoxes();
         this.formSubmit = false;
         loading.dismiss();
         this.presentToast("Tipo de atendimento cadastrado com sucesso!");
+        
       }, erro => {
         console.error(erro);
         loading.dismiss();
         this.presentToast(erro.errorMessage);
       });
+    } else {
+      this.presentToast("Por favor, cheque os campos em destaque.");
     }
   }
 

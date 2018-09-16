@@ -198,6 +198,7 @@ export class AtendimentoPage {
     modal.onDidDismiss(data => {
       if (data) {
         this.presentToast("Atendimento cadastrado com sucesso!");
+        this.filtrarAtendimento();
       }
     });
     modal.present();
