@@ -134,7 +134,7 @@
                 <ion-col col-2>{{l.paciente.pessoa.cpf}}</ion-col>
                 <ion-col>{{l.usuario.pessoa.nome}}</ion-col>
                 <ion-col col-2>{{l.tipoAtendimento.nome}}</ion-col>
-                <ion-col col-1.5><button ion-button block icon-only clear><ion-icon color="gray" name="eye"></ion-icon></button></ion-col>
+                <ion-col col-1.5><button ion-button block icon-only clear (click)="abrirModalEdicaoAtendimento(l)" ><ion-icon color="gray" name="eye"></ion-icon></button></ion-col>
                 <ion-col col-1><button ion-button block icon-only clear (click)="alertExcluirAtendimento(l)"><ion-icon color="gray" name="trash"></ion-icon></button></ion-col>
               </ion-row>
             </ion-grid>

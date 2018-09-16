@@ -15,6 +15,7 @@ export class ModalCadastroAtendimentoPage {
 
     formSubmit = false;
     agendado = false;
+    isEditing = false;
     dataAt: string;
     private form: FormGroup;
     private formAferiveis: FormGroup;
@@ -35,6 +36,7 @@ export class ModalCadastroAtendimentoPage {
         this.initVariables();
         this.dataService = completerService.local(this.searchData, 'nome', 'nome');
         this.atenderAgendamento();
+        this.editarAtendimento();
 
         this.form = this.formBuilder.group({
             nome: [{ value: '', disabled: this.agendado }, Validators.required],
@@ -44,8 +46,37 @@ export class ModalCadastroAtendimentoPage {
             hora: ['', [Validators.required, this.horaValidator, Validators.minLength(5)]],
             tipoAtendimento: [{ value: '', disabled: this.agendado }, Validators.required],
             tipoAtendimentoAgendado: [{ value: '', disabled: !this.agendado }, Validators.required],
-            responsavel: ['', Validators.required]
+            responsavel: [{ value: '', disabled: this.isEditing }, Validators.required],
+            responsavelIsEditing: [{ value: '', disabled: !this.isEditing }, Validators.required]
         });
+    }
+
+    ionViewDidLoad() {
+        if (this.isEditing) {
+            let atendimento: any = this.params.get('atendimento');
+            this.carregarValoresAferidos(atendimento.id);
+        }
+    }
+
+    carregarValoresAferidos(idAtendimento) {
+        let loading = this.loadingCtrl.create();
+        loading.present();
+        let urlRequest = this.requestService.buildUrlQueryParams({ idAtendimento: idAtendimento }, APP_CONFIG.WEBSERVICE.CARREGAR_VALORES_AFERIDOS);
+        this.requestService.getData(urlRequest)
+            .then((valores: any) => {
+                this.atendimento.valoresAferidos.forEach(v => {
+                    valores.forEach(valor => {
+                        if (v.idAferivel == valor.idAferivel) {
+                            v.valorAferido = valor.valorAferido;
+                        }
+                    });
+                });
+                console.log(this.atendimento.valoresAferidos);
+                loading.dismiss();
+            }, error => {
+                console.error(error);
+                loading.dismiss();
+            });
     }
 
     atenderAgendamento() {
@@ -56,6 +87,21 @@ export class ModalCadastroAtendimentoPage {
             this.dataAt = agendamento.data;
             this.atendimento.hora = agendamento.hora;
             this.atendimento.tipoAtendimento = agendamento.tipoAtendimento;
+            this.listarAtributosDeTipoAt();
+        }
+    }
+
+    editarAtendimento() {
+        let atendimento: any = this.params.get('atendimento');
+        if (atendimento != null) {
+            this.agendado = true;
+            this.isEditing = true;
+            this.atendimento.paciente = atendimento.paciente;
+            this.dataAt = atendimento.data;
+            this.atendimento.hora = atendimento.hora;
+            this.atendimento.tipoAtendimento = atendimento.tipoAtendimento;
+            this.atendimento.usuario = atendimento.usuario;
+            this.atendimento.anotacao = atendimento.anotacao;
             this.listarAtributosDeTipoAt();
         }
     }
@@ -131,7 +177,7 @@ export class ModalCadastroAtendimentoPage {
             this.atendimento.ativo = true;
             this.atendimento.usuario.pessoa.dataNascimento = moment(this.atendimento.usuario.pessoa.dataNascimento, 'DD-MM-YYYY').format('YYYY-MM-DD');
             this.atendimento.data = moment(this.dataAt, 'DD-MM-YYYY').format('YYYY-MM-DD');
-            if(this.atendimento.paciente.pessoa.dataNascimento != null){
+            if (this.atendimento.paciente.pessoa.dataNascimento != null) {
                 this.atendimento.paciente.pessoa.dataNascimento = moment(this.atendimento.paciente.pessoa.dataNascimento, 'DD-MM-YYYY').format('YYYY-MM-DD');
             }
             this.atendimento.valoresAferidos.forEach(v => {
@@ -148,8 +194,8 @@ export class ModalCadastroAtendimentoPage {
                 }
             })
             let dataHoraValid = true;
-            if(moment(this.dataAt + " " + this.atendimento.hora, 'DD-MM-YYYY HH:mm').isAfter(moment())){
-                dataHoraValid=false;
+            if (moment(this.dataAt + " " + this.atendimento.hora, 'DD-MM-YYYY HH:mm').isAfter(moment())) {
+                dataHoraValid = false;
                 loading.dismiss();
                 this.presentToast("Um atendimento não pode ser realizado em uma data futura.");
             }
@@ -166,7 +212,7 @@ export class ModalCadastroAtendimentoPage {
                     this.presentToast(erro.errorMessage);
                 });
             }
-        }else{
+        } else {
             this.presentToast("Por favor, cheque os campos em destaque.");
         }
     }

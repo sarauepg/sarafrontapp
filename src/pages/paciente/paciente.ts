@@ -33,11 +33,11 @@ export class PacientePage {
   list: any = [];
 
   constructor(public toastCtrl: ToastController,
+    public loadingCtrl: LoadingController,
     public events: Events, public navCtrl: NavController,
     public navParams: NavParams,
     private completerService: CompleterService,
     public modalCtrl: ModalController,
-    public loadingCtrl: LoadingController,
     private requestService: RequestService,
     private formBuilder: FormBuilder) {
 

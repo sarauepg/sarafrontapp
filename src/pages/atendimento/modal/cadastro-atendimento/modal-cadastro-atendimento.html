@@ -85,10 +85,10 @@
                                 <ion-input formControlName="tipoAtendimentoAgendado" disabled [(ngModel)]="atendimento.tipoAtendimento.nome" type="text"></ion-input>
                             </ion-item>
                         </ion-col>
-                        <ion-col col-12 style="padding-top: 0px !important;">
+                        <ion-col *ngIf="!isEditing" col-12 style="padding-top: 0px !important;">
                             <ion-item [hidden]="atendimento.tipoAtendimento == null">
                                 <ion-label floating padding-left>Responsável *</ion-label>
-                                <ion-select formControlName="responsavel" [(ngModel)]="atendimento.usuario" interface="popover" [ngClass]="{'invalid-box':   form.controls.responsavel.invalid && (form.controls.responsavel.touched || formSubmit)}">
+                                <ion-select [disabled]="isEditing" formControlName="responsavel" [(ngModel)]="atendimento.usuario" interface="popover" [ngClass]="{'invalid-box':   form.controls.responsavel.invalid && (form.controls.responsavel.touched || formSubmit)}">
                                     <ion-option *ngFor="let r of responsaveis" [value]="r">{{r.pessoa.nome + ' - ' + r.uf.sigla
                                         + '.' + r.numeroConselho}}</ion-option>
                                 </ion-select>
@@ -96,6 +96,12 @@
                             <div [hidden]="atendimento.tipoAtendimento == null" class="invalid-hint" *ngIf="form.controls.responsavel.errors?.required && (form.controls.responsavel.touched || formSubmit)">
                                 Campo obrigatório
                             </div>
+                        </ion-col>
+                        <ion-col *ngIf="isEditing" col-12 padding-left padding-right>
+                            <ion-item>
+                                <ion-label floating>Responsável</ion-label>
+                                <ion-input formControlName="responsavelIsEditing" disabled [(ngModel)]="atendimento.usuario.pessoa.nome" type="text"></ion-input>
+                            </ion-item>
                         </ion-col>
                     </ion-row>
                 </ion-list>

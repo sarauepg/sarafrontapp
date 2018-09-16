@@ -204,6 +204,17 @@ export class AtendimentoPage {
     modal.present();
   }
 
+  abrirModalEdicaoAtendimento(atendimento) {
+    const modal = this.modalCtrl.create("ModalCadastroAtendimento", {atendimento: atendimento}, { enableBackdropDismiss: false });
+    modal.onDidDismiss(data => {
+      if (data) {
+        this.presentToast("Atendimento cadastrado com sucesso!");
+        this.filtrarAtendimento();
+      }
+    });
+    modal.present();
+  }
+
   private dataValidator(control: FormControl) {
     let data = true;
     if (control.value != undefined && control.value != "") {

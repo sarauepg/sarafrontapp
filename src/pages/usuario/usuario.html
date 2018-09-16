@@ -101,7 +101,7 @@
             <ion-card-header>
                 <ion-row align-items-center>
                   <ion-col>
-                    <p class="register-counter">{{'Total de registros:  ' + listUsuarios.length + '  usuários'}}</p>
+                    <p class="register-counter">{{'Total de registros:  ' + listarUsuarios.length + '  usuários'}}</p>
                   </ion-col>
                 </ion-row>
               </ion-card-header>
@@ -117,7 +117,7 @@
                 <ion-col col-1>Admin</ion-col>
                 <ion-col col-1>Médico</ion-col>
                 <ion-col col-1>Ativo</ion-col>
-                <ion-col col-1.5>Visualizar/Editar</ion-col>
+                <ion-col col-2>Visualizar/Editar</ion-col>
               </ion-row>
               <ion-row *ngFor="let l of list" align-items-center class="table-content">
                 <ion-col>{{l.pessoa.nome}}</ion-col>
@@ -128,10 +128,10 @@
                 <ion-col col-1><ion-icon *ngIf="l.administrador" name="md-checkmark"></ion-icon></ion-col>
                 <ion-col col-1><ion-icon *ngIf="l.medico" name="md-checkmark"></ion-icon></ion-col>
                 <ion-col col-1><ion-icon *ngIf="l.ativo" name="md-checkmark"></ion-icon></ion-col>
-                <ion-col col-1.5><button ion-button block icon-only clear (click)="editarUsuario(l)"><ion-icon color="gray" name="eye"></ion-icon></button></ion-col>
+                <ion-col col-2><button ion-button block icon-only clear (click)="editarUsuario(l)"><ion-icon color="gray" name="eye"></ion-icon></button></ion-col>
               </ion-row>
             </ion-grid>
-            <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="list.length < listUsuarios.length">
+            <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="list.length < listarUsuarios.length">
               <ion-infinite-scroll-content></ion-infinite-scroll-content>
             </ion-infinite-scroll>
           </ion-card-content>

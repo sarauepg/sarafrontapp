@@ -4,18 +4,26 @@
       <div>
         <img class="logo-sara" src="../assets/imgs/logo-fundo-transparente.png" />
       </div>
+      <form [formGroup]="form">
       <div style="margin-top: 40px">
-      <ion-item class="login-input">
+      <ion-item class="login-input" [ngClass]="{'invalid': form.controls.nomeUsuario.invalid && ((form.controls.nomeUsuario.dirty && form.controls.nomeUsuario.touched) || formSubmit)}">
         <ion-icon item-left name="md-person" class="icones-login"></ion-icon>
-        <ion-input type="email" placeholder="Nome de usuário" cmaxlength="60"></ion-input>
+        <ion-input formControlName="nomeUsuario" type="text" [(ngModel)]="loginForm.nomeUsuario" placeholder="Nome de usuário" cmaxlength="16"></ion-input>
       </ion-item>
-      <ion-item class="login-input" style="margin-top: 5px">
+      <div class="invalid-hint" *ngIf="form.controls.nomeUsuario.errors?.required && ((form.controls.nomeUsuario.dirty && form.controls.nomeUsuario.touched) || formSubmit)">
+        Campo obrigatório
+    </div>
+      <ion-item class="login-input" style="margin-top: 5px" [ngClass]="{'invalid': form.controls.senha.invalid && ((form.controls.senha.dirty && form.controls.senha.touched) || formSubmit)}">
         <ion-icon item-left name="md-lock" class="icones-login"></ion-icon>
-        <ion-input type="password" placeholder="Senha" cmaxlength="20"></ion-input>
+        <ion-input formControlName="senha" type="password" [(ngModel)]="loginForm.senha" placeholder="Senha" cmaxlength="20"></ion-input>
       </ion-item>
-      <button ion-button block class="login-btn botao-enviar" (click)="goToAgenda()">entrar</button>
+      <div class="invalid-hint" *ngIf="form.controls.senha.errors?.required && ((form.controls.senha.dirty && form.controls.senha.touched) || formSubmit)">
+        Campo obrigatório
+    </div>
+      <button ion-button block class="login-btn botao-enviar" (click)="login()">entrar</button>
       <p style="text-align: center; color: rgb(89, 194, 200);">____________________________________________</p>
     </div>
+    </form>
     </div>
   </div>
   <ion-footer>

@@ -28,6 +28,7 @@ export const APP_CONFIG = {
 		CADASTRAR_ATENDIMENTO: END_POINT + "atendimento/cadastrar",
 		FILTRAR_ATENDIMENTO: END_POINT + "atendimento/filtrar?",
 		ALTERAR_ATENDIMENTO: END_POINT + "atendimento/alterar",
+		CARREGAR_VALORES_AFERIDOS: END_POINT + "atendimento/valoresAferidos?idAtendimento={idAtendimento}",
 		AT_X_TIPOAT: END_POINT + "atendimento/atendimentoxtipoat",
 		AT_X_LOTACAO: END_POINT + "atendimento/atendimentoxlotacao",
 
@@ -37,6 +38,7 @@ export const APP_CONFIG = {
 		LISTAR_USUARIOS: END_POINT + "usuario/listar",
 		FILTRAR_USUARIO: END_POINT + "usuario/filtrar?",
 		ALTERAR_USUARIO: END_POINT + "usuario/alterar",
+		LOGIN: END_POINT + "usuario/login",
 
 		// PACIENTE
 		LISTAR_PACIENTES: END_POINT + "paciente/listar",
