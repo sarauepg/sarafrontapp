@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Content, IonicPage, ViewController, LoadingController, ToastController, NavParams } from 'ionic-angular';
+import { Content, IonicPage, ViewController, LoadingController, ToastController, NavParams, AlertController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { RequestService } from '../../../../service/request.service';
 import { APP_CONFIG } from '../../../../app/app.config';
@@ -28,7 +28,7 @@ export class ModalCadastroAtendimentoPage {
     p: string;
     pacienteSelecionado: boolean = false;
 
-    constructor(public params: NavParams, public toastCtrl: ToastController, private completerService: CompleterService, private viewCtrl: ViewController, private formBuilder: FormBuilder, public loadingCtrl: LoadingController, private requestService: RequestService) {
+    constructor(private alertCtrl: AlertController, public params: NavParams, public toastCtrl: ToastController, private completerService: CompleterService, private viewCtrl: ViewController, private formBuilder: FormBuilder, public loadingCtrl: LoadingController, private requestService: RequestService) {
 
         this.atendimento.paciente = {};
         this.atendimento.paciente.pessoa = {};
@@ -215,6 +215,23 @@ export class ModalCadastroAtendimentoPage {
         } else {
             this.presentToast("Por favor, cheque os campos em destaque.");
         }
+    }
+
+    alterarAtendimento() {
+        let alert = this.alertCtrl.create({
+            title: 'Oops!',
+            message: 'Parece que essa funcionalidade ainda não foi implementada. Aguarde futuras versões.',
+            buttons: [
+                {
+                    text: 'Ok',
+                    role: 'cancel',
+                    handler: () => {
+                        console.log('Ok clicked');
+                    }
+                }
+            ]
+        });
+        alert.present();
     }
 
     presentToast(msg) {
