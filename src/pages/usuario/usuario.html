@@ -110,25 +110,25 @@
             <ion-grid>
               <ion-row class="table-header">
                 <ion-col>Nome</ion-col>
-                <ion-col class="max-w-130">Usuário</ion-col>
-                <ion-col class="max-w-115">N.º Conselho</ion-col>
-                <ion-col class="max-w-180">E-mail</ion-col>
-                <ion-col class="max-w-130">Telefone</ion-col>
-                <ion-col class="max-w-60">Admin</ion-col>
-                <ion-col class="max-w-80">Médico</ion-col>
-                <ion-col class="max-w-60">Ativo</ion-col>
-                <ion-col class="max-w-135">Visualizar/Editar</ion-col>
+                <ion-col col-1>Usuário</ion-col>
+                <ion-col col-2>N.º Conselho</ion-col>
+                <!-- <ion-col class="max-w-180">E-mail</ion-col> -->
+                <ion-col col-2>Telefone</ion-col>
+                <ion-col col-1>Admin</ion-col>
+                <ion-col col-1>Médico</ion-col>
+                <ion-col col-1>Ativo</ion-col>
+                <ion-col col-1.5>Visualizar/Editar</ion-col>
               </ion-row>
               <ion-row *ngFor="let l of list" align-items-center class="table-content">
                 <ion-col>{{l.pessoa.nome}}</ion-col>
-                <ion-col class="max-w-130">{{l.nomeUsuario}}</ion-col>
-                <ion-col class="max-w-115">{{l.uf.sigla + '-' + l.numeroConselho}}</ion-col>
-                <ion-col class="max-w-180">{{l.pessoa.email}}</ion-col>
-                <ion-col class="max-w-130">{{l.pessoa.telefonePrimario}}</ion-col>
-                <ion-col class="max-w-60 list-check"><ion-icon *ngIf="l.administrador" name="md-checkmark"></ion-icon></ion-col>
-                <ion-col class="max-w-80 list-check"><ion-icon *ngIf="l.medico" name="md-checkmark"></ion-icon></ion-col>
-                <ion-col class="max-w-60 list-check"><ion-icon *ngIf="l.ativo" name="md-checkmark"></ion-icon></ion-col>
-                <ion-col class="max-w-135"><button ion-button block icon-only clear (click)="editarUsuario(l)"><ion-icon color="gray" name="eye"></ion-icon></button></ion-col>
+                <ion-col col-1>{{l.nomeUsuario}}</ion-col>
+                <ion-col col-2>{{l.uf.sigla + '-' + l.numeroConselho}}</ion-col>
+                <!-- <ion-col class="max-w-180">{{l.pessoa.email}}</ion-col> -->
+                <ion-col col-2>{{l.pessoa.telefonePrimario}}</ion-col>
+                <ion-col col-1><ion-icon *ngIf="l.administrador" name="md-checkmark"></ion-icon></ion-col>
+                <ion-col col-1><ion-icon *ngIf="l.medico" name="md-checkmark"></ion-icon></ion-col>
+                <ion-col col-1><ion-icon *ngIf="l.ativo" name="md-checkmark"></ion-icon></ion-col>
+                <ion-col col-1.5><button ion-button block icon-only clear (click)="editarUsuario(l)"><ion-icon color="gray" name="eye"></ion-icon></button></ion-col>
               </ion-row>
             </ion-grid>
             <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="list.length < listUsuarios.length">
