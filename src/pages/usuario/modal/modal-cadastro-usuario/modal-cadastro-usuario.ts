@@ -17,6 +17,7 @@ export class ModalCadastroUsuarioPage {
     isEditing = false;
     formSubmit = false;
     private form: FormGroup;
+    dataNascimento: string;
     telefonePrimario: string;
     telefoneSecundario: string;
     lotacoes: any = [];
@@ -132,8 +133,7 @@ export class ModalCadastroUsuarioPage {
             this.usuario.pessoa.cpf = this.unmask(this.usuario.pessoa.cpf);
             this.usuario.pessoa.telefonePrimario = this.unmask(this.telefonePrimario);
             this.usuario.pessoa.telefoneSecundario = this.unmask(this.telefoneSecundario);
-            let dataNasc = moment(this.usuario.pessoa.dataNascimento, 'DD-MM-YYYY').format('YYYY-MM-DD');
-            this.usuario.pessoa.dataNascimento = dataNasc;
+            this.usuario.pessoa.dataNascimento = moment(this.dataNascimento, 'DD-MM-YYYY').format('YYYY-MM-DD');
             this.usuario.ativo = true;
             console.log(this.usuario);
             let data = JSON.parse(JSON.stringify(this.usuario));

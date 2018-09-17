@@ -19,6 +19,7 @@ export class ModalCadastroPacientePage {
     private form: FormGroup;
     lotacoes: any = [];
     paciente: any = {};
+    dataNascimento: string;
     telefonePrimario: string;
     telefoneSecundario: string;
 
@@ -86,8 +87,7 @@ export class ModalCadastroPacientePage {
             this.paciente.pessoa.cpf = this.unmask(this.paciente.pessoa.cpf);
             this.paciente.pessoa.telefonePrimario = this.unmask(this.telefonePrimario);
             this.paciente.pessoa.telefoneSecundario = this.unmask(this.telefoneSecundario);
-            let dataNasc = moment(this.paciente.pessoa.dataNascimento, 'DD-MM-YYYY').format('YYYY-MM-DD');
-            this.paciente.pessoa.dataNascimento = dataNasc;
+            this.paciente.pessoa.dataNascimento = moment(this.dataNascimento, 'DD-MM-YYYY').format('YYYY-MM-DD');
             console.log(this.paciente);
             let data = JSON.parse(JSON.stringify(this.paciente));
             this.requestService.postData(APP_CONFIG.WEBSERVICE.CADASTRAR_PACIENTES, data).then((response: any) => {
