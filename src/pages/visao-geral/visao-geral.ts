@@ -58,7 +58,7 @@ export class VisaoGeralPage {
     });
   }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     console.log('ionViewDidLoad VisaoGeralPage');
     this.tipoAtxAt = {
       chartType: 'PieChart',

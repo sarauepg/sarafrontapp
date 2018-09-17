@@ -5,7 +5,6 @@ import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 
 @NgModule({
   declarations: [
-    VisaoGeralPage,
   ],
   imports: [
     Ng2GoogleChartsModule,

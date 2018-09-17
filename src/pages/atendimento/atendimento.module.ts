@@ -6,7 +6,6 @@ import { SharedModule } from '../../directives/shared.module';
 
 @NgModule({
   declarations: [
-    AtendimentoPage,
   ],
   imports: [
     IonicPageModule.forChild(AtendimentoPage),
