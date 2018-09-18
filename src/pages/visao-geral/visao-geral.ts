@@ -64,7 +64,7 @@ export class VisaoGeralPage {
       chartType: 'PieChart',
       dataTable: this.tipoAtxAtDataTable,
       options: {
-        chartArea: { left: '0%', top: '5%', width: '100%', height: '100%' },
+        chartArea: { left: '0%', top: '5%', bottom: '5%', width: '100%', height: '100%' },
         is3D: false,
         pieHole: 0,
         fontSize: 20,
@@ -81,7 +81,7 @@ export class VisaoGeralPage {
       dataTable: this.lotacaoxAtDataTable,
       options: {
         colors: ['#F4C2C2'/* rosinnha */, '#A9A9A9'/* cinza claro */, '#FF0800'/* vermelho */, '#66FF00' /* verde claro */, '#013220'/* verde escuro */, '#00FFFF'/* ciano */, '#0072BB'/* azul */, '#FF8C00' /* laranja */, '#967117' /* beje */, '#FFBF00'/* amarelo */, '#26428B'/* azul escuro */, '#7C0A02' /* marrom */, '#8DB600' /* verde opaco */, '#BF00FF'/* roxo */, '#F400A1'/* rosa */, '#E30022'/* vermelho */, '#555555'/* cinze escuro */, '#1B1B1B'/* preto */, '#3B2F2F'/* cinza */],
-        chartArea: { left: '0%', top: '5%', width: '100%', height: '100%' },
+        chartArea: { left: '0%', top: '5%', bottom: '5%', width: '100%', height: '100%' },
         is3D: false,
         pieHole: 0,
         fontSize: 20,

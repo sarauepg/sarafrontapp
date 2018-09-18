@@ -24,7 +24,7 @@
                     <ion-row>
                         <ion-col *ngIf="!agendado" class="completer" col-6 padding-left padding-right [ngClass]="{'invalid': form.controls.nome.invalid && (form.controls.nome.dirty || form.controls.nome.touched || formSubmit)}">
                             <ion-label class="completer-label">Nome do paciente *</ion-label>
-                            <ng2-completer formControlName="nome" [textNoResults]="'Nenhum resultado encontrado'" (selected)="selecionado($event)" [(ngModel)]="p"
+                            <ng2-completer style="color:#555;font-size: 1.2em; display: block" formControlName="nome" [textNoResults]="'Nenhum resultado encontrado'" (selected)="selecionado($event)" [(ngModel)]="p"
                                 [datasource]="dataService" [minSearchLength]="0"></ng2-completer>
                             <div class="invalid-hint" *ngIf="form.controls.nome.errors?.required && (form.controls.nome.touched || formSubmit)">
                                 Campo obrigatório

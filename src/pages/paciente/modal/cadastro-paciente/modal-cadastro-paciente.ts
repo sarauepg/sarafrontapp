@@ -57,7 +57,7 @@ export class ModalCadastroPacientePage {
             this.isEditing = true;
             this.paciente.pessoa.nome = paciente.pessoa.nome;
             this.paciente.pessoa.cpf = paciente.pessoa.cpf;
-            this.paciente.pessoa.dataNascimento = paciente.pessoa.dataNascimento;
+            this.dataNascimento = paciente.pessoa.dataNascimento;
             this.paciente.pessoa.lotacao = paciente.pessoa.lotacao;
             this.telefonePrimario = paciente.pessoa.telefonePrimario;
             this.telefoneSecundario = paciente.pessoa.telefoneSecundario;

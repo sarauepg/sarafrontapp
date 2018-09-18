@@ -98,7 +98,7 @@ export class ModalCadastroUsuarioPage {
             this.usuario.pessoa.id = usuario.pessoa.id;
             this.usuario.pessoa.nome = usuario.pessoa.nome;
             this.usuario.pessoa.cpf = usuario.pessoa.cpf;
-            this.usuario.pessoa.dataNascimento = usuario.pessoa.dataNascimento;
+            this.dataNascimento = usuario.pessoa.dataNascimento;
             this.usuario.uf = usuario.uf;
             this.usuario.numeroConselho = usuario.numeroConselho;
             this.usuario.medico = usuario.medico;

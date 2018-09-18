@@ -39,7 +39,7 @@
               <ion-row>
                 <ion-col col-12 col-lg-8 padding-left padding-right>
                   <ion-label class="completer-label">Nome</ion-label>
-                  <ng2-completer [textNoResults]="'Nenhum resultado encontrado'" (selected)="selecionado($event)"
+                  <ng2-completer style="color:#555;font-size: 1.2em; display: block" [textNoResults]="'Nenhum resultado encontrado'" (selected)="selecionado($event)"
                     [(ngModel)]="p" [datasource]="dataService" [minSearchLength]="0"></ng2-completer>
                 </ion-col>
 
@@ -94,7 +94,7 @@
                 <ion-col col-2>Data de Nascimento</ion-col>
                 <!-- <ion-col col-1>E-mail</ion-col> -->
                 <ion-col col-2>Telefone</ion-col>
-                <ion-col col-1>Lotação</ion-col>
+                <ion-col col-1.5>Lotação</ion-col>
                 <ion-col col-1.5>Visualizar/Editar</ion-col>
               </ion-row>
 
@@ -104,7 +104,7 @@
                 <ion-col col-2>{{l.pessoa.dataNascimento}}</ion-col>
                 <!-- <ion-col col-1>{{l.pessoa.email}}</ion-col> -->
                 <ion-col col-2>{{l.pessoa.telefonePrimario}}</ion-col>
-                <ion-col col-1>{{l.pessoa.lotacao.sigla}}</ion-col>
+                <ion-col col-1.5>{{l.pessoa.lotacao.sigla}}</ion-col>
                 <ion-col col-1.5><button ion-button block icon-only clear (click)="editarPaciente(l)">
                     <ion-icon color="gray" name="eye"></ion-icon>
                   </button></ion-col>
