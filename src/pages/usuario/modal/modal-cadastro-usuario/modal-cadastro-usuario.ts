@@ -20,6 +20,10 @@ export class ModalCadastroUsuarioPage {
     dataNascimento: string;
     telefonePrimario: string;
     telefoneSecundario: string;
+    telefoneTerciario: string;
+    telefoneQuaternario: string;
+    telefoneQuintenario: string;
+    telCount: number = 2;
     lotacoes: any = [];
     usuario: any = {};
     atLeastOneLetterOneDigitRegExp: RegExp = /[^\w\d]*(([0-9]+.*[A-Za-z]+.*)|[A-Za-z]+.*([0-9]+.*))/;
@@ -79,6 +83,9 @@ export class ModalCadastroUsuarioPage {
             lotacaoIsEditing: [{ value: '', disabled: !this.isEditing }, Validators.required],
             telefonePrimario: ['', [Validators.required, Validators.minLength(14)]],
             telefoneSecundario: ['', Validators.minLength(14)],
+            telefoneTerciario: ['', Validators.minLength(14)],
+            telefoneQuaternario: ['', Validators.minLength(14)],
+            telefoneQuintenario: ['', Validators.minLength(14)],
             email: ['', Validators.email],
             nomeUsuario: ['', [Validators.required, Validators.minLength(4)]],
             administrador: [false, Validators.required],
@@ -105,10 +112,23 @@ export class ModalCadastroUsuarioPage {
             this.usuario.pessoa.lotacao = usuario.pessoa.lotacao;
             this.telefonePrimario = usuario.pessoa.telefonePrimario;
             this.telefoneSecundario = usuario.pessoa.telefoneSecundario;
+            this.telefoneTerciario = usuario.pessoa.telefoneTerciario;
+            this.telefoneQuaternario = usuario.pessoa.telefoneQuaternario;
+            this.telefoneQuintenario = usuario.pessoa.telefoneQuintenario;
             this.usuario.pessoa.email = usuario.pessoa.email;
             this.usuario.nomeUsuario = usuario.nomeUsuario;
             this.usuario.administrador = usuario.administrador;
             this.usuario.ativo = usuario.ativo;
+
+            if(usuario.pessoa.telefoneTerciario){
+                this.telCount = 3;
+                if(usuario.pessoa.telefoneQuaternario){
+                    this.telCount = 4;
+                    if(usuario.pessoa.telefoneQuintenario){
+                        this.telCount = 5;
+                    }
+                }
+            }
         }
     }
 
@@ -133,6 +153,9 @@ export class ModalCadastroUsuarioPage {
             this.usuario.pessoa.cpf = this.unmask(this.usuario.pessoa.cpf);
             this.usuario.pessoa.telefonePrimario = this.unmask(this.telefonePrimario);
             this.usuario.pessoa.telefoneSecundario = this.unmask(this.telefoneSecundario);
+            this.usuario.pessoa.telefoneTerciario = this.unmask(this.telefoneTerciario);
+            this.usuario.pessoa.telefoneQuaternario = this.unmask(this.telefoneQuaternario);
+            this.usuario.pessoa.telefoneQuintenario = this.unmask(this.telefoneQuintenario);
             this.usuario.pessoa.dataNascimento = moment(this.dataNascimento, 'DD-MM-YYYY').format('YYYY-MM-DD');
             this.usuario.ativo = true;
             console.log(this.usuario);

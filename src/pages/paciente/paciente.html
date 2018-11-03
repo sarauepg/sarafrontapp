@@ -92,7 +92,6 @@
                 <ion-col>Nome</ion-col>
                 <ion-col col-2>CPF</ion-col>
                 <ion-col col-2>Data de Nascimento</ion-col>
-                <!-- <ion-col col-1>E-mail</ion-col> -->
                 <ion-col col-2>Telefone</ion-col>
                 <ion-col col-1.5>Lotação</ion-col>
                 <ion-col col-1.5>Visualizar/Editar</ion-col>
@@ -102,7 +101,6 @@
                 <ion-col>{{l.pessoa.nome}}</ion-col>
                 <ion-col col-2>{{l.pessoa.cpf}}</ion-col>
                 <ion-col col-2>{{l.pessoa.dataNascimento}}</ion-col>
-                <!-- <ion-col col-1>{{l.pessoa.email}}</ion-col> -->
                 <ion-col col-2>{{l.pessoa.telefonePrimario}}</ion-col>
                 <ion-col col-1.5>{{l.pessoa.lotacao.sigla}}</ion-col>
                 <ion-col col-1.5><button ion-button block icon-only clear (click)="editarPaciente(l)">

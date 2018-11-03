@@ -22,6 +22,10 @@ export class ModalCadastroPacientePage {
     dataNascimento: string;
     telefonePrimario: string;
     telefoneSecundario: string;
+    telefoneTerciario: string;
+    telefoneQuaternario: string;
+    telefoneQuintenario: string;
+    telCount: number = 2;
 
     constructor(public params: NavParams,
         private alertCtrl: AlertController,
@@ -46,6 +50,9 @@ export class ModalCadastroPacientePage {
             lotacaoIsEditing: [{ value: '', disabled: !this.isEditing }, Validators.required],
             telefonePrimario: ['', [Validators.required, Validators.minLength(14)]],
             telefoneSecundario: ['', Validators.minLength(14)],
+            telefoneTerciario: ['', Validators.minLength(14)],
+            telefoneQuaternario: ['', Validators.minLength(14)],
+            telefoneQuintenario: ['', Validators.minLength(14)],
             email: [''],
             obsMedicas: ['']
         });
@@ -61,8 +68,21 @@ export class ModalCadastroPacientePage {
             this.paciente.pessoa.lotacao = paciente.pessoa.lotacao;
             this.telefonePrimario = paciente.pessoa.telefonePrimario;
             this.telefoneSecundario = paciente.pessoa.telefoneSecundario;
+            this.telefoneTerciario = paciente.pessoa.telefoneTerciario;
+            this.telefoneQuaternario = paciente.pessoa.telefoneQuaternario;
+            this.telefoneQuintenario = paciente.pessoa.telefoneQuintenario;
             this.paciente.pessoa.email = paciente.pessoa.email;
             this.paciente.observacaoMedica = paciente.observacaoMedica;
+
+            if(paciente.pessoa.telefoneTerciario){
+                this.telCount = 3;
+                if(paciente.pessoa.telefoneQuaternario){
+                    this.telCount = 4;
+                    if(paciente.pessoa.telefoneQuintenario){
+                        this.telCount = 5;
+                    }
+                }
+            }
         }
     }
 
@@ -87,6 +107,9 @@ export class ModalCadastroPacientePage {
             this.paciente.pessoa.cpf = this.unmask(this.paciente.pessoa.cpf);
             this.paciente.pessoa.telefonePrimario = this.unmask(this.telefonePrimario);
             this.paciente.pessoa.telefoneSecundario = this.unmask(this.telefoneSecundario);
+            this.paciente.pessoa.telefoneTerciario = this.unmask(this.telefoneTerciario);
+            this.paciente.pessoa.telefoneQuaternario = this.unmask(this.telefoneQuaternario);
+            this.paciente.pessoa.telefoneQuintenario = this.unmask(this.telefoneQuintenario);
             this.paciente.pessoa.dataNascimento = moment(this.dataNascimento, 'DD-MM-YYYY').format('YYYY-MM-DD');
             console.log(this.paciente);
             let data = JSON.parse(JSON.stringify(this.paciente));

@@ -5,7 +5,8 @@
                 <ion-icon name="md-close" item-right></ion-icon>
             </button>
         </ion-buttons>
-        <ion-title>Novo Paciente</ion-title>
+        <ion-title *ngIf="!isEditing" >Novo paciente</ion-title>
+        <ion-title *ngIf="isEditing" >Visualizar paciente</ion-title>
     </ion-navbar>
 </ion-header>
 
@@ -112,6 +113,42 @@
                                 <ion-input formControlName="telefoneSecundario" [mask]="{type: MaskType.CELLPHONE}" [(ngModel)]="telefoneSecundario" type="tel"></ion-input>
                             </ion-item>
                             <div class="invalid-hint" *ngIf="form.controls.telefoneSecundario.errors?.minlength && form.controls.telefoneSecundario.dirty">
+                                Telefone inválido
+                            </div>
+                        </ion-col>
+                        <ion-col col-6 padding-left padding-right>
+                            <button *ngIf="telCount == 2" color="light" class="novoTel" ion-button clear="true" icon-left (click)="telCount = telCount + 1" > 
+                                <ion-icon name="md-add" color="light" ></ion-icon> Novo telefone
+                            </button>
+                            <ion-item *ngIf="telCount > 2"  [ngClass]="{'invalid': form.controls.telefoneTerciario.invalid && (form.controls.telefoneTerciario.dirty || formSubmit)}">
+                                <ion-label floating>Telefone</ion-label>
+                                <ion-input [disabled]="telCount < 2" formControlName="telefoneTerciario" [mask]="{type: MaskType.CELLPHONE}" [(ngModel)]="telefoneTerciario" type="tel"></ion-input>
+                            </ion-item>
+                            <div class="invalid-hint" *ngIf="form.controls.telefoneTerciario.errors?.minlength && form.controls.telefoneTerciario.dirty && telCount > 2">
+                                Telefone inválido
+                            </div>
+                        </ion-col>
+                        <ion-col col-6 padding-left padding-right>
+                            <button *ngIf="telCount == 3" color="light" ion-button class="novoTel" clear="true" icon-left (click)="telCount = telCount + 1" > 
+                                <ion-icon name="md-add" color="light" ></ion-icon>Novo telefone
+                            </button>
+                            <ion-item *ngIf="telCount > 3"  [ngClass]="{'invalid': form.controls.telefoneQuaternario.invalid && (form.controls.telefoneQuaternario.dirty || formSubmit)}">
+                                <ion-label floating>Telefone</ion-label>
+                                <ion-input [disabled]="telCount < 3" formControlName="telefoneQuaternario" [mask]="{type: MaskType.CELLPHONE}" [(ngModel)]="telefoneQuaternario" type="tel"></ion-input>
+                            </ion-item>
+                            <div class="invalid-hint" *ngIf="form.controls.telefoneQuaternario.errors?.minlength && form.controls.telefoneQuaternario.dirty && telCount > 3">
+                                Telefone inválido
+                            </div>
+                        </ion-col>
+                        <ion-col col-6 padding-left padding-right>
+                            <button *ngIf="telCount == 4" color="light" ion-button class="novoTel" clear="true" icon-left (click)="telCount = telCount + 1" > 
+                                <ion-icon name="md-add" color="light" ></ion-icon>Novo telefone
+                            </button>
+                            <ion-item *ngIf="telCount > 4"  [ngClass]="{'invalid': form.controls.telefoneQuintenario.invalid && (form.controls.telefoneQuintenario.dirty || formSubmit)}">
+                                <ion-label floating>Telefone</ion-label>
+                                <ion-input [disabled]="telCount < 4" formControlName="telefoneQuintenario" [mask]="{type: MaskType.CELLPHONE}" [(ngModel)]="telefoneQuintenario" type="tel"></ion-input>
+                            </ion-item>
+                            <div class="invalid-hint" *ngIf="form.controls.telefoneQuintenario.errors?.minlength && form.controls.telefoneQuintenario.dirty && telCount > 4">
                                 Telefone inválido
                             </div>
                         </ion-col>
