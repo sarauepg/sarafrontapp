@@ -18,6 +18,7 @@ export const APP_CONFIG = {
 		LISTAR_TIPO_ATENDIMENTO: END_POINT + "tipoatendimento/listar",
 		LISTAR_TIPO_ATENDIMENTO_AGENDAVEL: END_POINT + "tipoatendimento/listarAgendaveis",
 		ADICIONAR_TIPO_ATENDIMENTO: END_POINT + "tipoatendimento/cadastrar",
+		DELETAR_TIPO_ATENDIMENTO: END_POINT + "tipoatendimento/deletarTipoAtendimento?idTipoAt={idTipoAt}",
 
 		// AGENDAMENTO
 		CADASTRAR_AGENDAMENTO: END_POINT + "agendamento/cadastrar",
@@ -35,6 +36,7 @@ export const APP_CONFIG = {
 		// USUÁRIO
 		LISTAR_RESPONSAVEIS: END_POINT + "usuario/listarResponsaveis?cargo={cargo}",
 		CADASTRAR_USUARIOS: END_POINT + "usuario/cadastrar",
+		ALTERAR_USUARIOS: END_POINT + "usuario/alterar",
 		LISTAR_USUARIOS: END_POINT + "usuario/listar",
 		FILTRAR_USUARIO: END_POINT + "usuario/filtrar?",
 		ALTERAR_USUARIO: END_POINT + "usuario/alterar",
@@ -43,6 +45,7 @@ export const APP_CONFIG = {
 		// PACIENTE
 		LISTAR_PACIENTES: END_POINT + "paciente/listar",
 		CADASTRAR_PACIENTES: END_POINT + "paciente/cadastrar",
+		ALTERAR_PACIENTES: END_POINT + "paciente/alterar",
 		FILTRAR_PACIENTE: END_POINT + "paciente/filtrar?",
 
 		// LOTAÇÃO

@@ -10,7 +10,9 @@ page-tipo-atendimento {
     .lista-tipo-at{
         text-transform: capitalize;
         color: #6b6b6b;
-        font-size: 1.1em;
+        font-size: 1.2em;
+        width: 100%;
+        text-align: center;
     }
     
     @media only screen and (min-width: 768px) {

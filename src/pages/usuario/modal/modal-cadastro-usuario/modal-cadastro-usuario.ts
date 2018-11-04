@@ -160,7 +160,8 @@ export class ModalCadastroUsuarioPage {
             this.usuario.ativo = true;
             console.log(this.usuario);
             let data = JSON.parse(JSON.stringify(this.usuario));
-            this.requestService.postData(APP_CONFIG.WEBSERVICE.CADASTRAR_USUARIOS, data).then((response: any) => {
+            let url = this.isEditing ? APP_CONFIG.WEBSERVICE.ALTERAR_USUARIOS : APP_CONFIG.WEBSERVICE.CADASTRAR_USUARIOS;
+            this.requestService.postData(url, data).then((response: any) => {
                 console.log(response);
                 loading.dismiss();
                 this.dismiss(true);

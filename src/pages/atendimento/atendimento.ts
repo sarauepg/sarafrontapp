@@ -194,7 +194,7 @@ export class AtendimentoPage {
 
   abrirModalCadastroAtendimento() {
     console.log();
-    const modal = this.modalCtrl.create("ModalCadastroAtendimento", { enableBackdropDismiss: false });
+    const modal = this.modalCtrl.create("ModalCadastroAtendimento", { enableBackdropDismiss: true });
     modal.onDidDismiss(data => {
       if (data) {
         this.presentToast("Atendimento cadastrado com sucesso!");
@@ -205,10 +205,10 @@ export class AtendimentoPage {
   }
 
   abrirModalEdicaoAtendimento(atendimento) {
-    const modal = this.modalCtrl.create("ModalCadastroAtendimento", {atendimento: atendimento}, { enableBackdropDismiss: false });
+    const modal = this.modalCtrl.create("ModalCadastroAtendimento", {atendimento: atendimento}, { enableBackdropDismiss: true });
     modal.onDidDismiss(data => {
       if (data) {
-        this.presentToast("Atendimento cadastrado com sucesso!");
+        this.presentToast("Atendimento alterado com sucesso!");
         this.filtrarAtendimento();
       }
     });

@@ -62,6 +62,7 @@ export class ModalCadastroPacientePage {
         let paciente: any = this.params.get('paciente');
         if (paciente != null) {
             this.isEditing = true;
+            this.paciente.pessoa.id = paciente.pessoa.id;
             this.paciente.pessoa.nome = paciente.pessoa.nome;
             this.paciente.pessoa.cpf = paciente.pessoa.cpf;
             this.dataNascimento = paciente.pessoa.dataNascimento;
@@ -74,11 +75,11 @@ export class ModalCadastroPacientePage {
             this.paciente.pessoa.email = paciente.pessoa.email;
             this.paciente.observacaoMedica = paciente.observacaoMedica;
 
-            if(paciente.pessoa.telefoneTerciario){
+            if (paciente.pessoa.telefoneTerciario) {
                 this.telCount = 3;
-                if(paciente.pessoa.telefoneQuaternario){
+                if (paciente.pessoa.telefoneQuaternario) {
                     this.telCount = 4;
-                    if(paciente.pessoa.telefoneQuintenario){
+                    if (paciente.pessoa.telefoneQuintenario) {
                         this.telCount = 5;
                     }
                 }
@@ -113,16 +114,28 @@ export class ModalCadastroPacientePage {
             this.paciente.pessoa.dataNascimento = moment(this.dataNascimento, 'DD-MM-YYYY').format('YYYY-MM-DD');
             console.log(this.paciente);
             let data = JSON.parse(JSON.stringify(this.paciente));
-            this.requestService.postData(APP_CONFIG.WEBSERVICE.CADASTRAR_PACIENTES, data).then((response: any) => {
-                console.log(response);
-                loading.dismiss();
-                this.dismiss(true);
-            }, erro => {
-                console.error(erro);
-                loading.dismiss();
-                this.presentToast(erro.errorMessage);
-            });
-        }else{
+            if (!this.isEditing) {
+                this.requestService.postData(APP_CONFIG.WEBSERVICE.CADASTRAR_PACIENTES, data).then((response: any) => {
+                    console.log(response);
+                    loading.dismiss();
+                    this.dismiss(true);
+                }, erro => {
+                    console.error(erro);
+                    loading.dismiss();
+                    this.presentToast(erro.errorMessage);
+                });
+            } else {
+                this.requestService.putData(APP_CONFIG.WEBSERVICE.ALTERAR_PACIENTES, data).then((response: any) => {
+                    console.log(response);
+                    loading.dismiss();
+                    this.dismiss(true);
+                }, erro => {
+                    console.error(erro);
+                    loading.dismiss();
+                    this.presentToast(erro.errorMessage);
+                });
+            }
+        } else {
             this.presentToast("Por favor, cheque os campos em destaque.");
         }
     }

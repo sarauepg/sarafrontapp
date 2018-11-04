@@ -124,7 +124,7 @@ export class UsuarioPage {
 
   abrirModalCadastroUsuario() {
     console.log();
-    const modal = this.modalCtrl.create("ModalCadastroUsuario", { enableBackdropDismiss: false });
+    const modal = this.modalCtrl.create("ModalCadastroUsuario", { enableBackdropDismiss: true });
     modal.onDidDismiss(data => {
       if (data) {
         this.presentToast("Usuário cadastrado com sucesso!");
@@ -136,10 +136,11 @@ export class UsuarioPage {
 
   editarUsuario(usuario){
     console.log();
-    const modal = this.modalCtrl.create("ModalCadastroUsuario", {usuario: usuario}, { enableBackdropDismiss: false });
+    const modal = this.modalCtrl.create("ModalCadastroUsuario", {usuario: usuario}, { enableBackdropDismiss: true });
     modal.onDidDismiss(data => {
       if (data) {
         this.presentToast("Usuário editado com sucesso!");
+        this.filtrarUsuario();
       }
     });
     modal.present();

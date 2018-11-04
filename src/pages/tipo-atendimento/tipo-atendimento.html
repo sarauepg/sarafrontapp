@@ -44,13 +44,13 @@
                     <ion-item>
                       <ion-label floating padding-left>Responsável *</ion-label>
                       <ion-select interface="popover" formControlName="responsavel" [(ngModel)]="tipoAt.responsavel"
-                        [ngClass]="{'invalid-box':   formTipoAt.controls.responsavel.invalid &&  (formTipoAt.controls.responsavel.touched || formSubmit)}">
+                        [ngClass]="{'invalid-box':   formTipoAt.controls.responsavel.invalid &&  (formTipoAt.controls.responsavel.touched && formSubmit)}">
                         <ion-option value="E">Enfermeiro(a)</ion-option>
                         <ion-option value="M">Médico(a)</ion-option>
                         <ion-option value="T">Todos(as)</ion-option>
                       </ion-select>
                     </ion-item>
-                    <div class="invalid-hint" *ngIf="formTipoAt.controls.responsavel.errors?.required && (formTipoAt.controls.responsavel.touched || formSubmit)">
+                    <div class="invalid-hint" *ngIf="formTipoAt.controls.responsavel.errors?.required && (formTipoAt.controls.responsavel.touched && formSubmit)">
                       Campo obrigatório
                     </div>
                   </ion-col>
@@ -118,7 +118,8 @@
                 </ion-col>
               </ion-row>
             </ion-list>
-            <button margin-bottom ion-button block class="add-btn" type="submit" (click)="adicionarTipoAtendimento()">ADICIONAR >></button>
+            <button margin-bottom ion-button block class="add-btn" type="submit" (click)="adicionarTipoAtendimento()">ADICIONAR
+              >></button>
           </ion-card-content>
         </ion-card>
       </ion-col>
@@ -132,9 +133,16 @@
           <div class="divider"></div>
           <ion-card-content margin-top>
             <ion-list>
-              <button *ngFor="let t of tiposAtendimento" class="lista-tipo-at" ion-button clear block>
-                {{t.nome}}
-              </button>
+              <ion-row *ngFor="let t of tiposAtendimento" class="lista-tipo-at">
+                <ion-col col-10>
+                  {{t.nome}}
+                </ion-col>
+                <ion-col col-2>
+                  <button ion-button icon-only clear (click)="deletaTipoAtendimento(t.id)">
+                    <ion-icon name="md-trash" color="gray"></ion-icon>
+                  </button>
+                </ion-col>
+              </ion-row>
             </ion-list>
           </ion-card-content>
         </ion-card>

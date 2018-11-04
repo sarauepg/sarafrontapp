@@ -5,7 +5,8 @@
                 <ion-icon name="md-close" item-right></ion-icon>
             </button>
         </ion-buttons>
-        <ion-title>Novo atendimento</ion-title>
+        <ion-title *ngIf="!isEditing" >Novo atendimento</ion-title>
+        <ion-title *ngIf="isEditing" >Visualizar atendimento</ion-title>
     </ion-navbar>
 </ion-header>
 
@@ -148,12 +149,12 @@
 <ion-footer>
     <ion-toolbar color="white">
         <ion-buttons right>
-            <button *ngIf="!isEditing" type="submit" (click)="salvarAtendimento()" icon-start ion-button margin-right color="light">
+            <button type="submit" (click)="salvarAtendimento()" icon-start ion-button margin-right color="light">
                 <ion-icon name="checkmark"></ion-icon> salvar
             </button>
-            <button *ngIf="isEditing" type="submit" (click)="alterarAtendimento()" icon-start ion-button margin-right color="light">
+            <!-- <button *ngIf="isEditing" type="submit" (click)="alterarAtendimento()" icon-start ion-button margin-right color="light">
                 <ion-icon name="checkmark"></ion-icon> salvar
-            </button>
+            </button> -->
             <button icon-start ion-button color="gray" (click)="dismiss()">
                 <ion-icon name="close"></ion-icon> cancelar
             </button>

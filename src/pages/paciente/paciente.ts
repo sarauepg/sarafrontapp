@@ -127,7 +127,7 @@ export class PacientePage {
 
   abrirModalCadastroPaciente() {
     console.log();
-    const modal = this.modalCtrl.create("ModalCadastroPaciente", { enableBackdropDismiss: false });
+    const modal = this.modalCtrl.create("ModalCadastroPaciente", { enableBackdropDismiss: true });
     modal.onDidDismiss(data => {
       if (data) {
         this.presentToast("Paciente cadastrado com sucesso!");
@@ -139,10 +139,11 @@ export class PacientePage {
 
   editarPaciente(paciente){
     console.log();
-    const modal = this.modalCtrl.create("ModalCadastroPaciente", {paciente: paciente}, { enableBackdropDismiss: false });
+    const modal = this.modalCtrl.create("ModalCadastroPaciente", {paciente: paciente}, { enableBackdropDismiss: true });
     modal.onDidDismiss(data => {
       if (data) {
         this.presentToast("Paciente editado com sucesso!");
+        this.filtrarPaciente();
       }
     });
     modal.present();

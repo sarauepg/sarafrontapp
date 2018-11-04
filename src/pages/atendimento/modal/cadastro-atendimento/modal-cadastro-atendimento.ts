@@ -96,6 +96,7 @@ export class ModalCadastroAtendimentoPage {
         if (atendimento != null) {
             this.agendado = true;
             this.isEditing = true;
+            this.atendimento.id = atendimento.id;
             this.atendimento.paciente = atendimento.paciente;
             this.dataAt = atendimento.data;
             this.atendimento.hora = atendimento.hora;
@@ -202,6 +203,7 @@ export class ModalCadastroAtendimentoPage {
             if (aferiveisValid && dataHoraValid) {
                 console.log(this.atendimento);
                 let data = JSON.parse(JSON.stringify(this.atendimento));
+                if(!this.isEditing){
                 this.requestService.postData(APP_CONFIG.WEBSERVICE.CADASTRAR_ATENDIMENTO, data).then((response: any) => {
                     console.log(response);
                     loading.dismiss();
@@ -211,6 +213,17 @@ export class ModalCadastroAtendimentoPage {
                     loading.dismiss();
                     this.presentToast(erro.errorMessage);
                 });
+                }else{
+                    this.requestService.putData(APP_CONFIG.WEBSERVICE.ALTERAR_ATENDIMENTO, data).then((response: any) => {
+                        console.log(response);
+                        loading.dismiss();
+                        this.dismiss(true);
+                    }, erro => {
+                        console.error(erro);
+                        loading.dismiss();
+                        this.presentToast(erro.errorMessage);
+                    }); 
+                }
             }
         } else {
             this.presentToast("Por favor, cheque os campos em destaque.");

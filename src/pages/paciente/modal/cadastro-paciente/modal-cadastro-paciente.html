@@ -178,12 +178,12 @@
     <ion-footer>
         <ion-toolbar color="white">
             <ion-buttons right>
-                <button *ngIf="!isEditing" type="submit" (click)="salvarPaciente()" icon-start ion-button margin-right color="light">
+                <button type="submit" (click)="salvarPaciente()" icon-start ion-button margin-right color="light">
                     <ion-icon name="checkmark"></ion-icon> salvar
                 </button>
-                <button *ngIf="isEditing" type="submit" (click)="alterarPaciente()" icon-start ion-button margin-right color="light">
+                <!-- <button *ngIf="isEditing" type="submit" (click)="alterarPaciente()" icon-start ion-button margin-right color="light">
                     <ion-icon name="checkmark"></ion-icon> salvar
-                </button>
+                </button> -->
                 <button icon-start ion-button color="gray" (click)="dismiss()">
                     <ion-icon name="close"></ion-icon> cancelar
                 </button>

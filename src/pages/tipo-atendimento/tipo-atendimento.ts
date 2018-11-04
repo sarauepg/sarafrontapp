@@ -37,6 +37,21 @@ export class TipoAtendimentoPage {
 
   }
 
+  deletaTipoAtendimento(id){
+    let loading = this.loadingCtrl.create();
+    loading.present();
+    let urlRequest = this.requestService.buildUrlQueryParams({idTipoAt: id}, APP_CONFIG.WEBSERVICE.DELETAR_TIPO_ATENDIMENTO);
+    this.requestService.deleteData(urlRequest).then(() => {
+      this.listarTiposDeAtedimento();
+      loading.dismiss();
+      this.presentToast("Tipo de atendimento excluído com sucesso.");
+    }, error => {
+      console.error(error);
+      loading.dismiss();
+      this.presentToast(error.errorMessage);
+    });
+  }
+
   initAferiveis() {
     this.aferiveis.push(new Aferivel(1, "Temperatura", false));
     this.aferiveis.push(new Aferivel(2, "Peso", false));
@@ -64,6 +79,7 @@ export class TipoAtendimentoPage {
     }, error => {
       console.error(error);
       loading.dismiss();
+      this.presentToast(error.errorMessage);
     });
   }
 

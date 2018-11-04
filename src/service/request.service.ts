@@ -60,6 +60,21 @@ export class RequestService {
 
     }
 
+    deleteData(url, dados?) {
+        return new Promise((resolve, reject) => {
+                    this.http.delete(url, dados)
+                        .timeout(this.TIMEOUT)
+                        .toPromise()
+                        .then((resp: any) => {
+                            resolve(this.getJsonData(resp));
+                        })
+                        .catch((error) => {
+                            reject(this.getJsonData(error));
+                        });
+        });
+
+    }
+
     private getJsonData(res: Response): any {
         let body = null;
         try {
