@@ -72,8 +72,8 @@ export class ModalCadastroPacientePage {
             this.telefoneTerciario = paciente.pessoa.telefoneTerciario;
             this.telefoneQuaternario = paciente.pessoa.telefoneQuaternario;
             this.telefoneQuintenario = paciente.pessoa.telefoneQuintenario;
-            this.paciente.pessoa.email = paciente.pessoa.email;
-            this.paciente.observacaoMedica = paciente.observacaoMedica;
+            if(paciente.pessoa.email) this.paciente.pessoa.email = paciente.pessoa.email;
+            if(paciente.observacaoMedica) this.paciente.observacaoMedica = paciente.observacaoMedica;
 
             if (paciente.pessoa.telefoneTerciario) {
                 this.telCount = 3;
