@@ -1,14 +1,13 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { VisaoGeralPage } from './visao-geral';
-import { Ng2GoogleChartsModule } from 'ng2-google-charts';
+import { SharedModule } from '../../directives/shared.module';
 
 @NgModule({
-  declarations: [
-  ],
+  declarations: [VisaoGeralPage],
   imports: [
-    Ng2GoogleChartsModule,
     IonicPageModule.forChild(VisaoGeralPage),
+    SharedModule
   ],
 })
 export class VisaoGeralPageModule {}

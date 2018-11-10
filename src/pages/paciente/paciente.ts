@@ -6,14 +6,8 @@ import { RequestService } from '../../service/request.service';
 import { APP_CONFIG } from '../../app/app.config';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-@IonicPage({
-  name: 'Paciente',
-  segment: 'paciente'
-})
-@Component({
-  selector: 'page-paciente',
-  templateUrl: 'paciente.html',
-})
+@IonicPage({name: 'Paciente', segment: 'paciente'})
+@Component({selector: 'page-paciente', templateUrl: 'paciente.html'})
 export class PacientePage {
 
   private form: FormGroup;

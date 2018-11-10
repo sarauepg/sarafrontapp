@@ -1,59 +1,31 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { IonicApp, IonicErrorHandler, IonicModule, NavController } from 'ionic-angular';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { AgendamentoPage } from '../pages/agendamento/agendamento';
-import { AtendimentoPage } from '../pages/atendimento/atendimento';
-import { PacientePage } from '../pages/paciente/paciente';
-import { TipoAtendimentoPage } from '../pages/tipo-atendimento/tipo-atendimento';
-import { UsuarioPage } from '../pages/usuario/usuario';
-import { VisaoGeralPage } from '../pages/visao-geral/visao-geral';
 import { HttpModule } from '@angular/http';
 import { RequestService } from '../service/request.service';
 import { Network } from '@ionic-native/network';
-import { Ng2CompleterModule } from "ng2-completer";
 import { SharedModule } from '../directives/shared.module';
-import { Ng2GoogleChartsModule } from 'ng2-google-charts';
-
-
+import { HomePageModule } from '../pages/home/home.module';
 
 @NgModule({
   declarations: [
-    MyApp,
-    AgendamentoPage,
-    AtendimentoPage,
-    PacientePage,
-    TipoAtendimentoPage,
-    UsuarioPage,
-    VisaoGeralPage,
-    HomePage,
-    ListPage
+    MyApp
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    Ng2CompleterModule,
     SharedModule,
-    Ng2GoogleChartsModule,
+    HomePageModule,
     HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    AgendamentoPage,
-    AtendimentoPage,
-    PacientePage,
-    TipoAtendimentoPage,
-    UsuarioPage,
-    VisaoGeralPage,
-    HomePage,
-    ListPage
+    MyApp
   ],
   providers: [
     StatusBar,

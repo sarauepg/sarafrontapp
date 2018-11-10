@@ -5,7 +5,7 @@
   "proxies": [
     {
       "path": "/proxy/sara/",
-      "proxyUrl": "http://localhost:8080/sara/",
+      "proxyUrl": "http://18.228.133.109/sara/",
       "rejectUnauthorized": false
     }
   ]

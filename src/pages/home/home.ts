@@ -33,7 +33,7 @@ export class HomePage {
   }
 
   goToAgenda(){
-    this.navCtrl.setRoot(AgendamentoPage);
+    this.navCtrl.setRoot('Agendamento');
   }
 
   login(){

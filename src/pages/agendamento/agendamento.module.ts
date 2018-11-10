@@ -4,8 +4,7 @@ import { AgendamentoPage } from './agendamento';
 import { SharedModule } from '../../directives/shared.module';
 
 @NgModule({
-  declarations: [
-  ],
+  declarations: [AgendamentoPage],
   imports: [
     IonicPageModule.forChild(AgendamentoPage),
     SharedModule

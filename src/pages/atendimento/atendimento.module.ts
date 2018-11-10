@@ -5,8 +5,7 @@ import { Ng2CompleterModule } from 'ng2-completer';
 import { SharedModule } from '../../directives/shared.module';
 
 @NgModule({
-  declarations: [
-  ],
+  declarations: [AtendimentoPage],
   imports: [
     IonicPageModule.forChild(AtendimentoPage),
     Ng2CompleterModule,
