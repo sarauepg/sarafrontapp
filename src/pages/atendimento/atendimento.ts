@@ -74,9 +74,13 @@ export class AtendimentoPage {
       this.list = [];
       if (this.dataInicial != null && this.dataInicial != undefined && this.dataInicial != "") {
         this.filtro.dataInicial = moment(this.dataInicial, 'DD-MM-YYYY').format('YYYY-MM-DD');
+      }else{
+        delete this.filtro.dataInicial;
       }
       if (this.dataFinal != null && this.dataFinal != undefined && this.dataFinal != "") {
         this.filtro.dataFinal = moment(this.dataFinal, 'DD-MM-YYYY').format('YYYY-MM-DD');
+      }else{
+        delete this.filtro.dataFinal;
       }
       if (this.filtro.idResponsavel == "null") {
         delete this.filtro.idResponsavel;

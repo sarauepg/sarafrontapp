@@ -188,7 +188,7 @@ export class ModalCadastroAtendimentoPage {
             });
             let aferiveisValid = true;
             this.atendimento.valoresAferidos.forEach(v => {
-                if (v.valorAferido != null && (v.valorAferido > 500 || v.valorAferido < 0) && aferiveisValid == true) {
+                if (v.valorAferido != null && (v.valorAferido > 500 || v.valorAferido < 0 ) && aferiveisValid == true) {
                     aferiveisValid = false;
                     loading.dismiss();
                     this.presentToast(v.nomeAferivel + " inválido.");
