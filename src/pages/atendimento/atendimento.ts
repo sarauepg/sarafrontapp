@@ -73,12 +73,12 @@ export class AtendimentoPage {
       this.listPage = 1;
       this.list = [];
       if (this.dataInicial != null && this.dataInicial != undefined && this.dataInicial != "") {
-        this.filtro.dataInicial = moment(this.dataInicial, 'DD-MM-YYYY').format('YYYY-MM-DD');
+        this.filtro.dataInicial = moment(this.dataInicial, 'DD/MM/YYYY').format('YYYY-MM-DD');
       }else{
         delete this.filtro.dataInicial;
       }
       if (this.dataFinal != null && this.dataFinal != undefined && this.dataFinal != "") {
-        this.filtro.dataFinal = moment(this.dataFinal, 'DD-MM-YYYY').format('YYYY-MM-DD');
+        this.filtro.dataFinal = moment(this.dataFinal, 'DD/MM/YYYY').format('YYYY-MM-DD');
       }else{
         delete this.filtro.dataFinal;
       }
@@ -131,10 +131,10 @@ export class AtendimentoPage {
 
   excluirAtendimento(atendimento) {
     atendimento.ativo = false;
-    atendimento.usuario.pessoa.dataNascimento = moment(atendimento.usuario.pessoa.dataNascimento, 'DD-MM-YYYY').format('YYYY-MM-DD');
-    atendimento.data = moment(atendimento.data, 'DD-MM-YYYY').format('YYYY-MM-DD');
+    atendimento.usuario.pessoa.dataNascimento = moment(atendimento.usuario.pessoa.dataNascimento, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    atendimento.data = moment(atendimento.data, 'DD/MM/YYYY').format('YYYY-MM-DD');
     if (atendimento.paciente.pessoa.dataNascimento != null) {
-      atendimento.paciente.pessoa.dataNascimento = moment(atendimento.paciente.pessoa.dataNascimento, 'DD-MM-YYYY').format('YYYY-MM-DD');
+      atendimento.paciente.pessoa.dataNascimento = moment(atendimento.paciente.pessoa.dataNascimento, 'DD/MM/YYYY').format('YYYY-MM-DD');
     }
     console.log(atendimento);
     let data = JSON.parse(JSON.stringify(atendimento));
@@ -222,7 +222,7 @@ export class AtendimentoPage {
   private dataValidator(control: FormControl) {
     let data = true;
     if (control.value != undefined && control.value != "") {
-      data = moment(control.value, 'DD-MM-YYYY').isValid();
+      data = moment(control.value, 'DD/MM/YYYY').isValid();
     }
     let valid = data ? null : { data: true };
     return valid;

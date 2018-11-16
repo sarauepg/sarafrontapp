@@ -102,9 +102,9 @@ export class ModalCadastroAgendamentoPage {
             let loading = this.loadingCtrl.create();
             loading.present();
             this.agendamento.status = 'M';
-            this.agendamento.data = moment(this.dataAgendamento, 'DD-MM-YYYY').format('YYYY-MM-DD');
+            this.agendamento.data = moment(this.dataAgendamento, 'DD/MM/YYYY').format('YYYY-MM-DD');
             let dataHoraValid = true;
-            if (moment(this.dataAgendamento + " " + this.agendamento.hora, 'DD-MM-YYYY HH:mm').isBefore(moment())) {
+            if (moment(this.dataAgendamento + " " + this.agendamento.hora, 'DD/MM/YYYY HH:mm').isBefore(moment())) {
                 dataHoraValid = false;
                 loading.dismiss();
                 this.presentToast("Um agendamento não pode ser realizado em uma data passada.");
@@ -136,7 +136,7 @@ export class ModalCadastroAgendamentoPage {
     }
 
     private dataValidator(control: FormControl) {
-        let data = moment(control.value, 'DD-MM-YYYY').isValid();
+        let data = moment(control.value, 'DD/MM/YYYY').isValid();
         let valid = data ? null : { data: true };
         return valid;
     }

@@ -156,12 +156,12 @@ export class ModalCadastroUsuarioPage {
             this.usuario.pessoa.telefoneTerciario = this.unmask(this.telefoneTerciario);
             this.usuario.pessoa.telefoneQuaternario = this.unmask(this.telefoneQuaternario);
             this.usuario.pessoa.telefoneQuintenario = this.unmask(this.telefoneQuintenario);
-            this.usuario.pessoa.dataNascimento = moment(this.dataNascimento, 'DD-MM-YYYY').format('YYYY-MM-DD');
+            this.usuario.pessoa.dataNascimento = moment(this.dataNascimento, 'DD/MM/YYYY').format('YYYY-MM-DD');
             this.usuario.ativo = true;
             console.log(this.usuario);
             let data = JSON.parse(JSON.stringify(this.usuario));
-            let url = this.isEditing ? APP_CONFIG.WEBSERVICE.ALTERAR_USUARIOS : APP_CONFIG.WEBSERVICE.CADASTRAR_USUARIOS;
-            this.requestService.postData(url, data).then((response: any) => {
+            if(!this.isEditing){
+            this.requestService.postData(APP_CONFIG.WEBSERVICE.CADASTRAR_USUARIOS, data).then((response: any) => {
                 console.log(response);
                 loading.dismiss();
                 this.dismiss(true);
@@ -170,6 +170,17 @@ export class ModalCadastroUsuarioPage {
                 loading.dismiss();
                 this.presentToast(erro.errorMessage);
             });
+        }else{
+            this.requestService.putData(APP_CONFIG.WEBSERVICE.ALTERAR_USUARIOS, data).then((response: any) => {
+                console.log(response);
+                loading.dismiss();
+                this.dismiss(true);
+            }, erro => {
+                console.error(erro);
+                loading.dismiss();
+                this.presentToast(erro.errorMessage);
+            });
+        }
         }else{
             this.presentToast("Por favor, cheque os campos em destaque.");
         }
@@ -183,7 +194,7 @@ export class ModalCadastroUsuarioPage {
             this.usuario.pessoa.cpf = this.unmask(this.usuario.pessoa.cpf);
             this.usuario.pessoa.telefonePrimario = this.unmask(this.telefonePrimario);
             this.usuario.pessoa.telefoneSecundario = this.unmask(this.telefoneSecundario);
-            let dataNasc = moment(this.usuario.pessoa.dataNascimento, 'DD-MM-YYYY').format('YYYY-MM-DD');
+            let dataNasc = moment(this.usuario.pessoa.dataNascimento, 'DD/MM/YYYY').format('YYYY-MM-DD');
             this.usuario.pessoa.dataNascimento = dataNasc;
             console.log(this.usuario);
             let data = JSON.parse(JSON.stringify(this.usuario));
@@ -227,7 +238,7 @@ export class ModalCadastroUsuarioPage {
     }
 
     private dataValidator(control: FormControl) {
-        let data = moment(control.value, 'DD-MM-YYYY').isValid();
+        let data = moment(control.value, 'DD/MM/YYYY').isValid();
         let valid = data ? null : { data: true };
         return valid;
     }

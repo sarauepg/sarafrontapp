@@ -47,7 +47,7 @@
                 <ion-col col-12 col-lg-4 padding-left padding-right>
                   <ion-item [ngClass]="{'invalid': formData.controls.dataInicio.invalid && (formData.controls.dataInicio.dirty || formSubmit)}">
                     <ion-label floating>Data inicial</ion-label>
-                    <ion-input formControlName="dataInicio" type="text" [mask]="{mask:'99-99-9999'}" [(ngModel)]="dataInicial"></ion-input>
+                    <ion-input formControlName="dataInicio" type="text" [mask]="{mask:'99/99/9999'}" [(ngModel)]="dataInicial"></ion-input>
                   </ion-item>
                   <div class="invalid-hint" *ngIf="(formData.controls.dataInicio.errors?.data || formData.controls.dataInicio.errors?.minlength) && formData.controls.dataInicio.dirty">
                       Data inválida
@@ -57,7 +57,7 @@
                 <ion-col col-12 col-lg-4 padding-left padding-right>
                   <ion-item [ngClass]="{'invalid': formData.controls.dataFim.invalid && (formData.controls.dataFim.dirty || formSubmit)}">
                     <ion-label floating>Data final</ion-label>
-                    <ion-input formControlName="dataFim" type="text" [mask]="{mask:'99-99-9999'}" [(ngModel)]="dataFinal"></ion-input>
+                    <ion-input formControlName="dataFim" type="text" [mask]="{mask:'99/99/9999'}" [(ngModel)]="dataFinal"></ion-input>
                   </ion-item>
                   <div class="invalid-hint" *ngIf="(formData.controls.dataFim.errors?.data || formData.controls.dataFim.errors?.minlength) && formData.controls.dataFim.dirty">
                       Data inválida

@@ -27,7 +27,7 @@ export class AgendamentoPage {
   constructor(private alertCtrl: AlertController, public loadingCtrl: LoadingController, private requestService: RequestService, public modalCtrl: ModalController, public toastCtrl: ToastController, public events: Events, public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams) {
 
     this.listarTiposDeAtendimento();
-    this.dataAgendamento = moment().format('DD-MM-YYYY').toString();
+    this.dataAgendamento = moment().format('DD/MM/YYYY').toString();
 
   }
 
@@ -41,12 +41,12 @@ export class AgendamentoPage {
   }
 
   filtrarAgendamento() {
-    if (moment(this.dataAgendamento, 'DD-MM-YYYY').isValid() && this.dataAgendamento.length == 10) {
+    if (moment(this.dataAgendamento, 'DD/MM/YYYY').isValid() && this.dataAgendamento.length == 10) {
       let loading = this.loadingCtrl.create();
       loading.present();
       this.listPage = 1;
       this.list = [];
-      this.filtro.dataAgendamento = moment(this.dataAgendamento, 'DD-MM-YYYY').format('YYYY-MM-DD');
+      this.filtro.dataAgendamento = moment(this.dataAgendamento, 'DD/MM/YYYY').format('YYYY-MM-DD');
       if (this.filtro.idTipoAtendimento == "null") {
         delete this.filtro.idTipoAtendimento;
       }
@@ -93,12 +93,12 @@ export class AgendamentoPage {
 
   atenderAgendamento(agendamento){
     agendamento.status = 'A';
-    agendamento.data = moment(this.dataAgendamento, 'DD-MM-YYYY').format('YYYY-MM-DD');
+    agendamento.data = moment(this.dataAgendamento, 'DD/MM/YYYY').format('YYYY-MM-DD');
     console.log(agendamento);
     let data = JSON.parse(JSON.stringify(agendamento));
     this.requestService.putData(APP_CONFIG.WEBSERVICE.ALTERAR_AGENDAMENTO, data).then((response: any) => {
       console.log(response);
-      agendamento.data = moment(agendamento.data, 'YYYY-MM-DD').format('DD-MM-YYYY');
+      agendamento.data = moment(agendamento.data, 'YYYY-MM-DD').format('DD/MM/YYYY');
     }, erro => {
       console.error(erro);
       this.presentToast(erro.errorMessage);
@@ -107,12 +107,12 @@ export class AgendamentoPage {
 
   cancelarAgendamento(agendamento) {
     agendamento.status = 'C';
-    agendamento.data = moment(this.dataAgendamento, 'DD-MM-YYYY').format('YYYY-MM-DD');
+    agendamento.data = moment(this.dataAgendamento, 'DD/MM/YYYY').format('YYYY-MM-DD');
     console.log(agendamento);
     let data = JSON.parse(JSON.stringify(agendamento));
     this.requestService.putData(APP_CONFIG.WEBSERVICE.ALTERAR_AGENDAMENTO, data).then((response: any) => {
       console.log(response);
-      agendamento.data = moment(agendamento.data, 'YYYY-MM-DD').format('DD-MM-YYYY');
+      agendamento.data = moment(agendamento.data, 'YYYY-MM-DD').format('DD/MM/YYYY');
     }, erro => {
       console.error(erro);
       this.presentToast(erro.errorMessage);
@@ -120,12 +120,12 @@ export class AgendamentoPage {
   }
 
   nextDay() {
-    this.dataAgendamento = moment(this.dataAgendamento, 'DD-MM-YYYY').add(1, 'days').format('DD-MM-YYYY').toString();
+    this.dataAgendamento = moment(this.dataAgendamento, 'DD/MM/YYYY').add(1, 'days').format('DD/MM/YYYY').toString();
     this.filtrarAgendamento();
   }
 
   previousDay() {
-    this.dataAgendamento = moment(this.dataAgendamento, 'DD-MM-YYYY').subtract(1, 'days').format('DD-MM-YYYY').toString();
+    this.dataAgendamento = moment(this.dataAgendamento, 'DD/MM/YYYY').subtract(1, 'days').format('DD/MM/YYYY').toString();
     this.filtrarAgendamento();
   }
 

@@ -48,7 +48,7 @@
                         <ion-col col-6 padding-left padding-right>
                             <ion-item [ngClass]="{'invalid': form.controls.dataNasc.invalid && (form.controls.dataNasc.dirty || form.controls.dataNasc.touched || formSubmit)}">
                                 <ion-label floating>Data de nascimento *</ion-label>
-                                <ion-input [disabled]="isEditing" formControlName="dataNasc" [mask]="{mask:'99-99-9999'}" [(ngModel)]="dataNascimento" type="text"></ion-input>
+                                <ion-input [disabled]="isEditing" formControlName="dataNasc" [mask]="{mask:'99/99/9999'}" [(ngModel)]="dataNascimento" type="text"></ion-input>
                             </ion-item>
                             <div class="invalid-hint" *ngIf="form.controls.dataNasc.errors?.required && (form.controls.dataNasc.touched || formSubmit)">
                                 Campo obrigatório

@@ -111,7 +111,7 @@ export class ModalCadastroPacientePage {
             this.paciente.pessoa.telefoneTerciario = this.unmask(this.telefoneTerciario);
             this.paciente.pessoa.telefoneQuaternario = this.unmask(this.telefoneQuaternario);
             this.paciente.pessoa.telefoneQuintenario = this.unmask(this.telefoneQuintenario);
-            this.paciente.pessoa.dataNascimento = moment(this.dataNascimento, 'DD-MM-YYYY').format('YYYY-MM-DD');
+            this.paciente.pessoa.dataNascimento = moment(this.dataNascimento, 'DD/MM/YYYY').format('YYYY-MM-DD');
             console.log(this.paciente);
             let data = JSON.parse(JSON.stringify(this.paciente));
             if (!this.isEditing) {
@@ -171,7 +171,7 @@ export class ModalCadastroPacientePage {
     }
 
     private dataValidator(control: FormControl) {
-        let data = moment(control.value, 'DD-MM-YYYY').isValid();
+        let data = moment(control.value, 'DD/MM/YYYY').isValid();
         let valid = data ? null : { data: true };
         return valid;
     }

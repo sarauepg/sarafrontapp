@@ -176,10 +176,10 @@ export class ModalCadastroAtendimentoPage {
             let loading = this.loadingCtrl.create();
             loading.present();
             this.atendimento.ativo = true;
-            this.atendimento.usuario.pessoa.dataNascimento = moment(this.atendimento.usuario.pessoa.dataNascimento, 'DD-MM-YYYY').format('YYYY-MM-DD');
-            this.atendimento.data = moment(this.dataAt, 'DD-MM-YYYY').format('YYYY-MM-DD');
+            this.atendimento.usuario.pessoa.dataNascimento = moment(this.atendimento.usuario.pessoa.dataNascimento, 'DD/MM/YYYY').format('YYYY-MM-DD');
+            this.atendimento.data = moment(this.dataAt, 'DD/MM/YYYY').format('YYYY-MM-DD');
             if (this.atendimento.paciente.pessoa.dataNascimento != null) {
-                this.atendimento.paciente.pessoa.dataNascimento = moment(this.atendimento.paciente.pessoa.dataNascimento, 'DD-MM-YYYY').format('YYYY-MM-DD');
+                this.atendimento.paciente.pessoa.dataNascimento = moment(this.atendimento.paciente.pessoa.dataNascimento, 'DD/MM/YYYY').format('YYYY-MM-DD');
             }
             this.atendimento.valoresAferidos.forEach(v => {
                 if (v.valorAferido != null && typeof v.valorAferido == "string") {
@@ -195,7 +195,7 @@ export class ModalCadastroAtendimentoPage {
                 }
             })
             let dataHoraValid = true;
-            if (moment(this.dataAt + " " + this.atendimento.hora, 'DD-MM-YYYY HH:mm').isAfter(moment())) {
+            if (moment(this.dataAt + " " + this.atendimento.hora, 'DD/MM/YYYY HH:mm').isAfter(moment())) {
                 dataHoraValid = false;
                 loading.dismiss();
                 this.presentToast("Um atendimento não pode ser realizado em uma data futura.");
