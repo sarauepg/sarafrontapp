@@ -129,6 +129,7 @@ export class UsuarioPage {
       if (data) {
         this.presentToast("Usuário cadastrado com sucesso!");
         this.filtrarUsuario();
+        this.listarUsuarios();
       }
     });
     modal.present();

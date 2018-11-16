@@ -126,6 +126,7 @@ export class PacientePage {
       if (data) {
         this.presentToast("Paciente cadastrado com sucesso!");
         this.filtrarPaciente();
+        this.listarPacientes();
       }
     });
     modal.present();
