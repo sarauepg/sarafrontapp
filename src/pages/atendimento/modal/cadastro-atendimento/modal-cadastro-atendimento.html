@@ -123,7 +123,7 @@
                     <ion-col *ngFor="let a of atendimento.valoresAferidos;" col-4 padding-left padding-right>
                         <ion-item>
                             <ion-label floating>{{a.nomeAferivel}}</ion-label>
-                            <ion-input [(ngModel)]="a.valorAferido" [ngModelOptions]="{standalone: true}" type="number"></ion-input>
+                            <ion-input [(ngModel)]="a.valorAferido" [ngModelOptions]="{standalone: true}" type="number" (keydown)="filterInput($event)"></ion-input>
                         </ion-item>
                     </ion-col>
                 </ion-row>

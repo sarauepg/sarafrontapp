@@ -247,6 +247,18 @@ export class ModalCadastroAtendimentoPage {
         alert.present();
     }
 
+    filterInput(event) {
+        var keyCode = ('which' in event) ? event.which : event.keyCode;
+        
+        let isNotWanted = true;
+        if(keyCode == 188 || keyCode == 190){
+            isNotWanted = (event.srcElement.value.split(",").length-1 > 0 || event.srcElement.value.split(".").length-1 > 0 || event.srcElement.value == "") ? false : true;
+        }else{
+            isNotWanted = (keyCode == 69 || keyCode == 101 || keyCode == 189) ? false : true;
+        }
+        return isNotWanted;
+    }
+
     presentToast(msg) {
         const toast = this.toastCtrl.create({
             message: msg,
