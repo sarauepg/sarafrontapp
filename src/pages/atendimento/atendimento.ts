@@ -65,6 +65,14 @@ export class AtendimentoPage {
     }
   }
 
+  openHelp() {
+    let loading = this.loadingCtrl.create();
+    loading.present();
+    window.open('../../assets/help/PROVA_LFC.pdf', '_blank');
+    loading.dismiss();
+  }
+
+
   filtrarAtendimento() {
     this.formSubmit = true;
     if (this.formData.valid) {
@@ -74,12 +82,12 @@ export class AtendimentoPage {
       this.list = [];
       if (this.dataInicial != null && this.dataInicial != undefined && this.dataInicial != "") {
         this.filtro.dataInicial = moment(this.dataInicial, 'DD/MM/YYYY').format('YYYY-MM-DD');
-      }else{
+      } else {
         delete this.filtro.dataInicial;
       }
       if (this.dataFinal != null && this.dataFinal != undefined && this.dataFinal != "") {
         this.filtro.dataFinal = moment(this.dataFinal, 'DD/MM/YYYY').format('YYYY-MM-DD');
-      }else{
+      } else {
         delete this.filtro.dataFinal;
       }
       if (this.filtro.idResponsavel == "null") {
@@ -209,7 +217,7 @@ export class AtendimentoPage {
   }
 
   abrirModalEdicaoAtendimento(atendimento) {
-    const modal = this.modalCtrl.create("ModalCadastroAtendimento", {atendimento: atendimento}, { enableBackdropDismiss: true });
+    const modal = this.modalCtrl.create("ModalCadastroAtendimento", { atendimento: atendimento }, { enableBackdropDismiss: true });
     modal.onDidDismiss(data => {
       if (data) {
         this.presentToast("Atendimento alterado com sucesso!");
