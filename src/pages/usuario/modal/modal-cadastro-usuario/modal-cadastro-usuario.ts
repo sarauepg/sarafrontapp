@@ -157,7 +157,9 @@ export class ModalCadastroUsuarioPage {
             this.usuario.pessoa.telefoneQuaternario = this.unmask(this.telefoneQuaternario);
             this.usuario.pessoa.telefoneQuintenario = this.unmask(this.telefoneQuintenario);
             this.usuario.pessoa.dataNascimento = moment(this.dataNascimento, 'DD/MM/YYYY').format('YYYY-MM-DD');
-            this.usuario.ativo = true;
+            if(!this.isEditing){
+                this.usuario.ativo = true;
+            };
             console.log(this.usuario);
             let data = JSON.parse(JSON.stringify(this.usuario));
             if(!this.isEditing){
