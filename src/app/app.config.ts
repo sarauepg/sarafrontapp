@@ -3,7 +3,7 @@ let LOCALHOST_SERVER_ADDRESS = "http://localhost";
 let AMAZON_SERVER_ADDRESS = "http://18.228.133.109";
 
 /* PARA TROCAR DE AMBIENTE APENAS MUDAR A VARIAVEL. CASO QUEIRA RODAR NO NAVEGADOR ALTERAR TAMBEM "ionic.config.json" */
-let SERVER_SELECTED =AMAZON_SERVER_ADDRESS;
+let SERVER_SELECTED =LOCALHOST_SERVER_ADDRESS;
 
 let API_ADDRESS = SERVER_SELECTED + ":8080/sara/";
 
@@ -31,8 +31,8 @@ export const APP_CONFIG = {
 		FILTRAR_ATENDIMENTO: END_POINT + "atendimento/filtrar?",
 		ALTERAR_ATENDIMENTO: END_POINT + "atendimento/alterar",
 		CARREGAR_VALORES_AFERIDOS: END_POINT + "atendimento/valoresAferidos?idAtendimento={idAtendimento}",
-		AT_X_TIPOAT: END_POINT + "atendimento/atendimentoxtipoat",
-		AT_X_LOTACAO: END_POINT + "atendimento/atendimentoxlotacao",
+		AT_X_TIPOAT: END_POINT + "atendimento/atendimentoxtipoat?",
+		AT_X_LOTACAO: END_POINT + "atendimento/atendimentoxlotacao?",
 
 		// USUÁRIO
 		LISTAR_RESPONSAVEIS: END_POINT + "usuario/listarResponsaveis?cargo={cargo}",
