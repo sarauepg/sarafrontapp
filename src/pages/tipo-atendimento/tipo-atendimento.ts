@@ -37,6 +37,10 @@ export class TipoAtendimentoPage {
 
   }
 
+  openHelp() {
+    window.open('../../assets/help/tipodeatendimento.pdf', '_blank');
+  }
+
   deletaTipoAtendimento(id){
     let loading = this.loadingCtrl.create();
     loading.present();

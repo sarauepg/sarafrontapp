@@ -3,10 +3,25 @@
         <ion-buttons right>
             <button ion-button icon-only clear (click)="dismiss()">
                 <ion-icon name="md-close" item-right></ion-icon>
-            </button>
+            </button>   
         </ion-buttons>
-        <ion-title *ngIf="!isEditing" >Novo atendimento</ion-title>
-        <ion-title *ngIf="isEditing" >Visualizar atendimento</ion-title>
+        <!-- <ion-title *ngIf="!isEditing" >Novo atendimento</ion-title> -->
+
+        <ion-row *ngIf="!isEditing" align-items-center	>
+                <ion-col col-10>
+                  <ion-title icon-start>
+                    <ion-icon name="medkit"></ion-icon>Novo atendimento
+                  </ion-title>
+                </ion-col>
+                <ion-col class="help5">
+                    <button icon-start ion-button class="help" (click)="openHelp()">
+                        <ion-icon name="help">
+                        </ion-icon>Ajuda
+                      </button> 
+                </ion-col>
+              </ion-row>
+
+        <ion-title *ngIf="isEditing" >Visualizar/Editar atendimento</ion-title>
     </ion-navbar>
 </ion-header>
 

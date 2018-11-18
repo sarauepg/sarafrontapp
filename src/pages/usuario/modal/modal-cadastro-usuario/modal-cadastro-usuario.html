@@ -5,8 +5,21 @@
                 <ion-icon name="md-close" item-right></ion-icon>
             </button>
         </ion-buttons>
-        <ion-title *ngIf="!isEditing" >Novo usuário</ion-title>
-        <ion-title *ngIf="isEditing" >Visualizar usuário</ion-title>
+        <!-- <ion-title *ngIf="!isEditing" >Novo usuário</ion-title> -->
+        <ion-row *ngIf="!isEditing" align-items-center	>
+                <ion-col col-10>
+                  <ion-title icon-start>
+                    <ion-icon name="people"></ion-icon>Novo usuário
+                  </ion-title>
+                </ion-col>
+                <ion-col class="help5">
+                    <button icon-start ion-button class="help" (click)="openHelp()">
+                        <ion-icon name="help">
+                        </ion-icon>Ajuda
+                      </button> 
+                </ion-col>
+              </ion-row>
+        <ion-title *ngIf="isEditing" >Visualizar/Editar usuário</ion-title>
     </ion-navbar>
 </ion-header>
 

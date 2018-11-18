@@ -7,15 +7,28 @@
 <ion-header>
 
   <ion-navbar color="dark">
-    <ion-title icon-start>
-      <ion-icon name="calendar"></ion-icon>Agenda
-    </ion-title>
+      <ion-row align-items-center	>
+          <ion-col col-10>
+            <ion-title icon-start>
+              <ion-icon name="calendar"></ion-icon>Agenda
+            </ion-title>
+          </ion-col>
+          <ion-col class="help5">
+              <button icon-start ion-button class="help" (click)="openHelp()">
+                  <ion-icon name="help">
+                  </ion-icon>Ajuda
+                </button> 
+          </ion-col>
+        </ion-row>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding fullscreen="true" class="content-bg">
+  <!-- <button ion-button icon-start class="help-btn" (click)="openHelp()">
+      <ion-icon name="help"></ion-icon>Sobre esta página
+    </button> -->
   <div margin-top class="content-padding-side">
     <ion-row>
       <ion-col col-12 col-md no-padding>

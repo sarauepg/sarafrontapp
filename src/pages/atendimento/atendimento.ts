@@ -66,12 +66,8 @@ export class AtendimentoPage {
   }
 
   openHelp() {
-    let loading = this.loadingCtrl.create();
-    loading.present();
-    window.open('../../assets/help/PROVA_LFC.pdf', '_blank');
-    loading.dismiss();
+    window.open('../../assets/help/atendimentos.pdf', '_blank');
   }
-
 
   filtrarAtendimento() {
     this.formSubmit = true;

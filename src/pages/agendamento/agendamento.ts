@@ -31,6 +31,10 @@ export class AgendamentoPage {
 
   }
 
+  openHelp() {
+    window.open('../../assets/help/agenda.pdf', '_blank');
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad AgendamentoPage');
     this.filtrarAgendamento();
@@ -181,5 +185,7 @@ export class AgendamentoPage {
     });
     toast.present();
   }
+
+
 
 }

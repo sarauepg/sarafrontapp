@@ -54,6 +54,10 @@ export class HomePage {
           }
   }
 
+  openHelp() {
+    window.open('../../assets/help/login.pdf', '_blank');
+  }
+
   presentToast(msg) {
     const toast = this.toastCtrl.create({
         message: msg,

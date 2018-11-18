@@ -39,6 +39,11 @@ export class PacientePage {
     this.initVariables();  
   }
 
+  openHelp() {
+    window.open('../../assets/help/paciente.pdf', '_blank');
+  }
+
+
   selecionado(selected: CompleterItem) {
     if (selected) {
       this.filtro.idPaciente = selected.originalObject.id;

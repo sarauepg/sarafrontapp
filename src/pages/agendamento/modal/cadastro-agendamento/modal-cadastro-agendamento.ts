@@ -52,6 +52,10 @@ export class ModalCadastroAgendamentoPage {
 
     }
 
+    openHelp() {
+        window.open('../../../assets/help/agenda-novoagendamento.pdf', '_blank');
+      }
+
     selecionado(selected: CompleterItem) {
         if (selected) {
             this.pacienteSelecionado = true;

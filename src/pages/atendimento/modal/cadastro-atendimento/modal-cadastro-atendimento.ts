@@ -51,6 +51,10 @@ export class ModalCadastroAtendimentoPage {
         });
     }
 
+    openHelp() {
+        window.open('../../../assets/help/atendimentos-novoatendimento.pdf', '_blank');
+      }
+
     ionViewDidLoad() {
         if (this.isEditing) {
             let atendimento: any = this.params.get('atendimento');

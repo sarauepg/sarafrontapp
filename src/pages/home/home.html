@@ -3,6 +3,7 @@
     <div>
       <div>
         <img class="logo-sara" src="../assets/imgs/logo-fundo-transparente.png" />
+        
       </div>
       <form [formGroup]="form">
       <div style="margin-top: 40px">
@@ -20,8 +21,17 @@
       <div class="invalid-hint" *ngIf="form.controls.senha.errors?.required && ((form.controls.senha.dirty && form.controls.senha.touched) || formSubmit)">
         Campo obrigatório
     </div>
+    
       <button ion-button block class="login-btn botao-enviar" (click)="login()">entrar</button>
       <p style="text-align: center; color: rgb(89, 194, 200);">____________________________________________</p>
+      <div>
+      
+        <button ion-button icon-start class="help-btn" (click)="openHelp()">
+          <ion-icon name="help"></ion-icon>Ajuda
+        </button>
+     
+       
+    </div>  
     </div>
     </form>
     </div>

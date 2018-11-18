@@ -8,13 +8,16 @@
 
   <ion-navbar color="dark">
     <ion-row align-items-center	>
-      <ion-col col-auto>
+      <ion-col col-10>
         <ion-title icon-start>
           <ion-icon name="medkit"></ion-icon>
         </ion-title>
       </ion-col>
-      <ion-col>
-        <button color="white" ion-button clear (click)="openHelp()">help</button>
+      <ion-col class="help5">
+          <button icon-start ion-button class="help" (click)="openHelp()">
+              <ion-icon name="help">
+              </ion-icon>Ajuda
+            </button> 
       </ion-col>
     </ion-row>
   </ion-navbar>

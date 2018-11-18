@@ -132,6 +132,10 @@ export class ModalCadastroUsuarioPage {
         }
     }
 
+    openHelp() {
+        window.open('../../assets/help/usuario-cadastrarusuario.pdf', '_blank');
+    }
+    
     dismiss(data?) {
         data ? this.viewCtrl.dismiss(data) : this.viewCtrl.dismiss();
     }

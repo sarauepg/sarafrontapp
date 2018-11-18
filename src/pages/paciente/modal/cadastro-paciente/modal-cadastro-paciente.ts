@@ -58,6 +58,10 @@ export class ModalCadastroPacientePage {
         });
     }
 
+    openHelp() {
+        window.open('../../assets/help/paciente-cadastrarpaciente.pdf', '_blank');
+      }
+    
     editarPaciente() {
         let paciente: any = this.params.get('paciente');
         if (paciente != null) {

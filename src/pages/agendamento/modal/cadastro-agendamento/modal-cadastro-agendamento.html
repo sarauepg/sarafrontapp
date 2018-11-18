@@ -5,7 +5,26 @@
                 <ion-icon name="md-close" item-right></ion-icon>
             </button>
         </ion-buttons>
-        <ion-title>Novo agendamento</ion-title>
+        <ion-row align-items-center	>
+                <ion-col col-10>
+                  <ion-title icon-start>
+                    <ion-icon name="calendar"></ion-icon>Novo Agendamento
+                  </ion-title>
+                </ion-col>
+                <ion-col class="help5">
+                    <button icon-start ion-button class="help" (click)="openHelp()">
+                        <ion-icon name="help">
+                        </ion-icon>Ajuda
+                      </button> 
+                </ion-col>
+              </ion-row>
+        <!-- <ion-title>Novo agendamento
+                <button ion-button class="help" (click)="openHelp()">
+                        <ion-icon name="help">
+                        </ion-icon>Ajuda
+                </button> 
+        </ion-title> -->
+        
     </ion-navbar>
 </ion-header>
 

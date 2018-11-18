@@ -21,6 +21,25 @@ page-agendamento {
             border-bottom: 1px solid #cfcfcf !important;
         }
     }
+    .help5{
+        margin-left: 5%;
+    }
+
+    .help{
+        background-color: #39a49e;
+        //margin-left: 81%;
+        width: 75px;
+        height: 20px;
+        font-size: 11px;
+    }
+
+    .help-btn{
+        background-color: #59c2c8;
+        margin-right: 1%;
+        width: 140px;
+        height: 20px;
+        font-size: 11px;
+    }
 
     @media only screen and (min-width: 768px) {
         .content-padding-side {

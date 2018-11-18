@@ -7,9 +7,22 @@
 <ion-header>
 
   <ion-navbar color="dark">
-    <ion-title icon-start>
+      <ion-row align-items-center	>
+          <ion-col col-10>
+            <ion-title icon-start>
+              <ion-icon name="people"></ion-icon>
+            </ion-title>
+          </ion-col>
+          <ion-col class="help5">
+              <button icon-start ion-button class="help" (click)="openHelp()">
+                  <ion-icon name="help">
+                  </ion-icon>Ajuda
+                </button> 
+          </ion-col>
+        </ion-row>
+    <!-- <ion-title icon-start>
       <ion-icon name="people"></ion-icon>
-    </ion-title>
+    </ion-title> -->
   </ion-navbar>
 
 </ion-header>

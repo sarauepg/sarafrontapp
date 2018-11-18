@@ -45,6 +45,10 @@ export class UsuarioPage {
     }
   }
 
+  openHelp() {
+    window.open('../../assets/help/usuario.pdf', '_blank');
+  }
+
   selecionado(selected: CompleterItem) {
     if (selected) {
       this.filtro.idUsuario = selected.originalObject.id;
