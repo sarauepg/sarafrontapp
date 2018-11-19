@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, Events, NavController} from 'ionic-angular';
+import { Nav, Platform, Events, NavController, AlertController} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -21,7 +21,7 @@ export class MyApp {
 
   pages: Array<{ title: string, component: any, name: string, icon: string }>;
 
-  constructor(public events: Events, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public alertCtrl: AlertController, public events: Events, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
 
     this.pages = [
@@ -48,6 +48,29 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.name);
+  }
+
+  logout() {
+    let alert = this.alertCtrl.create({
+      title: 'Sair',
+      message: 'Você deseja fazer logout do sistema?',
+      buttons: [
+        {
+          text: 'Não',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Sim',
+          handler: () => {
+            this.nav.setRoot('Home');
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
 }
