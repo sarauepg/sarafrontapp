@@ -26,6 +26,10 @@ export class VisaoGeralPage {
     this.initGraficos();
   }
 
+  openHelp() {
+    window.open('../../assets/help/visaogeral.pdf', '_blank');
+  }
+
   initGraficos() {
     let loading = this.loadingCtrl.create();
     loading.present();
