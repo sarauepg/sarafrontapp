@@ -258,7 +258,7 @@ export class ModalCadastroAtendimentoPage {
         if(keyCode == 188 || keyCode == 190 || keyCode == 108 || keyCode == 110){
             isNotWanted = (event.srcElement.value.split(",").length-1 > 0 || event.srcElement.value.split(".").length-1 > 0 || event.srcElement.value == "") ? false : true;
         }else{
-            isNotWanted = (keyCode == 69 || keyCode == 101 || keyCode == 189 || keyCode == 109) ? false : true;
+            isNotWanted = (keyCode == 69 || keyCode == 107 || keyCode == 189 || keyCode == 109) ? false : true;
         }
         return isNotWanted;
     }
