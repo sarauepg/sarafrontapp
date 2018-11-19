@@ -31,8 +31,8 @@ export const APP_CONFIG = {
 		FILTRAR_ATENDIMENTO: END_POINT + "atendimento/filtrar?",
 		ALTERAR_ATENDIMENTO: END_POINT + "atendimento/alterar",
 		CARREGAR_VALORES_AFERIDOS: END_POINT + "atendimento/valoresAferidos?idAtendimento={idAtendimento}",
-		AT_X_TIPOAT: END_POINT + "atendimento/atendimentoxtipoat",
-		AT_X_LOTACAO: END_POINT + "atendimento/atendimentoxlotacao",
+		AT_X_TIPOAT: END_POINT + "atendimento/atendimentoxtipoat?",
+		AT_X_LOTACAO: END_POINT + "atendimento/atendimentoxlotacao?",
 
 		// USUÁRIO
 		LISTAR_RESPONSAVEIS: END_POINT + "usuario/listarResponsaveis?cargo={cargo}",
