@@ -5,121 +5,123 @@
 -->
 <ion-header>
 
-    <ion-navbar color="dark">
-        <ion-row align-items-center	>
-            <ion-col col-10>
-              <ion-title icon-start>
-                <ion-icon name="pie"></ion-icon>Visão Geral
-              </ion-title>
-            </ion-col>
-            <ion-col class="help5">
-                <button icon-start ion-button class="help" (click)="openHelp()">
-                    <ion-icon name="help">
-                    </ion-icon>Ajuda
-                  </button> 
-            </ion-col>
-          </ion-row>
-      <!-- <ion-title icon-start>
+  <ion-navbar color="dark">
+    <ion-row align-items-center>
+      <ion-col col-10>
+        <ion-title icon-start>
+          <ion-icon name="pie"></ion-icon>Visão Geral
+        </ion-title>
+      </ion-col>
+      <ion-col class="help5">
+        <button icon-start ion-button class="help" (click)="openHelp()">
+          <ion-icon name="help">
+          </ion-icon>Ajuda
+        </button>
+      </ion-col>
+    </ion-row>
+    <!-- <ion-title icon-start>
         <ion-icon name="pie"></ion-icon>Visão geral
       </ion-title> -->
-    </ion-navbar>
-  
-  </ion-header>
-  
-  <ion-content padding fullscreen="true" class="content-bg">
-  
-    <div margin-top class="content-padding-side">
-      <ion-row>
-        <ion-col col-lg-12>
-          <ion-card>
-            <ion-card-header>
-              <ion-row justify-content-center align-items-center>
-                <p class="card-title">ATENDIMENTO x TIPO DE ATENDIMENTO</p>
-              </ion-row>
-            </ion-card-header>
-            <div class="divider"></div>
-            <ion-card-content>
-              <form [formGroup]="formTipoAt">
-                <ion-row justify-content-center>
-                  <ion-col col-auto>
-                      <div style="margin-top: 40px !important;"><span class="font-size-medium">Período:</span></div>
-                  </ion-col>
-                  <ion-col col-2>
-                      <ion-item [ngClass]="{'invalid': formTipoAt.controls.dataInicio.invalid && (formTipoAt.controls.dataInicio.dirty || form1Submit)}">
-                          <ion-label floating>Data inicial *</ion-label>
-                          <ion-input formControlName="dataInicio" type="text" [mask]="{mask:'99/99/9999'}" [(ngModel)]="dataInicioTipoAt"></ion-input>
-                        </ion-item>
-                        <div class="invalid-hint" *ngIf="(formTipoAt.controls.dataInicio.errors?.data || formTipoAt.controls.dataInicio.errors?.minlength) && formTipoAt.controls.dataInicio.dirty">
-                          Data inválida
-                        </div>
-                    </ion-col>
-                    <ion-col col-2>
-                        <ion-item [ngClass]="{'invalid': formTipoAt.controls.dataInicio.invalid && (formTipoAt.controls.dataInicio.dirty || form1Submit)}">
-                            <ion-label floating>Data final *</ion-label>
-                            <ion-input formControlName="dataFim" type="text" [mask]="{mask:'99/99/9999'}" [(ngModel)]="dataFimTipoAt"></ion-input>
-                          </ion-item>
-                          <div class="invalid-hint" *ngIf="(formTipoAt.controls.dataInicio.errors?.data || formTipoAt.controls.dataInicio.errors?.minlength) && formTipoAt.controls.dataInicio.dirty">
-                            Data inválida
-                          </div>
-                      </ion-col>
-                      <ion-col col-auto>
-                          <button icon-start ion-button class="search-btn" color="light" float-end (click)="getGraficoAtXTipoAt()">
-                              <ion-icon name="search"></ion-icon>Pesquisar
-                            </button>
-                      </ion-col>
-                </ion-row>
-              </form>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding fullscreen="true" class="content-bg">
+
+  <div margin-top class="content-padding-side">
+    <ion-row>
+      <ion-col col-lg-12>
+        <ion-card>
+          <ion-card-header>
+            <ion-row justify-content-center align-items-center>
+              <p class="card-title">ATENDIMENTO x TIPO DE ATENDIMENTO</p>
+            </ion-row>
+          </ion-card-header>
+          <div class="divider"></div>
+          <ion-card-content>
+            <form [formGroup]="formTipoAt">
               <ion-row justify-content-center>
-                <google-chart [data]="tipoAtxAt"></google-chart>
+                <ion-col col-auto>
+                  <div style="margin-top: 40px !important;"><span class="font-size-medium">Período:</span></div>
+                </ion-col>
+                <ion-col col-2>
+                  <ion-item [ngClass]="{'invalid': formTipoAt.controls.dataInicio.invalid && (formTipoAt.controls.dataInicio.dirty || form1Submit)}">
+                    <ion-label floating>Data inicial *</ion-label>
+                    <ion-input formControlName="dataInicio" type="text" [mask]="{mask:'99/99/9999'}" [(ngModel)]="dataInicioTipoAt"></ion-input>
+                  </ion-item>
+                  <div class="invalid-hint" *ngIf="(formTipoAt.controls.dataInicio.errors?.data || formTipoAt.controls.dataInicio.errors?.minlength) && formTipoAt.controls.dataInicio.dirty">
+                    Data inválida
+                  </div>
+                </ion-col>
+                <ion-col col-2>
+                  <ion-item [ngClass]="{'invalid': formTipoAt.controls.dataInicio.invalid && (formTipoAt.controls.dataInicio.dirty || form1Submit)}">
+                    <ion-label floating>Data final *</ion-label>
+                    <ion-input formControlName="dataFim" type="text" [mask]="{mask:'99/99/9999'}" [(ngModel)]="dataFimTipoAt"></ion-input>
+                  </ion-item>
+                  <div class="invalid-hint" *ngIf="(formTipoAt.controls.dataInicio.errors?.data || formTipoAt.controls.dataInicio.errors?.minlength) && formTipoAt.controls.dataInicio.dirty">
+                    Data inválida
+                  </div>
+                </ion-col>
+                <ion-col col-auto>
+                  <button icon-start ion-button class="search-btn" color="light" float-end (click)="getGraficoAtXTipoAt()">
+                    <ion-icon name="search"></ion-icon>Pesquisar
+                  </button>
+                </ion-col>
               </ion-row>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col col-lg-12>
-          <ion-card>
-            <ion-card-header>
+            </form>
+            <ion-row justify-content-center>
+              <google-chart *ngIf="tipoAtxAtDataTable.length > 1" [data]="tipoAtxAt"></google-chart>
+              <div *ngIf="tipoAtxAtDataTable.length <= 1" style="margin-top: 40px; margin-bottom: 35px;"><span class="font-size-great">Nenhum atendimento realizado nesse período.</span></div>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col col-lg-12>
+        <ion-card>
+          <ion-card-header>
+            <ion-row justify-content-center>
+              <p class="card-title">ATENDIMENTO x LOTAÇÃO</p>
+            </ion-row>
+          </ion-card-header>
+          <div class="divider"></div>
+          <ion-card-content>
+            <form [formGroup]="formLotacao">
               <ion-row justify-content-center>
-                <p class="card-title">ATENDIMENTO x LOTAÇÃO</p>
+                <ion-col col-auto>
+                  <div style="margin-top: 40px !important;"><span class="font-size-medium">Período:</span></div>
+                </ion-col>
+                <ion-col col-2>
+                  <ion-item [ngClass]="{'invalid': formLotacao.controls.dataInicio.invalid && (formLotacao.controls.dataInicio.dirty || form2Submit)}">
+                    <ion-label floating>Data inicial *</ion-label>
+                    <ion-input formControlName="dataInicio" type="text" [mask]="{mask:'99/99/9999'}" [(ngModel)]="dataInicioLotacao"></ion-input>
+                  </ion-item>
+                  <div class="invalid-hint" *ngIf="(formLotacao.controls.dataInicio.errors?.data || formLotacao.controls.dataInicio.errors?.minlength) && formLotacao.controls.dataInicio.dirty">
+                    Data inválida
+                  </div>
+                </ion-col>
+                <ion-col col-2>
+                  <ion-item [ngClass]="{'invalid': formLotacao.controls.dataInicio.invalid && (formLotacao.controls.dataInicio.dirty || form2Submit)}">
+                    <ion-label floating>Data final *</ion-label>
+                    <ion-input formControlName="dataFim" type="text" [mask]="{mask:'99/99/9999'}" [(ngModel)]="dataFimLotacao"></ion-input>
+                  </ion-item>
+                  <div class="invalid-hint" *ngIf="(formLotacao.controls.dataInicio.errors?.data || formLotacao.controls.dataInicio.errors?.minlength) && formLotacao.controls.dataInicio.dirty">
+                    Data inválida
+                  </div>
+                </ion-col>
+                <ion-col col-auto>
+                  <button icon-start ion-button class="search-btn" color="light" float-end (click)="getGraficoAtXLotacao()">
+                    <ion-icon name="search"></ion-icon>Pesquisar
+                  </button>
+                </ion-col>
               </ion-row>
-            </ion-card-header>
-            <div class="divider"></div>
-            <ion-card-content>
-                <form [formGroup]="formLotacao">
-                    <ion-row justify-content-center>
-                      <ion-col col-auto>
-                          <div style="margin-top: 40px !important;"><span class="font-size-medium">Período:</span></div>
-                      </ion-col>
-                      <ion-col col-2>
-                          <ion-item [ngClass]="{'invalid': formLotacao.controls.dataInicio.invalid && (formLotacao.controls.dataInicio.dirty || form2Submit)}">
-                              <ion-label floating>Data inicial *</ion-label>
-                              <ion-input formControlName="dataInicio" type="text" [mask]="{mask:'99/99/9999'}" [(ngModel)]="dataInicioLotacao"></ion-input>
-                            </ion-item>
-                            <div class="invalid-hint" *ngIf="(formLotacao.controls.dataInicio.errors?.data || formLotacao.controls.dataInicio.errors?.minlength) && formLotacao.controls.dataInicio.dirty">
-                              Data inválida
-                            </div>
-                        </ion-col>
-                        <ion-col col-2>
-                            <ion-item [ngClass]="{'invalid': formLotacao.controls.dataInicio.invalid && (formLotacao.controls.dataInicio.dirty || form2Submit)}">
-                                <ion-label floating>Data final *</ion-label>
-                                <ion-input formControlName="dataFim" type="text" [mask]="{mask:'99/99/9999'}" [(ngModel)]="dataFimLotacao"></ion-input>
-                              </ion-item>
-                              <div class="invalid-hint" *ngIf="(formLotacao.controls.dataInicio.errors?.data || formLotacao.controls.dataInicio.errors?.minlength) && formLotacao.controls.dataInicio.dirty">
-                                Data inválida
-                              </div>
-                          </ion-col>
-                          <ion-col col-auto>
-                              <button icon-start ion-button class="search-btn" color="light" float-end (click)="getGraficoAtXLotacao()">
-                                  <ion-icon name="search"></ion-icon>Pesquisar
-                                </button>
-                          </ion-col>
-                    </ion-row>
-                  </form>
-              <ion-row justify-content-center>
-                <google-chart [data]="AtxLotacao"></google-chart>
-              </ion-row>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-    </div>
-  </ion-content>
+            </form>
+            <ion-row justify-content-center>
+              <google-chart *ngIf="lotacaoxAtDataTable.length > 1" [data]="AtxLotacao"></google-chart>
+              <div *ngIf="lotacaoxAtDataTable.length <= 1" style="margin-top: 40px; margin-bottom: 35px;"><span class="font-size-great">Nenhum atendimento realizado nesse período.</span></div>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>
