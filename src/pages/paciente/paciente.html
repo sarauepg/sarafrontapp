@@ -64,12 +64,22 @@
                 </ion-col>
               </ion-row>
               <ion-row>
-                <ion-col col-12 col-lg-10>
+                  <ion-col col-12 col-lg-3>
+                      <ion-item>
+                        <ion-label floating padding-left>Tipo</ion-label>
+                        <ion-select (ionChange)="listarLotacoes()" [(ngModel)]="filtro.tipoPaciente" interface="popover">
+                          <ion-option value="null">Todos</ion-option>
+                          <ion-option *ngFor="let t of tiposPaciente" [value]="t.id">{{t.nome}}</ion-option>
+                        </ion-select>
+                      </ion-item>
+                    </ion-col>
+
+                <ion-col col-12 col-lg-7>
                   <ion-item>
                     <ion-label floating padding-left>Lotação</ion-label>
                     <ion-select [(ngModel)]="filtro.idLotacao" interface="popover">
                       <ion-option value="null">Todas</ion-option>
-                      <ion-option *ngFor="let l of lotacoes" [value]="l.id">{{l.sigla + ' - ' + l.nome}}</ion-option>
+                      <ion-option *ngFor="let l of lotacoes" [value]="l.id">{{l.sigla ? l.sigla + ' - ' + l.nome : l.nome}}</ion-option>
                     </ion-select>
                   </ion-item>
                 </ion-col>
@@ -115,7 +125,7 @@
                 <ion-col col-2>{{l.pessoa.cpf}}</ion-col>
                 <ion-col col-2>{{l.pessoa.dataNascimento}}</ion-col>
                 <ion-col col-2>{{l.pessoa.telefonePrimario}}</ion-col>
-                <ion-col col-1.5>{{l.pessoa.lotacao.sigla}}</ion-col>
+                <ion-col col-1.5>{{l.pessoa.lotacao.sigla ? l.pessoa.lotacao.sigla : l.pessoa.lotacao.nome}}</ion-col>
                 <ion-col col-1.5><button ion-button block icon-only clear (click)="editarPaciente(l)">
                     <ion-icon color="gray" name="eye"></ion-icon>
                   </button></ion-col>

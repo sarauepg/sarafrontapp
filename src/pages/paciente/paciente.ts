@@ -16,6 +16,11 @@ export class PacientePage {
   filtro: any = {};
   pacientes: any = [];
   lotacoes: any = [];
+  tiposPaciente: any = [
+    {id: 0, nome: 'Comunidade externa'},
+    {id: 1, nome: 'Servidor'},
+    {id: 2, nome: 'Acadêmico'}
+];
 
   dataService: CompleterData;
   searchData: Array<PessoaModel> = [];
@@ -53,7 +58,6 @@ export class PacientePage {
   initVariables() {
     let loading = this.loadingCtrl.create();
     loading.present();
-    this.listarLotacoes();
     this.listarPacientes();
     loading.dismiss();
   }
@@ -68,6 +72,9 @@ export class PacientePage {
     }
     if(this.filtro.idLotacao == "null"){
       delete this.filtro.idLotacao;
+    }
+    if(this.filtro.tipoPaciente == "null"){
+      delete this.filtro.tipoPaciente;
     }
     let urlRequest = this.requestService.buildHttpBodyFormData(this.filtro, APP_CONFIG.WEBSERVICE.FILTRAR_PACIENTE);
     this.requestService.getData(urlRequest).then((pacientes: any) => {
@@ -87,12 +94,23 @@ export class PacientePage {
   }
 
   listarLotacoes() {
+    this.filtro.idLotacao = "null";
+    if(this.filtro.tipoPaciente == "null"){
     this.requestService.getData(APP_CONFIG.WEBSERVICE.LISTAR_LOTACOES).then((lotacoes: any) => {
       this.lotacoes = lotacoes;
       console.log(this.lotacoes);
     }, error => {
       console.error(error);
     });
+  }else{
+    let urlRequest = this.requestService.buildUrlQueryParams({ tipo: this.filtro.tipoPaciente}, APP_CONFIG.WEBSERVICE.LISTAR_LOTACOES_POR_TIPO);
+        this.requestService.getData(urlRequest).then((lotacoes: any) => {
+            this.lotacoes = lotacoes;
+            console.log(this.lotacoes);
+        }, error => {
+            console.error(error);
+        });
+  }
   }
 
   listarPacientes() {

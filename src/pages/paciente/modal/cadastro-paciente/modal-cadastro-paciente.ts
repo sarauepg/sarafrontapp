@@ -19,6 +19,12 @@ export class ModalCadastroPacientePage {
     private form: FormGroup;
     lotacoes: any = [];
     paciente: any = {};
+    tiposPaciente: any = [
+        {id: 0, nome: 'Comunidade externa'},
+        {id: 1, nome: 'Servidor'},
+        {id: 2, nome: 'Acadêmico'}
+    ];
+    tipoPaciente: {id: number, nome: string} = null;
     dataNascimento: string;
     telefonePrimario: string;
     telefoneSecundario: string;
@@ -39,13 +45,14 @@ export class ModalCadastroPacientePage {
         this.paciente.pessoa = {};
         this.paciente.pessoa.email = "";
         this.paciente.observacaoMedica = "";
-        this.listarLotacoes();
         this.editarPaciente();
 
         this.form = this.formBuilder.group({
             nome: ['', Validators.required],
             cpf: ['', [Validators.required, this.cpfValidator]],
             dataNasc: ['', [Validators.required, Validators.minLength(10), this.dataValidator]],
+            tipoPaciente: [{ value: '', disabled: this.isEditing }, Validators.required],
+            tipoPacienteIsEditing: [{ value: '', disabled: !this.isEditing }, Validators.required],
             lotacao: [{ value: '', disabled: this.isEditing }, Validators.required],
             lotacaoIsEditing: [{ value: '', disabled: !this.isEditing }, Validators.required],
             telefonePrimario: ['', [Validators.required, Validators.minLength(14)]],
@@ -70,6 +77,13 @@ export class ModalCadastroPacientePage {
             this.paciente.pessoa.nome = paciente.pessoa.nome;
             this.paciente.pessoa.cpf = paciente.pessoa.cpf;
             this.dataNascimento = paciente.pessoa.dataNascimento;
+            if(paciente.pessoa.lotacao.tipo == 0){
+                this.tipoPaciente = {id: 0, nome: 'Comunidade externa'};
+            }else if(paciente.pessoa.lotacao.tipo == 1){
+                this.tipoPaciente = {id: 1, nome: 'Servidor'};
+            }else if(paciente.pessoa.lotacao.tipo == 2){
+                this.tipoPaciente = {id: 2, nome: 'Acadêmico'};
+            }
             this.paciente.pessoa.lotacao = paciente.pessoa.lotacao;
             this.telefonePrimario = paciente.pessoa.telefonePrimario;
             this.telefoneSecundario = paciente.pessoa.telefoneSecundario;
@@ -96,7 +110,8 @@ export class ModalCadastroPacientePage {
     }
 
     listarLotacoes() {
-        this.requestService.getData(APP_CONFIG.WEBSERVICE.LISTAR_LOTACOES).then((lotacoes: any) => {
+        let urlRequest = this.requestService.buildUrlQueryParams({ tipo: this.tipoPaciente.id}, APP_CONFIG.WEBSERVICE.LISTAR_LOTACOES_POR_TIPO);
+        this.requestService.getData(urlRequest).then((lotacoes: any) => {
             this.lotacoes = lotacoes;
             console.log(this.lotacoes);
         }, error => {
